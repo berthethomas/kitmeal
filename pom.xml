@@ -95,6 +95,12 @@
                         <artifactId>spring-security-config</artifactId>
                         <version>3.2.3.RELEASE</version>
                 </dependency>
+                <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+                <dependency>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-jdbc</artifactId>
+                    <version>${org.springframework-version}</version>
+                </dependency>
 
 
 	</dependencies>
