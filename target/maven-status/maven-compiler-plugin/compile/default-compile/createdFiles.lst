@@ -1,2 +1,9 @@
-fr\imie\kitmeal\config\databaseConnection.class
-fr\imie\kitmeal\config\KitmealAppContextConfig.class
+fr/imie/kitmeal/config/KitmealAppContextConfig.class
+fr/imie/kitmeal/dao/AbstractGenericDao.class
+fr/imie/kitmeal/dao/UserDao.class
+fr/imie/kitmeal/interfacesDao/IUserDao.class
+fr/imie/kitmeal/beans/UserBean.class
+fr/imie/kitmeal/entities/User.class
+fr/imie/kitmeal/config/databaseConnection.class
+fr/imie/kitmeal/controllers/UserController.class
+fr/imie/kitmeal/interfacesDao/IGenericDao.class
