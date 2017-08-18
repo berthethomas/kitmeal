@@ -7,13 +7,12 @@ import java.util.Date;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Laura
  */
 public class UserBean {
-    
+
     private String nom;
     private String prenom;
     private String telephone;
@@ -21,9 +20,8 @@ public class UserBean {
     private String photo;
     private String username;
     private String password;
-    private Date birthday;
+    private String birthday;
     private String role;
-
 
     public String getNom() {
         return nom;
@@ -64,7 +62,7 @@ public class UserBean {
     public void setPhoto(String photo) {
         this.photo = photo;
     }
-    
+
     public String getUsername() {
         return username;
     }
@@ -81,11 +79,11 @@ public class UserBean {
         this.password = password;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
@@ -96,5 +94,5 @@ public class UserBean {
     public void setRole(String role) {
         this.role = role;
     }
-    
+
 }

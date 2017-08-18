@@ -16,18 +16,18 @@ import org.springframework.web.servlet.DispatcherServlet;
  *
  * @author Laura
  */
-public class databaseConnection implements WebApplicationInitializer{
+public class databaseConnection implements WebApplicationInitializer {
 
-        @Override
-	public void onStartup(ServletContext context) throws ServletException {
-            AnnotationConfigWebApplicationContext appContext = new AnnotationConfigWebApplicationContext();
-            appContext.register(KitmealAppContextConfig.class);
-         
-            ServletRegistration.Dynamic dispatcher = context.addServlet(
+    @Override
+    public void onStartup(ServletContext context) throws ServletException {
+        AnnotationConfigWebApplicationContext appContext = new AnnotationConfigWebApplicationContext();
+        appContext.register(KitmealAppContextConfig.class);
+
+        ServletRegistration.Dynamic dispatcher = context.addServlet(
                 "SpringDispatcher", new DispatcherServlet(appContext));
-            dispatcher.setLoadOnStartup(1);
-            dispatcher.addMapping("/*");
+        dispatcher.setLoadOnStartup(1);
+        dispatcher.addMapping("/app/*");
 
-	}
-    
+    }
+
 }

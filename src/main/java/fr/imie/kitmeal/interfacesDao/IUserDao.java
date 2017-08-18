@@ -5,12 +5,13 @@
  */
 package fr.imie.kitmeal.interfacesDao;
 
+import fr.imie.kitmeal.entities.User;
 import java.io.Serializable;
 
 /**
  *
  * @author Laura
  */
-public interface IUserDao extends IGenericDao<Serializable, Object>{
-    
+public interface IUserDao extends IGenericDao<Serializable, User> {
+
 }

@@ -15,53 +15,55 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 /**
  *
  * @author Laura
  */
 @Entity
-@Table(name="user")
+@Table(name = "user")
 public class User {
-    
-    @Id 
-    @GeneratedValue 
-    @Column(name="id_user")
+
+    @Id
+    @GeneratedValue
+    @Column(name = "id_user")
     private Integer idUser;
-    
-    @Column(name="nom")
+
+    @Column(name = "nom")
     private String nom;
-    
-    @Column(name="prenom")
+
+    @Column(name = "prenom")
     private String prenom;
-    
-    @Column(name="telephone")
+
+    @Column(name = "telephone")
     private String telephone;
-    
-    @Column(name="mail")
+
+    @Column(name = "mail")
     private String mail;
-    
-    @Column(name="username")
+
+    @Column(name = "username")
     private String username;
-    
-    @Column(name="password")
+
+    @Column(name = "password")
     private String password;
-    
-    @Column(name="birthday")
-    private Date birthday;
-    
-    @Column(name="role")
+
+    @Column(name = "birthday")
+    private String birthday;
+
+    @Column(name = "role")
     private String role;
-    
-    @Column(name="photo")
+
+    @Column(name = "photo")
     private String photo;
-    
+
     //@OneToMany
     //@JoinColumn(name="adresse")
     //private Adresse adresse ;
-
     public Integer getIdUser() {
         return idUser;
+    }
+    
+    public void setIdUser(Integer idUser) {
+        this.idUser = idUser;
     }
 
     public String getNom() {
@@ -112,11 +114,11 @@ public class User {
         this.password = password;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
@@ -135,7 +137,5 @@ public class User {
     public void setPhoto(String photo) {
         this.photo = photo;
     }
-    
-    
-    
+
 }

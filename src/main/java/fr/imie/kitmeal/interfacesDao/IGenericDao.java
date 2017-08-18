@@ -12,16 +12,16 @@ import java.util.List;
  *
  * @author Laura
  */
-public interface IGenericDao <PK extends Serializable, T> {
-    
+public interface IGenericDao<PK extends Serializable, T> {
+
     T create(T t);
 
     void delete(T entity);
 
-    T find(Long id);
+    T find(Integer id);
 
     T update(T t);
-    
+
     List<T> findAll();
 
 }
