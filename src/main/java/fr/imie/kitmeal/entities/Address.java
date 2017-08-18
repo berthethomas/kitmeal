@@ -9,6 +9,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -47,6 +49,10 @@ public class Address {
 
     @Column(name = "porte")
     private String porte;
+    
+    @ManyToOne
+    @JoinColumn(name="user")
+    private User user ;
 
     public Integer getIdAddress() {
         return idAddress;
@@ -119,5 +125,15 @@ public class Address {
     public void setPorte(String porte) {
         this.porte = porte;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+    
+    
 
 }

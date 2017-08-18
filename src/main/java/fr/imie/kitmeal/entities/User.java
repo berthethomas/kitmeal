@@ -55,9 +55,10 @@ public class User {
     @Column(name = "photo")
     private String photo;
 
-    //@OneToMany
-    //@JoinColumn(name="adresse")
-    //private Adresse adresse ;
+    @OneToMany
+    @JoinColumn(name="adresse")
+    private Address adresse ;
+    
     public Integer getIdUser() {
         return idUser;
     }
@@ -137,5 +138,15 @@ public class User {
     public void setPhoto(String photo) {
         this.photo = photo;
     }
+
+    public Address getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(Address adresse) {
+        this.adresse = adresse;
+    }
+    
+    
 
 }
