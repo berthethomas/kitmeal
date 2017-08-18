@@ -1,9 +1,0 @@
-/Users/thomasberthe/Documents/workspace/kitmeal/src/main/java/fr/imie/kitmeal/interfacesDao/IGenericDao.java
-/Users/thomasberthe/Documents/workspace/kitmeal/src/main/java/fr/imie/kitmeal/interfacesDao/IUserDao.java
-/Users/thomasberthe/Documents/workspace/kitmeal/src/main/java/fr/imie/kitmeal/beans/UserBean.java
-/Users/thomasberthe/Documents/workspace/kitmeal/src/main/java/fr/imie/kitmeal/config/KitmealAppContextConfig.java
-/Users/thomasberthe/Documents/workspace/kitmeal/src/main/java/fr/imie/kitmeal/entities/User.java
-/Users/thomasberthe/Documents/workspace/kitmeal/src/main/java/fr/imie/kitmeal/controllers/UserController.java
-/Users/thomasberthe/Documents/workspace/kitmeal/src/main/java/fr/imie/kitmeal/config/databaseConnection.java
-/Users/thomasberthe/Documents/workspace/kitmeal/src/main/java/fr/imie/kitmeal/dao/AbstractGenericDao.java
-/Users/thomasberthe/Documents/workspace/kitmeal/src/main/java/fr/imie/kitmeal/dao/UserDao.java
