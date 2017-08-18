@@ -5,6 +5,7 @@
  */
 package fr.imie.kitmeal.config;
 
+import fr.imie.kitmeal.entities.Unite;
 import fr.imie.kitmeal.entities.User;
 import java.util.Properties;
 import javax.sql.DataSource;
@@ -40,6 +41,7 @@ public class KitmealAppContextConfig {
     public SessionFactory getSessionFactoryKitmeal(DataSource dataSourceKitmeal) {
         LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSourceKitmeal);
         sessionBuilder.addAnnotatedClasses(User.class);
+        sessionBuilder.addAnnotatedClasses(Unite.class);
         sessionBuilder.addProperties(getHibernatePropertiesKitmeal());
         return sessionBuilder.buildSessionFactory();
     }
