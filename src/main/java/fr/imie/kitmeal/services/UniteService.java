@@ -65,10 +65,10 @@ public class UniteService implements IUniteService {
 
     @Override
     public UniteBean findUnite(Integer idUnite) {
-        Unite user = uniteDao.find(idUnite);
+        Unite unite = uniteDao.find(idUnite);
 
         UniteBean bean = new UniteBean();
-        bean.setNom(user.getNom());
+        bean.setNom(unite.getNom());
 
         return bean;
     }

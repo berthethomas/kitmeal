@@ -40,7 +40,7 @@ public class UniteController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public ResponseEntity<UniteBean> createUser(HttpSession session, @RequestBody UniteBean bean,
+    public ResponseEntity<UniteBean> createUnite(HttpSession session, @RequestBody UniteBean bean,
             HttpServletRequest request) {
         uniteService.createUnite(bean);
 
@@ -48,7 +48,7 @@ public class UniteController {
     }
 
     @RequestMapping(value = "/update/{idUnite}", method = RequestMethod.POST)
-    public ResponseEntity<UniteBean> updateUser(HttpSession session, @RequestBody UniteBean bean,
+    public ResponseEntity<UniteBean> updateUnite(HttpSession session, @RequestBody UniteBean bean,
             @PathVariable Integer idUnite, HttpServletRequest request) {
         uniteService.updateUnite(idUnite, bean);
 
@@ -56,7 +56,7 @@ public class UniteController {
     }
 
     @RequestMapping(value = "/find/{idUnite}", method = RequestMethod.GET)
-    public ResponseEntity<UniteBean> findUser(HttpSession session, @PathVariable Integer idUnite,
+    public ResponseEntity<UniteBean> findUnite(HttpSession session, @PathVariable Integer idUnite,
             HttpServletRequest request) {
         UniteBean bean = uniteService.findUnite(idUnite);
 
@@ -65,7 +65,7 @@ public class UniteController {
 
     @RequestMapping(value = "/remove/{idUnite}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
-    public void removeUser(HttpSession session, @PathVariable Integer idUnite,
+    public void removeUnite(HttpSession session, @PathVariable Integer idUnite,
             HttpServletRequest request) {
         uniteService.removeUnite(idUnite);
     }
