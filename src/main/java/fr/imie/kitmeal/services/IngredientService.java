@@ -7,8 +7,12 @@ package fr.imie.kitmeal.services;
 
 import fr.imie.kitmeal.beans.IngredientBean;
 import fr.imie.kitmeal.entities.Ingredient;
+import fr.imie.kitmeal.interfacesDao.ICategoryDao;
 import fr.imie.kitmeal.interfacesDao.IIngredientDao;
+import fr.imie.kitmeal.interfacesDao.IUniteDao;
+import fr.imie.kitmeal.interfacesServices.ICategoryService;
 import fr.imie.kitmeal.interfacesServices.IIngredientService;
+import fr.imie.kitmeal.interfacesServices.IUniteService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +30,16 @@ public class IngredientService implements IIngredientService {
     @Autowired
     private IIngredientDao ingredientDao;
 
+    @Autowired
+    ICategoryService categoryService;
+    @Autowired
+    ICategoryDao categoryDao;
+
+    @Autowired
+    IUniteService uniteService;
+    @Autowired
+    IUniteDao uniteDao;
+
     @Override
     public List<IngredientBean> findAllIngredients() {
         List<Ingredient> ingredients = ingredientDao.findAll();
@@ -34,7 +48,10 @@ public class IngredientService implements IIngredientService {
         for (Ingredient ingredient : ingredients) {
             IngredientBean bean = new IngredientBean();
 
+            bean.setIdIngredient(ingredient.getIdIngredient());
             bean.setNom(ingredient.getNom());
+            bean.setCategory(categoryService.findCategory(ingredient.getCategory().getIdCategory()));
+            bean.setUnite(uniteService.findUnite(ingredient.getUnite().getIdUnite()));
 
             beans.add(bean);
         }
@@ -45,7 +62,10 @@ public class IngredientService implements IIngredientService {
     @Override
     public IngredientBean createIngredient(IngredientBean bean) {
         Ingredient ingredient = new Ingredient();
+
         ingredient.setNom(bean.getNom());
+        ingredient.setCategory(categoryDao.find(bean.getCategory().getIdCategory()));
+        ingredient.setUnite(uniteDao.find(bean.getUnite().getIdUnite()));
 
         ingredientDao.create(ingredient);
 
@@ -56,7 +76,10 @@ public class IngredientService implements IIngredientService {
     public IngredientBean updateIngredient(Integer idIngredient, IngredientBean bean) {
         Ingredient ingredient = ingredientDao.find(idIngredient);
 
+        ingredient.setIdIngredient(bean.getIdIngredient());
         ingredient.setNom(bean.getNom());
+        ingredient.setCategory(categoryDao.find(bean.getCategory().getIdCategory()));
+        ingredient.setUnite(uniteDao.find(bean.getUnite().getIdUnite()));
 
         ingredientDao.update(ingredient);
 
@@ -68,7 +91,11 @@ public class IngredientService implements IIngredientService {
         Ingredient ingredient = ingredientDao.find(idIngredient);
 
         IngredientBean bean = new IngredientBean();
+        
+        bean.setIdIngredient(ingredient.getIdIngredient());
         bean.setNom(ingredient.getNom());
+        bean.setCategory(categoryService.findCategory(ingredient.getCategory().getIdCategory()));
+        bean.setUnite(uniteService.findUnite(ingredient.getUnite().getIdUnite()));
 
         return bean;
     }

@@ -7,7 +7,9 @@ package fr.imie.kitmeal.services;
 
 import fr.imie.kitmeal.beans.UserBean;
 import fr.imie.kitmeal.entities.User;
+import fr.imie.kitmeal.interfacesDao.IAddressDao;
 import fr.imie.kitmeal.interfacesDao.IUserDao;
+import fr.imie.kitmeal.interfacesServices.IAddressService;
 import fr.imie.kitmeal.interfacesServices.IUserService;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +28,11 @@ public class UserService implements IUserService {
     @Autowired
     private IUserDao userDao;
 
+    @Autowired
+    IAddressService addressService;
+    @Autowired
+    IAddressDao addressDao;
+
     @Override
     public List<UserBean> findAllUsers() {
         List<User> users = userDao.findAll();
@@ -33,7 +40,8 @@ public class UserService implements IUserService {
 
         for (User user : users) {
             UserBean bean = new UserBean();
-            
+
+            bean.setIdUser(user.getIdUser());
             bean.setPrenom(user.getPrenom());
             bean.setNom(user.getNom());
             bean.setMail(user.getMail());
@@ -43,7 +51,8 @@ public class UserService implements IUserService {
             bean.setPassword(user.getPassword());
             bean.setPhoto(user.getPhoto());
             bean.setRole(user.getRole());
-            
+            bean.setAddress(addressService.findAddress(user.getAdresse().getIdAddress()));
+
             beans.add(bean);
         }
 
@@ -62,6 +71,7 @@ public class UserService implements IUserService {
         user.setPassword(bean.getPassword());
         user.setPhoto(bean.getPhoto());
         user.setRole("user");
+        user.setAdresse(addressDao.find(bean.getAddress().getIdAddress()));
 
         userDao.create(user);
 
@@ -72,6 +82,7 @@ public class UserService implements IUserService {
     public UserBean updateUser(Integer idUser, UserBean bean) {
         User user = userDao.find(idUser);
 
+        user.setIdUser(bean.getIdUser());
         user.setPrenom(bean.getPrenom());
         user.setNom(bean.getNom());
         user.setMail(bean.getMail());
@@ -80,6 +91,7 @@ public class UserService implements IUserService {
         user.setUsername(bean.getUsername());
         user.setPassword(bean.getPassword());
         user.setPhoto(bean.getPhoto());
+        user.setAdresse(addressDao.find(bean.getAddress().getIdAddress()));
 
         userDao.update(user);
 
@@ -91,6 +103,8 @@ public class UserService implements IUserService {
         User user = userDao.find(idUser);
 
         UserBean bean = new UserBean();
+
+        bean.setIdUser(user.getIdUser());
         bean.setPrenom(user.getPrenom());
         bean.setNom(user.getNom());
         bean.setMail(user.getMail());
@@ -99,6 +113,7 @@ public class UserService implements IUserService {
         bean.setUsername(user.getUsername());
         bean.setPassword(user.getPassword());
         bean.setPhoto(user.getPhoto());
+        bean.setAddress(addressService.findAddress(user.getAdresse().getIdAddress()));
 
         return bean;
     }

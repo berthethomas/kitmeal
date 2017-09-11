@@ -9,6 +9,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -35,6 +37,10 @@ public class Event {
 
     @Column(name = "date_fin")
     private String dateFin;
+
+    @ManyToOne(targetEntity = Recipe.class)
+    @JoinColumn(name = "recipe")
+    private Recipe recipe;
 
     public Integer getIdEvent() {
         return idEvent;
@@ -74,6 +80,14 @@ public class Event {
 
     public void setDateFin(String dateFin) {
         this.dateFin = dateFin;
+    }
+
+    public Recipe getRecipe() {
+        return recipe;
+    }
+
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
     }
 
 }

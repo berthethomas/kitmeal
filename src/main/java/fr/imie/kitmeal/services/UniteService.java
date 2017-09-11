@@ -34,6 +34,7 @@ public class UniteService implements IUniteService {
         for (Unite unite : unites) {
             UniteBean bean = new UniteBean();
 
+            bean.setIdUnite(unite.getIdUnite());
             bean.setNom(unite.getNom());
 
             beans.add(bean);
@@ -56,6 +57,7 @@ public class UniteService implements IUniteService {
     public UniteBean updateUnite(Integer idUnite, UniteBean bean) {
         Unite unite = uniteDao.find(idUnite);
 
+        unite.setIdUnite(bean.getIdUnite());
         unite.setNom(bean.getNom());
 
         uniteDao.update(unite);
@@ -68,6 +70,7 @@ public class UniteService implements IUniteService {
         Unite unite = uniteDao.find(idUnite);
 
         UniteBean bean = new UniteBean();
+        bean.setIdUnite(unite.getIdUnite());
         bean.setNom(unite.getNom());
 
         return bean;

@@ -8,7 +8,9 @@ package fr.imie.kitmeal.services;
 import fr.imie.kitmeal.beans.RecipeBean;
 import fr.imie.kitmeal.entities.Recipe;
 import fr.imie.kitmeal.interfacesDao.IRecipeDao;
+import fr.imie.kitmeal.interfacesDao.IUserDao;
 import fr.imie.kitmeal.interfacesServices.IRecipeService;
+import fr.imie.kitmeal.interfacesServices.IUserService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,11 @@ public class RecipeService implements IRecipeService {
     @Autowired
     private IRecipeDao recipeDao;
 
+    @Autowired
+    IUserService userService;
+    @Autowired
+    IUserDao userDao;
+
     @Override
     public List<RecipeBean> findAllRecipes() {
         List<Recipe> recipes = recipeDao.findAll();
@@ -34,8 +41,10 @@ public class RecipeService implements IRecipeService {
         for (Recipe recipe : recipes) {
             RecipeBean bean = new RecipeBean();
 
+            bean.setIdRecipe(recipe.getIdRecipe());
             bean.setNom(recipe.getNom());
             bean.setDescription(recipe.getDescription());
+            bean.setUser(userService.findUser(recipe.getUser().getIdUser()));
 
             beans.add(bean);
         }
@@ -46,8 +55,11 @@ public class RecipeService implements IRecipeService {
     @Override
     public RecipeBean createRecipe(RecipeBean bean) {
         Recipe recipe = new Recipe();
+
+        recipe.setIdRecipe(bean.getIdRecipe());
         recipe.setNom(bean.getNom());
         recipe.setDescription(bean.getDescription());
+        recipe.setUser(userDao.find(bean.getUser().getIdUser()));
 
         recipeDao.create(recipe);
 
@@ -58,8 +70,10 @@ public class RecipeService implements IRecipeService {
     public RecipeBean updateRecipe(Integer idRecipe, RecipeBean bean) {
         Recipe recipe = recipeDao.find(idRecipe);
 
+        recipe.setIdRecipe(bean.getIdRecipe());
         recipe.setNom(bean.getNom());
         recipe.setDescription(bean.getDescription());
+        recipe.setUser(userDao.find(bean.getUser().getIdUser()));
 
         recipeDao.update(recipe);
 
@@ -71,8 +85,11 @@ public class RecipeService implements IRecipeService {
         Recipe recipe = recipeDao.find(idRecipe);
 
         RecipeBean bean = new RecipeBean();
+
+        bean.setIdRecipe(recipe.getIdRecipe());
         bean.setNom(recipe.getNom());
         bean.setDescription(recipe.getDescription());
+        bean.setUser(userService.findUser(recipe.getUser().getIdUser()));
 
         return bean;
     }

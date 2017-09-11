@@ -34,6 +34,7 @@ public class AddressService implements IAddressService {
         for (Address address : addresses) {
             AddressBean bean = new AddressBean();
 
+            bean.setIdAddress(address.getIdAddress());
             bean.setNumero(address.getNumero());
             bean.setRue(address.getRue());
             bean.setVille(address.getVille());
@@ -71,6 +72,7 @@ public class AddressService implements IAddressService {
     public AddressBean updateAddress(Integer idAddress, AddressBean bean) {
         Address address = addressDao.find(idAddress);
 
+        address.setIdAddress(bean.getIdAddress());
         address.setNumero(bean.getNumero());
         address.setRue(bean.getRue());
         address.setVille(bean.getVille());
@@ -91,6 +93,7 @@ public class AddressService implements IAddressService {
 
         AddressBean bean = new AddressBean();
 
+        bean.setIdAddress(address.getIdAddress());
         bean.setNumero(address.getNumero());
         bean.setRue(address.getRue());
         bean.setVille(address.getVille());

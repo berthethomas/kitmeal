@@ -8,7 +8,9 @@ package fr.imie.kitmeal.services;
 import fr.imie.kitmeal.beans.EventBean;
 import fr.imie.kitmeal.entities.Event;
 import fr.imie.kitmeal.interfacesDao.IEventDao;
+import fr.imie.kitmeal.interfacesDao.IRecipeDao;
 import fr.imie.kitmeal.interfacesServices.IEventService;
+import fr.imie.kitmeal.interfacesServices.IRecipeService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,11 @@ public class EventService implements IEventService {
     @Autowired
     private IEventDao eventDao;
 
+    @Autowired
+    IRecipeService recipeService;
+    @Autowired
+    IRecipeDao recipeDao;
+
     @Override
     public List<EventBean> findAllEvents() {
         List<Event> events = eventDao.findAll();
@@ -38,6 +45,7 @@ public class EventService implements IEventService {
             bean.setDescription(event.getDescription());
             bean.setDateDebut(event.getDateDebut());
             bean.setDateFin(event.getDateFin());
+            bean.setRecipe(recipeService.findRecipe(event.getRecipe().getIdRecipe()));
 
             beans.add(bean);
         }
@@ -52,6 +60,7 @@ public class EventService implements IEventService {
         event.setDescription(bean.getDescription());
         event.setDateDebut(bean.getDateDebut());
         event.setDateFin(bean.getDateFin());
+        event.setRecipe(recipeDao.find(bean.getRecipe().getIdRecipe()));
 
         eventDao.create(event);
 
@@ -66,6 +75,7 @@ public class EventService implements IEventService {
         event.setDescription(bean.getDescription());
         event.setDateDebut(bean.getDateDebut());
         event.setDateFin(bean.getDateFin());
+        event.setRecipe(recipeDao.find(bean.getRecipe().getIdRecipe()));
 
         eventDao.update(event);
 
@@ -81,6 +91,7 @@ public class EventService implements IEventService {
         bean.setDescription(event.getDescription());
         bean.setDateDebut(event.getDateDebut());
         bean.setDateFin(event.getDateFin());
+        bean.setRecipe(recipeService.findRecipe(event.getRecipe().getIdRecipe()));
 
         return bean;
     }

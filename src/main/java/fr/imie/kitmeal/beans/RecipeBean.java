@@ -11,8 +11,18 @@ package fr.imie.kitmeal.beans;
  */
 public class RecipeBean {
 
+    private Integer idRecipe;
     private String nom;
     private String description;
+    private UserBean user;
+
+    public Integer getIdRecipe() {
+        return idRecipe;
+    }
+
+    public void setIdRecipe(Integer idRecipe) {
+        this.idRecipe = idRecipe;
+    }
 
     public String getNom() {
         return nom;
@@ -21,7 +31,7 @@ public class RecipeBean {
     public void setNom(String nom) {
         this.nom = nom;
     }
-    
+
     public String getDescription() {
         return description;
     }
@@ -29,4 +39,13 @@ public class RecipeBean {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public UserBean getUser() {
+        return user;
+    }
+
+    public void setUser(UserBean user) {
+        this.user = user;
+    }
+
 }

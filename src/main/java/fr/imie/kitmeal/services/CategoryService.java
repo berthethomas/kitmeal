@@ -21,9 +21,9 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional(transactionManager = "txManagerKitmeal")
-public class CategoryService implements ICategoryService{
-    
-     @Autowired
+public class CategoryService implements ICategoryService {
+
+    @Autowired
     private ICategoryDao categoryDao;
 
     @Override
@@ -33,8 +33,9 @@ public class CategoryService implements ICategoryService{
 
         for (Category category : categories) {
             CategoryBean bean = new CategoryBean();
-            
-            bean.setNom(category.getNom()); 
+
+            bean.setIdCategory(category.getIdCategory());
+            bean.setNom(category.getNom());
             beans.add(bean);
         }
 
@@ -44,9 +45,9 @@ public class CategoryService implements ICategoryService{
     @Override
     public CategoryBean createCategory(CategoryBean bean) {
         Category category = new Category();
-       
+
         category.setNom(bean.getNom());
-        
+
         categoryDao.create(category);
 
         return bean;
@@ -56,6 +57,7 @@ public class CategoryService implements ICategoryService{
     public CategoryBean updateCategory(Integer idCategory, CategoryBean bean) {
         Category category = categoryDao.find(idCategory);
 
+        category.setIdCategory(bean.getIdCategory());
         category.setNom(bean.getNom());
         categoryDao.update(category);
 
@@ -64,12 +66,13 @@ public class CategoryService implements ICategoryService{
 
     @Override
     public CategoryBean findCategory(Integer idCategory) {
-         Category category = categoryDao.find(idCategory);
+        Category category = categoryDao.find(idCategory);
 
         CategoryBean bean = new CategoryBean();
-        
+
+        bean.setIdCategory(category.getIdCategory());
         bean.setNom(category.getNom());
-       
+
         return bean;
     }
 
@@ -77,5 +80,5 @@ public class CategoryService implements ICategoryService{
     public void removeCategory(Integer idCategory) {
         categoryDao.delete(categoryDao.find(idCategory));
     }
-    
+
 }

@@ -11,10 +11,20 @@ package fr.imie.kitmeal.beans;
  */
 public class EventBean {
 
+    private Integer idEvent;
     private String nom;
     private String description;
     private String dateDebut;
     private String dateFin;
+    private RecipeBean recipe;
+
+    public Integer getIdEvent() {
+        return idEvent;
+    }
+
+    public void setIdEvent(Integer idEvent) {
+        this.idEvent = idEvent;
+    }
 
     public String getNom() {
         return nom;
@@ -46,6 +56,14 @@ public class EventBean {
 
     public void setDateFin(String dateFin) {
         this.dateFin = dateFin;
+    }
+
+    public RecipeBean getRecipe() {
+        return recipe;
+    }
+
+    public void setRecipe(RecipeBean recipe) {
+        this.recipe = recipe;
     }
 
 }

@@ -1,7 +1,5 @@
 package fr.imie.kitmeal.beans;
 
-import java.util.Date;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -13,6 +11,7 @@ import java.util.Date;
  */
 public class UserBean {
 
+    private Integer idUser;
     private String nom;
     private String prenom;
     private String telephone;
@@ -22,6 +21,15 @@ public class UserBean {
     private String password;
     private String birthday;
     private String role;
+    private AddressBean address;
+
+    public Integer getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(Integer idUser) {
+        this.idUser = idUser;
+    }
 
     public String getNom() {
         return nom;
@@ -93,6 +101,14 @@ public class UserBean {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public AddressBean getAddress() {
+        return address;
+    }
+
+    public void setAddress(AddressBean address) {
+        this.address = address;
     }
 
 }

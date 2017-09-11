@@ -11,7 +11,18 @@ package fr.imie.kitmeal.beans;
  */
 public class IngredientBean {
 
+    private Integer idIngredient;
     private String nom;
+    private UniteBean unite;
+    private CategoryBean category;
+
+    public Integer getIdIngredient() {
+        return idIngredient;
+    }
+
+    public void setIdIngredient(Integer idIngredient) {
+        this.idIngredient = idIngredient;
+    }
 
     public String getNom() {
         return nom;
@@ -20,4 +31,21 @@ public class IngredientBean {
     public void setNom(String nom) {
         this.nom = nom;
     }
+
+    public UniteBean getUnite() {
+        return unite;
+    }
+
+    public void setUnite(UniteBean unite) {
+        this.unite = unite;
+    }
+
+    public CategoryBean getCategory() {
+        return category;
+    }
+
+    public void setCategory(CategoryBean category) {
+        this.category = category;
+    }
+
 }

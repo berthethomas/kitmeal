@@ -11,7 +11,16 @@ package fr.imie.kitmeal.beans;
  */
 public class UniteBean {
 
+    private Integer idUnite;
     private String nom;
+
+    public Integer getIdUnite() {
+        return idUnite;
+    }
+
+    public void setIdUnite(Integer idUnite) {
+        this.idUnite = idUnite;
+    }
 
     public String getNom() {
         return nom;

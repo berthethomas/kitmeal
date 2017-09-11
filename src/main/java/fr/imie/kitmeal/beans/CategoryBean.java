@@ -10,8 +10,17 @@ package fr.imie.kitmeal.beans;
  * @author Laura
  */
 public class CategoryBean {
-    
+
+    private Integer idCategory;
     private String nom;
+
+    public Integer getIdCategory() {
+        return idCategory;
+    }
+
+    public void setIdCategory(Integer idCategory) {
+        this.idCategory = idCategory;
+    }
 
     public String getNom() {
         return nom;
@@ -20,6 +29,5 @@ public class CategoryBean {
     public void setNom(String nom) {
         this.nom = nom;
     }
-    
-    
+
 }

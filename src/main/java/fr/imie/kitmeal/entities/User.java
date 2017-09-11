@@ -5,12 +5,15 @@
  */
 package fr.imie.kitmeal.entities;
 
+import java.util.Set;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -54,13 +57,18 @@ public class User {
     private String photo;
 
     @ManyToOne(targetEntity = Address.class)
-    @JoinColumn(name="adresse")
-    private Address adresse ;
-    
+    @JoinColumn(name = "adresse")
+    private Address adresse;
+
+    @OneToMany(targetEntity = Recipe.class)
+    @JoinColumn(name = "recipe")
+    @ElementCollection
+    private Set<Recipe> recipes;
+
     public Integer getIdUser() {
         return idUser;
     }
-    
+
     public void setIdUser(Integer idUser) {
         this.idUser = idUser;
     }
@@ -144,7 +152,17 @@ public class User {
     public void setAdresse(Address adresse) {
         this.adresse = adresse;
     }
-    
-    
+
+    public Set<Recipe> getRecipes() {
+        return recipes;
+    }
+
+    public void addRecipe(Recipe recipe) {
+        this.recipes.add(recipe);
+    }
+
+    public void removeRecipe(Recipe recipe) {
+        this.recipes.remove(recipe);
+    }
 
 }

@@ -5,10 +5,15 @@
  */
 package fr.imie.kitmeal.entities;
 
+import java.util.Set;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -29,6 +34,15 @@ public class Recipe {
 
     @Column(name = "description")
     private String description;
+
+    @ManyToOne(targetEntity = User.class)
+    @JoinColumn(name = "user")
+    private User user;
+
+    @OneToMany(targetEntity = Event.class)
+    @JoinColumn(name = "event")
+    @ElementCollection
+    private Set<Event> events;
 
     public Integer getIdRecipe() {
         return idRecipe;
@@ -52,6 +66,26 @@ public class Recipe {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Set<Event> getEvents() {
+        return events;
+    }
+
+    public void addEvent(Event event) {
+        this.events.add(event);
+    }
+
+    public void removeEvent(Event event) {
+        this.events.remove(event);
     }
 
 }

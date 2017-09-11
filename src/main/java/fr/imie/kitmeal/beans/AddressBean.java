@@ -11,6 +11,7 @@ package fr.imie.kitmeal.beans;
  */
 public class AddressBean {
 
+    private Integer idAddress;
     private Long numero;
     private String rue;
     private String ville;
@@ -19,6 +20,14 @@ public class AddressBean {
     private String batiment;
     private Integer etage;
     private String porte;
+
+    public Integer getIdAddress() {
+        return idAddress;
+    }
+
+    public void setIdAddress(Integer idAddress) {
+        this.idAddress = idAddress;
+    }
 
     public Long getNumero() {
         return numero;
