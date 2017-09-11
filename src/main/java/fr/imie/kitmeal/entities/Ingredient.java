@@ -9,6 +9,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -27,6 +29,14 @@ public class Ingredient {
     @Column(name = "nom")
     private String nom;
 
+    @ManyToOne(targetEntity = Category.class)
+    @JoinColumn(name = "category")
+    private Category category;
+
+    @ManyToOne(targetEntity = Unite.class)
+    @JoinColumn(name = "unite")
+    private Unite unite;
+
     public Integer getIdIngredient() {
         return idIngredient;
     }
@@ -41,6 +51,22 @@ public class Ingredient {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Unite getUnite() {
+        return unite;
+    }
+
+    public void setUnite(Unite unite) {
+        this.unite = unite;
     }
 
 }

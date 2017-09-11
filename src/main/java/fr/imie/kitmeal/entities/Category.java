@@ -5,10 +5,13 @@
  */
 package fr.imie.kitmeal.entities;
 
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -16,23 +19,27 @@ import javax.persistence.Table;
  * @author Laura
  */
 @Entity
-@Table(name="categorie")
+@Table(name = "categorie")
 public class Category {
-    
-    @Id 
-    @GeneratedValue 
-    @Column(name="id_categorie")
+
+    @Id
+    @GeneratedValue
+    @Column(name = "id_categorie")
     private Integer idCategory;
-   
-    @Column(name="nom")
+
+    @Column(name = "nom")
     private String nom;
 
-    public Integer getIdCategorie() {
+    @OneToMany(targetEntity = Ingredient.class)
+    @JoinColumn(name = "ingredients")
+    private Set<Ingredient> ingredients;
+
+    public Integer getIdCategory() {
         return idCategory;
     }
 
-    public void setIdCategorie(Integer idCategorie) {
-        this.idCategory = idCategorie;
+    public void setIdCategory(Integer idCategory) {
+        this.idCategory = idCategory;
     }
 
     public String getNom() {
@@ -42,6 +49,16 @@ public class Category {
     public void setNom(String nom) {
         this.nom = nom;
     }
-    
-    
+
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void addIngredient(Ingredient ingredient) {
+        this.ingredients.add(ingredient);
+    }
+
+    public void removeIngredient(Ingredient ingredient) {
+        this.ingredients.remove(ingredient);
+    }
 }

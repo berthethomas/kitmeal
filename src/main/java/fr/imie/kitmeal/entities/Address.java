@@ -5,12 +5,14 @@
  */
 package fr.imie.kitmeal.entities;
 
+import java.util.Set;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -49,10 +51,11 @@ public class Address {
 
     @Column(name = "porte")
     private String porte;
-    
-    @ManyToOne
-    @JoinColumn(name="user")
-    private User user ;
+
+    @OneToMany(targetEntity = User.class)
+    @JoinColumn(name = "user")
+    @ElementCollection
+    private Set<User> users;
 
     public Integer getIdAddress() {
         return idAddress;
@@ -126,14 +129,16 @@ public class Address {
         this.porte = porte;
     }
 
-    public User getUser() {
-        return user;
+    public Set<User> getUsers() {
+        return users;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void addUser(User user) {
+        this.users.add(user);
     }
-    
-    
+
+    public void removeUser(User user) {
+        this.users.remove(user);
+    }
 
 }

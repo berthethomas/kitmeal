@@ -5,10 +5,13 @@
  */
 package fr.imie.kitmeal.entities;
 
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -27,6 +30,10 @@ public class Unite {
     @Column(name = "nom")
     private String nom;
 
+    @OneToMany(targetEntity = Ingredient.class)
+    @JoinColumn(name = "ingredients")
+    private Set<Ingredient> ingredients;
+
     public Integer getIdUnite() {
         return idUnite;
     }
@@ -41,6 +48,18 @@ public class Unite {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void addIngredient(Ingredient ingredient) {
+        this.ingredients.add(ingredient);
+    }
+
+    public void removeIngredient(Ingredient ingredient) {
+        this.ingredients.remove(ingredient);
     }
 
 }
