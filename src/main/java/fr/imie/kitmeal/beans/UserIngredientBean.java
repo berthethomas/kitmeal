@@ -16,6 +16,10 @@ public class UserIngredientBean {
     private IngredientBean ingredient;
     private Long quantite;
 
+    public UserIngredientBean() {
+
+    }
+
     public Integer getIdUserIngredient() {
         return idUserIngredient;
     }

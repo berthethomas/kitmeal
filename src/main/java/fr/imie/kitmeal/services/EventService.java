@@ -9,8 +9,10 @@ import fr.imie.kitmeal.beans.EventBean;
 import fr.imie.kitmeal.entities.Event;
 import fr.imie.kitmeal.interfacesDao.IEventDao;
 import fr.imie.kitmeal.interfacesDao.IRecipeDao;
+import fr.imie.kitmeal.interfacesDao.IUserDao;
 import fr.imie.kitmeal.interfacesServices.IEventService;
 import fr.imie.kitmeal.interfacesServices.IRecipeService;
+import fr.imie.kitmeal.interfacesServices.IUserService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,11 @@ public class EventService implements IEventService {
     @Autowired
     IRecipeDao recipeDao;
 
+    @Autowired
+    IUserService userService;
+    @Autowired
+    IUserDao userDao;
+
     @Override
     public List<EventBean> findAllEvents() {
         List<Event> events = eventDao.findAll();
@@ -46,6 +53,7 @@ public class EventService implements IEventService {
             bean.setDateDebut(event.getDateDebut());
             bean.setDateFin(event.getDateFin());
             bean.setRecipe(recipeService.findRecipe(event.getRecipe().getIdRecipe()));
+            bean.setOrganisateur(userService.findUser(event.getOrganisateur().getIdUser()));
 
             beans.add(bean);
         }
@@ -61,6 +69,7 @@ public class EventService implements IEventService {
         event.setDateDebut(bean.getDateDebut());
         event.setDateFin(bean.getDateFin());
         event.setRecipe(recipeDao.find(bean.getRecipe().getIdRecipe()));
+        event.setOrganisateur(userDao.find(bean.getOrganisateur().getIdUser()));
 
         eventDao.create(event);
 
@@ -76,6 +85,7 @@ public class EventService implements IEventService {
         event.setDateDebut(bean.getDateDebut());
         event.setDateFin(bean.getDateFin());
         event.setRecipe(recipeDao.find(bean.getRecipe().getIdRecipe()));
+        event.setOrganisateur(userDao.find(bean.getOrganisateur().getIdUser()));
 
         eventDao.update(event);
 
@@ -92,6 +102,7 @@ public class EventService implements IEventService {
         bean.setDateDebut(event.getDateDebut());
         bean.setDateFin(event.getDateFin());
         bean.setRecipe(recipeService.findRecipe(event.getRecipe().getIdRecipe()));
+        bean.setOrganisateur(userService.findUser(event.getOrganisateur().getIdUser()));
 
         return bean;
     }

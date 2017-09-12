@@ -42,6 +42,10 @@ public class Event {
     @JoinColumn(name = "recipe")
     private Recipe recipe;
 
+    @ManyToOne(targetEntity = User.class)
+    @JoinColumn(name = "organisateur")
+    private User organisateur;
+
     public Integer getIdEvent() {
         return idEvent;
     }
@@ -88,6 +92,14 @@ public class Event {
 
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
+    }
+
+    public User getOrganisateur() {
+        return organisateur;
+    }
+
+    public void setOrganisateur(User organisateur) {
+        this.organisateur = organisateur;
     }
 
 }

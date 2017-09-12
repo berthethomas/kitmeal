@@ -16,6 +16,10 @@ public class UserEventBean {
     private EventBean event;
     private boolean response;
 
+    public UserEventBean() {
+
+    }
+
     public Integer getIdUserEvent() {
         return idUserEvent;
     }

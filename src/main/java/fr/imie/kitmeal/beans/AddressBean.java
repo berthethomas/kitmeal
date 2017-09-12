@@ -21,6 +21,10 @@ public class AddressBean {
     private Integer etage;
     private String porte;
 
+    public AddressBean() {
+
+    }
+
     public Integer getIdAddress() {
         return idAddress;
     }

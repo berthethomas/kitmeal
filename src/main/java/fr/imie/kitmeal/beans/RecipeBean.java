@@ -16,6 +16,10 @@ public class RecipeBean {
     private String description;
     private UserBean user;
 
+    public RecipeBean() {
+
+    }
+
     public Integer getIdRecipe() {
         return idRecipe;
     }

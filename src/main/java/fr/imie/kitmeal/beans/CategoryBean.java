@@ -14,6 +14,10 @@ public class CategoryBean {
     private Integer idCategory;
     private String nom;
 
+    public CategoryBean() {
+
+    }
+
     public Integer getIdCategory() {
         return idCategory;
     }

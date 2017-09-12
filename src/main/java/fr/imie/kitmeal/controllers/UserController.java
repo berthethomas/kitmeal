@@ -48,12 +48,28 @@ public class UserController {
         return new ResponseEntity<UserBean>(bean, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    public ModelAndView showCreateUser(HttpSession session,
+            HttpServletRequest request) {
+        UserBean bean = new UserBean();
+
+        return new ModelAndView("/", "bean", bean);
+    }
+
     @RequestMapping(value = "/update/{idUser}", method = RequestMethod.POST)
     public ResponseEntity<UserBean> updateUser(HttpSession session, @RequestBody UserBean bean,
             @PathVariable Integer idUser, HttpServletRequest request) {
         userService.updateUser(idUser, bean);
 
         return new ResponseEntity<UserBean>(bean, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/update/{idUser}", method = RequestMethod.GET)
+    public ModelAndView showUpdateUser(HttpSession session,
+            @PathVariable Integer idUser, HttpServletRequest request) {
+        UserBean bean = userService.findUser(idUser);
+
+        return new ModelAndView("/", "bean", bean);
     }
 
     @RequestMapping(value = "/find/{idUser}", method = RequestMethod.GET)

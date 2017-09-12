@@ -16,6 +16,10 @@ public class IngredientBean {
     private UniteBean unite;
     private CategoryBean category;
 
+    public IngredientBean() {
+
+    }
+
     public Integer getIdIngredient() {
         return idIngredient;
     }

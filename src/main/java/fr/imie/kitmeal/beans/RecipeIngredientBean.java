@@ -16,6 +16,10 @@ public class RecipeIngredientBean {
     private IngredientBean ingredient;
     private Long quantite;
 
+    public RecipeIngredientBean() {
+
+    }
+
     public Integer getIdRecipeIngredient() {
         return idRecipeIngredient;
     }

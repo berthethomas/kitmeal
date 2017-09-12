@@ -17,6 +17,11 @@ public class EventBean {
     private String dateDebut;
     private String dateFin;
     private RecipeBean recipe;
+    private UserBean organisateur;
+
+    public EventBean() {
+
+    }
 
     public Integer getIdEvent() {
         return idEvent;
@@ -64,6 +69,14 @@ public class EventBean {
 
     public void setRecipe(RecipeBean recipe) {
         this.recipe = recipe;
+    }
+
+    public UserBean getOrganisateur() {
+        return organisateur;
+    }
+
+    public void setOrganisateur(UserBean organisateur) {
+        this.organisateur = organisateur;
     }
 
 }

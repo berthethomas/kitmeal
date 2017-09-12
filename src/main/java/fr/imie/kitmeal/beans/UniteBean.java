@@ -14,6 +14,10 @@ public class UniteBean {
     private Integer idUnite;
     private String nom;
 
+    public UniteBean() {
+
+    }
+
     public Integer getIdUnite() {
         return idUnite;
     }
