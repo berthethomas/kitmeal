@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -47,12 +48,28 @@ public class UniteController {
         return new ResponseEntity<UniteBean>(bean, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    public ModelAndView showCreateUnite(HttpSession session,
+            HttpServletRequest request) {
+        UniteBean bean = new UniteBean();
+
+        return new ModelAndView("/", "bean", bean);
+    }
+
     @RequestMapping(value = "/update/{idUnite}", method = RequestMethod.POST)
     public ResponseEntity<UniteBean> updateUnite(HttpSession session, @RequestBody UniteBean bean,
             @PathVariable Integer idUnite, HttpServletRequest request) {
         uniteService.updateUnite(idUnite, bean);
 
         return new ResponseEntity<UniteBean>(bean, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/update/{idUnite}", method = RequestMethod.GET)
+    public ModelAndView showUpdateUnite(HttpSession session,
+            @PathVariable Integer idUnite, HttpServletRequest request) {
+        UniteBean bean = uniteService.findUnite(idUnite);
+
+        return new ModelAndView("/", "bean", bean);
     }
 
     @RequestMapping(value = "/find/{idUnite}", method = RequestMethod.GET)

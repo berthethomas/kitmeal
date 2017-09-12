@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -47,12 +48,28 @@ public class RecipeController {
         return new ResponseEntity<RecipeBean>(bean, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    public ModelAndView showCreateRecipe(HttpSession session,
+            HttpServletRequest request) {
+        RecipeBean bean = new RecipeBean();
+
+        return new ModelAndView("/", "bean", bean);
+    }
+
     @RequestMapping(value = "/update/{idRecipe}", method = RequestMethod.POST)
     public ResponseEntity<RecipeBean> updateRecipe(HttpSession session, @RequestBody RecipeBean bean,
             @PathVariable Integer idRecipe, HttpServletRequest request) {
         recipeService.updateRecipe(idRecipe, bean);
 
         return new ResponseEntity<RecipeBean>(bean, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/update/{idRecipe}", method = RequestMethod.GET)
+    public ModelAndView showUpdateRecipe(HttpSession session,
+            @PathVariable Integer idRecipe, HttpServletRequest request) {
+        RecipeBean bean = recipeService.findRecipe(idRecipe);
+
+        return new ModelAndView("/", "bean", bean);
     }
 
     @RequestMapping(value = "/find/{idRecipe}", method = RequestMethod.GET)

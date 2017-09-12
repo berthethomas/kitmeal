@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -47,12 +48,28 @@ public class AddressController {
         return new ResponseEntity<AddressBean>(bean, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    public ModelAndView showCreateAddress(HttpSession session,
+            HttpServletRequest request) {
+        AddressBean bean = new AddressBean();
+
+        return new ModelAndView("/", "bean", bean);
+    }
+
     @RequestMapping(value = "/update/{idAddress}", method = RequestMethod.POST)
     public ResponseEntity<AddressBean> updateAddress(HttpSession session, @RequestBody AddressBean bean,
             @PathVariable Integer idAddress, HttpServletRequest request) {
         addressService.updateAddress(idAddress, bean);
 
         return new ResponseEntity<AddressBean>(bean, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/update/{idAddress}", method = RequestMethod.GET)
+    public ModelAndView showUpdateAddress(HttpSession session,
+            @PathVariable Integer idAddress, HttpServletRequest request) {
+        AddressBean bean = addressService.findAddress(idAddress);
+
+        return new ModelAndView("/", "bean", bean);
     }
 
     @RequestMapping(value = "/find/{idAddress}", method = RequestMethod.GET)

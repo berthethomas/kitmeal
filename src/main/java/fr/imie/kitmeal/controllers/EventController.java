@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -47,12 +48,28 @@ public class EventController {
         return new ResponseEntity<EventBean>(bean, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    public ModelAndView showCreateEvent(HttpSession session,
+            HttpServletRequest request) {
+        EventBean bean = new EventBean();
+
+        return new ModelAndView("/", "bean", bean);
+    }
+
     @RequestMapping(value = "/update/{idEvent}", method = RequestMethod.POST)
     public ResponseEntity<EventBean> updateEvent(HttpSession session, @RequestBody EventBean bean,
             @PathVariable Integer idEvent, HttpServletRequest request) {
         eventService.updateEvent(idEvent, bean);
 
         return new ResponseEntity<EventBean>(bean, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/update/{idEvent}", method = RequestMethod.GET)
+    public ModelAndView showUpdateEvent(HttpSession session,
+            @PathVariable Integer idEvent, HttpServletRequest request) {
+        EventBean bean = eventService.findEvent(idEvent);
+
+        return new ModelAndView("/", "bean", bean);
     }
 
     @RequestMapping(value = "/find/{idEvent}", method = RequestMethod.GET)

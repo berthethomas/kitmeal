@@ -37,7 +37,7 @@ public class UserController {
             HttpServletRequest request) {
         List<UserBean> beans = userService.findAllUsers();
 
-        return new ModelAndView("/contacts.jsp", "bean", beans);
+        return new ModelAndView("/contacts/contacts.jsp", "bean", beans);
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
