@@ -17,17 +17,14 @@
 
         <title>Kitmeal | Famille</title>
 
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+        <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../assets/font-awesome/css/font-awesome.css" rel="stylesheet">
 
-        <link href="css/animate.css" rel="stylesheet">
-        <link href="css/style.css" rel="stylesheet">
+        <link href="../assets/css/animate.css" rel="stylesheet">
+        <link href="../assets/css/style.css" rel="stylesheet">
     </head>
 
     <body>
-        <c:forEach items="${bean}" var="item">
-            ${item.nom}<br>
-        </c:forEach>
         <div id="wrapper">
 
             <nav class="navbar-default navbar-static-side" role="navigation">
@@ -35,17 +32,17 @@
                     <ul class="nav metismenu" id="side-menu">
                         <li class="nav-header">
                             <div class="dropdown profile-element"> <span>
-                                    <img alt="image" class="img-circle" src="img/profile_small.jpg" />
+                                    <img alt="image" class="img-circle" src="../assets/img/profile_small.jpg" />
                                 </span>
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                     <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">David Williams</strong>
-                                        </span> <span class="text-muted text-xs block">Art Director <b class="caret"></b></span> </span> </a>
+                                        </span> <span class="text-muted text-xs block">Options <b class="caret"></b></span> </span> </a>
                                 <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                    <li><a href="profile.html">Profile</a></li>
+                                    <li><a href="profile.html">Profil</a></li>
                                     <li><a href="contacts.html">Contacts</a></li>
                                     <li><a href="mailbox.html">Mailbox</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="login.html">Logout</a></li>
+                                    <li><a href="login.html">Déconnexion</a></li>
                                 </ul>
                             </div>
                             <div class="logo-element">
@@ -81,13 +78,13 @@
                             <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
                             <form role="search" class="navbar-form-custom" action="search_results.html">
                                 <div class="form-group">
-                                    <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
+                                    <input type="text" placeholder="Rechercher..." class="form-control" name="top-search" id="top-search">
                                 </div>
                             </form>
                         </div>
                         <ul class="nav navbar-top-links navbar-right">
                             <li>
-                                <span class="m-r-sm text-muted welcome-message">Kitmeal</span>
+                                <span class="m-r-sm text-muted welcome-message">KITmeal</span>
                             </li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
@@ -97,7 +94,7 @@
                                     <li>
                                         <div class="dropdown-messages-box">
                                             <a href="profile.html" class="pull-left">
-                                                <img alt="image" class="img-circle" src="img/a7.jpg">
+                                                <img alt="image" class="img-circle" src="../assets/img/a7.jpg">
                                             </a>
                                             <div class="media-body">
                                                 <small class="pull-right">46h ago</small>
@@ -110,7 +107,7 @@
                                     <li>
                                         <div class="dropdown-messages-box">
                                             <a href="profile.html" class="pull-left">
-                                                <img alt="image" class="img-circle" src="img/a4.jpg">
+                                                <img alt="image" class="img-circle" src="../assets/img/a4.jpg">
                                             </a>
                                             <div class="media-body ">
                                                 <small class="pull-right text-navy">5h ago</small>
@@ -123,7 +120,7 @@
                                     <li>
                                         <div class="dropdown-messages-box">
                                             <a href="profile.html" class="pull-left">
-                                                <img alt="image" class="img-circle" src="img/profile.jpg">
+                                                <img alt="image" class="img-circle" src="../assets/img/profile.jpg">
                                             </a>
                                             <div class="media-body ">
                                                 <small class="pull-right">23h ago</small>
@@ -212,28 +209,28 @@
                 <div class="wrapper wrapper-content animated fadeInRight">
                     <div class="contact-row">
                         <div class="col-lg-4">
-                            <div class="contact-box">
-                                <a href="profile.html">
-                                    <div class="col-sm-4">
-                                        <div class="text-center">
-                                            <img alt="image" class="img-circle m-t-xs img-responsive" src="img/a2.jpg">
-                                            <div class="m-t-xs font-bold"></div>
+                            <c:forEach items="${bean}" var="item">
+                                <div class="contact-box">
+                                    <a href="#">
+                                        <div class="col-sm-4">
+                                            <div class="text-center">
+                                                <img alt="image" class="img-circle m-t-xs img-responsive" src="../assets/img/a2.jpg">
+                                                <div class="m-t-xs font-bold"></div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <h3><strong><%=(bean.getNom()%></strong></h3>
-                                        <p><i class="fa fa-map-marker"></i></p>
-                                        <address>
-                                            <strong></strong>
-                                            <br>
-                                            <br>
-
-                                            <br>
-                                        </address>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </a>
-                            </div>
+                                        <div class="col-sm-8">
+                                            <h3><strong>${item.nom}</strong></h3>
+                                            <p><i class="fa fa-map-marker"></i> ${item.address.numero}, ${item.address.rue}</p>
+                                            <address>
+                                                <strong>${item.address.codePostal} ${item.address.ville}</strong>
+                                                <br>
+                                                ${item.address.pays}
+                                            </address>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </a>
+                                </div>
+                            </c:forEach>
                         </div>
 
                     </div>
@@ -253,15 +250,15 @@
 
 
         <!-- Mainly scripts -->
-        <script src="js/jquery-2.1.1.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
-        <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+        <script src="../assets/js/jquery-2.1.1.js"></script>
+        <script src="../assets/js/bootstrap.min.js"></script>
+        <script src="../assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+        <script src="../assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
 
         <!-- Custom and plugin javascript -->
-        <script src="js/inspinia.js"></script>
-        <script src="js/plugins/pace/pace.min.js"></script>
+        <script src="../assets/js/inspinia.js"></script>
+        <script src="../assets/js/plugins/pace/pace.min.js"></script>
     </body>
 
 </html>
