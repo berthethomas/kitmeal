@@ -7,15 +7,19 @@ package fr.imie.kitmeal.entities;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author thomasberthe
  */
+@Entity
+@Table(name = "user_event")
 public class UserEvent {
 
     @Id
@@ -23,14 +27,12 @@ public class UserEvent {
     @Column(name = "id_user_event")
     private Integer idUserEvent;
 
-    @OneToMany(targetEntity = User.class)
+    @ManyToOne(targetEntity = User.class)
     @JoinColumn(name = "user")
-    @ElementCollection
     private User user;
 
-    @OneToMany(targetEntity = Event.class)
+    @ManyToOne(targetEntity = Event.class)
     @JoinColumn(name = "event")
-    @ElementCollection
     private Event event;
 
     @Column(name = "response")

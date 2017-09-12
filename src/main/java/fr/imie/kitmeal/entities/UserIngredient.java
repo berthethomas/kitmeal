@@ -7,15 +7,19 @@ package fr.imie.kitmeal.entities;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author thomasberthe
  */
+@Entity
+@Table(name = "user_ingredient")
 public class UserIngredient {
 
     @Id
@@ -23,14 +27,12 @@ public class UserIngredient {
     @Column(name = "id_user_ingredient")
     private Integer idUserIngredient;
 
-    @OneToMany(targetEntity = User.class)
+    @ManyToOne(targetEntity = User.class)
     @JoinColumn(name = "user")
-    @ElementCollection
     private User user;
 
-    @OneToMany(targetEntity = Ingredient.class)
+    @ManyToOne(targetEntity = Ingredient.class)
     @JoinColumn(name = "ingredient")
-    @ElementCollection
     private Ingredient ingredient;
 
     @Column(name = "quantite")

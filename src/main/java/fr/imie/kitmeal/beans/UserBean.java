@@ -22,6 +22,10 @@ public class UserBean {
     private String birthday;
     private String role;
     private AddressBean address;
+    
+    public UserBean() {
+        
+    }
 
     public Integer getIdUser() {
         return idUser;

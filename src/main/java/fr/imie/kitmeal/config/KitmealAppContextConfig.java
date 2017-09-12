@@ -10,8 +10,11 @@ import fr.imie.kitmeal.entities.Category;
 import fr.imie.kitmeal.entities.Event;
 import fr.imie.kitmeal.entities.Ingredient;
 import fr.imie.kitmeal.entities.Recipe;
+import fr.imie.kitmeal.entities.RecipeIngredient;
 import fr.imie.kitmeal.entities.Unite;
 import fr.imie.kitmeal.entities.User;
+import fr.imie.kitmeal.entities.UserEvent;
+import fr.imie.kitmeal.entities.UserIngredient;
 import java.util.Properties;
 import javax.sql.DataSource;
 import org.hibernate.SessionFactory;
@@ -52,6 +55,9 @@ public class KitmealAppContextConfig {
         sessionBuilder.addAnnotatedClasses(Event.class);
         sessionBuilder.addAnnotatedClasses(Ingredient.class);
         sessionBuilder.addAnnotatedClasses(Recipe.class);
+        sessionBuilder.addAnnotatedClasses(RecipeIngredient.class);
+        sessionBuilder.addAnnotatedClasses(UserEvent.class);
+        sessionBuilder.addAnnotatedClasses(UserIngredient.class);
         sessionBuilder.addProperties(getHibernatePropertiesKitmeal());
         return sessionBuilder.buildSessionFactory();
     }

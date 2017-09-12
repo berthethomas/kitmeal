@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -32,11 +33,11 @@ public class UserController {
     IUserService userService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public ResponseEntity<List<UserBean>> findAllUsers(HttpSession session,
+    public ModelAndView findAllUsers(HttpSession session,
             HttpServletRequest request) {
         List<UserBean> beans = userService.findAllUsers();
 
-        return new ResponseEntity<List<UserBean>>(beans, HttpStatus.OK);
+        return new ModelAndView("/contacts.jsp", "bean", beans);
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
