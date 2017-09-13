@@ -41,7 +41,8 @@ public class ConnexionController {
               //log.setTrigramme((String) session.getAttribute("user"));
               //return new ModelAndView("/home/home.jsp");
           //}else {
-              return new ModelAndView("/home/login.jsp");
+          UserBean bean = new UserBean();
+              return new ModelAndView("/home/login.jsp", "bean", bean);
          // }
 
         
@@ -51,14 +52,12 @@ public class ConnexionController {
     @RequestMapping(value = "/login/{bean}", method = RequestMethod.POST)
     public ModelAndView log(HttpSession session, UserBean bean,
             HttpServletRequest request) {
-        System.err.println("cest iciiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
         UserBean user = userService.connect(bean);
-        System.err.println(user);
+        
         if(user != null){
             session.setAttribute("user", user);
-            
         }else{
-            return new ModelAndView("/home/login.jsp");
+            return new ModelAndView("redirect:/app/log");
         }
 
         return new ModelAndView("redirect:/app/home");
@@ -74,7 +73,7 @@ public class ConnexionController {
     }*/
     
     //home
-    @RequestMapping(value = "/home", method = RequestMethod.POST)
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
     public ModelAndView showHome(HttpSession session, @RequestBody EventBean bean,
             HttpServletRequest request) {
         

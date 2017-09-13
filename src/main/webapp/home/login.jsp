@@ -41,10 +41,10 @@
 
             
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Identifiant" value='${bean.username}' required="">
+                    <s:input id="username" path="username" type="text" value='${bean.username}' class="form-control required" />
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Mot de passe" value='${bean.password}' required="">
+                    <s:input id="password" path="password" type="text" value='${bean.password}' class="form-control required" />
                 </div>
                 <button type="submit" class="btn btn-primary block full-width m-b">Connexion</button>
 

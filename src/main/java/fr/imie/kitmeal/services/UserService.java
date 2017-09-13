@@ -127,8 +127,6 @@ public class UserService implements IUserService {
     public UserBean connect(UserBean bean) {
         
         User user = userDao.findUser(bean.getUsername(), bean.getPassword());
-        System.err.println("pbbbbbbbbb");
-        System.err.println(user);
         if(user != null){
             bean = findUser(user.getIdUser());
         }else{

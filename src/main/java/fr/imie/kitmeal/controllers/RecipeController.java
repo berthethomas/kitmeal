@@ -11,7 +11,9 @@ import fr.imie.kitmeal.beans.RecipeIngredientBean;
 import fr.imie.kitmeal.interfacesServices.IIngredientService;
 import fr.imie.kitmeal.interfacesServices.IRecipeIngredientService;
 import fr.imie.kitmeal.interfacesServices.IRecipeService;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +56,9 @@ public class RecipeController {
     public ModelAndView createRecipe(HttpSession session, RecipeIngredientBean bean,
             HttpServletRequest request) {
          System.err.println("TOTOTOTOTOTOTOTOOTOTOTOTOTOTOTOTOTOOTOTOTOTOTOTO");
-        System.err.println(request.getAttribute("ingredient.idIngredient"));
+
+         
+        System.err.println(request.getAttributeNames());
         recipeIngredientService.createRecipeIngredient(bean);
 
         return new ModelAndView("redirect:/app/recipes");
