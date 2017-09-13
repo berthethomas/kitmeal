@@ -211,7 +211,10 @@
                         <div class="col-lg-10 col-lg-offset-1">
                             <div class="ibox">
                                 <div class="ibox-content">
-
+                                    <div class="pull-right">
+                                        <a href="${pageContext.servletContext.contextPath}/app/recipes/update/${bean.idRecipe}"><i class="fa fa-wrench"></i></a>
+                                        <a href="${pageContext.servletContext.contextPath}/app/recipes/remove/${bean.idRecipe}"><i class="fa fa-times"></i></a>
+                                    </div>
                                     <div class="text-center article-title">
                                         <span class="text-muted"><i class="fa fa-user"></i> Ajoutée par ${bean.user.nom}</span>
                                         <h1>

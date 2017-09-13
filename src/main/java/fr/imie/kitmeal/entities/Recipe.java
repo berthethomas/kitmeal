@@ -39,11 +39,6 @@ public class Recipe {
     @JoinColumn(name = "user")
     private User user;
 
-    @OneToMany(targetEntity = Event.class)
-    @JoinColumn(name = "event")
-    @ElementCollection
-    private Set<Event> events;
-
     public Integer getIdRecipe() {
         return idRecipe;
     }
@@ -74,18 +69,6 @@ public class Recipe {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public Set<Event> getEvents() {
-        return events;
-    }
-
-    public void addEvent(Event event) {
-        this.events.add(event);
-    }
-
-    public void removeEvent(Event event) {
-        this.events.remove(event);
     }
 
 }

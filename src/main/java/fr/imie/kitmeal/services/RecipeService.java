@@ -56,12 +56,13 @@ public class RecipeService implements IRecipeService {
     public RecipeBean createRecipe(RecipeBean bean) {
         Recipe recipe = new Recipe();
 
-        recipe.setIdRecipe(bean.getIdRecipe());
         recipe.setNom(bean.getNom());
         recipe.setDescription(bean.getDescription());
         recipe.setUser(userDao.find(bean.getUser().getIdUser()));
 
         recipeDao.create(recipe);
+
+        bean.setIdRecipe(recipe.getIdRecipe());
 
         return bean;
     }
@@ -70,12 +71,12 @@ public class RecipeService implements IRecipeService {
     public RecipeBean updateRecipe(Integer idRecipe, RecipeBean bean) {
         Recipe recipe = recipeDao.find(idRecipe);
 
-        recipe.setIdRecipe(bean.getIdRecipe());
         recipe.setNom(bean.getNom());
         recipe.setDescription(bean.getDescription());
-        recipe.setUser(userDao.find(bean.getUser().getIdUser()));
 
         recipeDao.update(recipe);
+
+        bean.setIdRecipe(recipe.getIdRecipe());
 
         return bean;
     }

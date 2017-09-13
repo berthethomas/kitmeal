@@ -8,6 +8,7 @@ package fr.imie.kitmeal.controllers;
 import fr.imie.kitmeal.beans.IngredientBean;
 import fr.imie.kitmeal.beans.RecipeBean;
 import fr.imie.kitmeal.beans.RecipeIngredientBean;
+import fr.imie.kitmeal.beans.UserBean;
 import fr.imie.kitmeal.interfacesServices.IIngredientService;
 import fr.imie.kitmeal.interfacesServices.IRecipeIngredientService;
 import fr.imie.kitmeal.interfacesServices.IRecipeService;
@@ -53,37 +54,48 @@ public class RecipeController {
     }
 
     @RequestMapping(value = "/create/{bean}", method = RequestMethod.POST)
-    public ModelAndView createRecipe(HttpSession session, RecipeIngredientBean bean,
+    public ModelAndView createRecipe(HttpSession session, RecipeBean bean,
             HttpServletRequest request) {
-         System.err.println("TOTOTOTOTOTOTOTOOTOTOTOTOTOTOTOTOTOOTOTOTOTOTOTO");
+        bean.setUser((UserBean) session.getAttribute("user"));
+        recipeService.createRecipe(bean);
 
-         
-        System.err.println(request.getAttributeNames());
-        recipeIngredientService.createRecipeIngredient(bean);
-
-        return new ModelAndView("redirect:/app/recipes");
+        return new ModelAndView("redirect:/app/recipes/create/ingredients/" + bean.getIdRecipe());
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView showCreateRecipe(HttpSession session,
             HttpServletRequest request) {
-        RecipeIngredientBean bean = new RecipeIngredientBean();
+        RecipeBean bean = new RecipeBean();
 
-        List<IngredientBean> ingredients = ingredientService.findAllIngredients();
+        return new ModelAndView("/recipe/create.jsp", "bean", bean);
+    }
 
-        ModelAndView mav = new ModelAndView("/recipe/create.jsp");
+    @RequestMapping(value = "/create/ingredients/{idRecipe}", method = RequestMethod.GET)
+    public ModelAndView showCreateIngredientRecipe(HttpSession session,
+            @PathVariable Integer idRecipe, HttpServletRequest request) {
+        List<IngredientBean> bean = ingredientService.findAllIngredients();
+        
+        ModelAndView mav = new ModelAndView("/recipe/createIngredient.jsp");
         mav.addObject("bean", bean);
-        mav.addObject("ingredients", ingredients);
+        mav.addObject("idRecipe", idRecipe);
 
         return mav;
     }
 
-    @RequestMapping(value = "/update/{idRecipe}", method = RequestMethod.POST)
-    public ResponseEntity<RecipeBean> updateRecipe(HttpSession session, @RequestBody RecipeBean bean,
+    @RequestMapping(value = "/create/ingredients/{bean}", method = RequestMethod.POST)
+    public void createIngredientRecipe(HttpSession session,
+            HttpServletRequest request) {
+        RecipeIngredientBean bean = new RecipeIngredientBean();
+        recipeIngredientService.createRecipeIngredient(bean);
+
+    }
+
+    @RequestMapping(value = "/update/{idRecipe}/{bean}", method = RequestMethod.POST)
+    public ModelAndView updateRecipe(HttpSession session, RecipeBean bean,
             @PathVariable Integer idRecipe, HttpServletRequest request) {
         recipeService.updateRecipe(idRecipe, bean);
 
-        return new ResponseEntity<RecipeBean>(bean, HttpStatus.OK);
+        return new ModelAndView("redirect:/app/recipes/find/" + bean.getIdRecipe());
     }
 
     @RequestMapping(value = "/update/{idRecipe}", method = RequestMethod.GET)
@@ -91,7 +103,7 @@ public class RecipeController {
             @PathVariable Integer idRecipe, HttpServletRequest request) {
         RecipeBean bean = recipeService.findRecipe(idRecipe);
 
-        return new ModelAndView("/", "bean", bean);
+        return new ModelAndView("/recipe/update.jsp", "bean", bean);
     }
 
     @RequestMapping(value = "/find/{idRecipe}", method = RequestMethod.GET)
@@ -102,10 +114,11 @@ public class RecipeController {
         return new ModelAndView("/recipe/show.jsp", "bean", bean);
     }
 
-    @RequestMapping(value = "/remove/{idRecipe}", method = RequestMethod.DELETE)
-    @ResponseStatus(value = HttpStatus.OK)
-    public void removeRecipe(HttpSession session, @PathVariable Integer idRecipe,
+    @RequestMapping(value = "/remove/{idRecipe}", method = RequestMethod.GET)
+    public ModelAndView removeRecipe(HttpSession session, @PathVariable Integer idRecipe,
             HttpServletRequest request) {
         recipeService.removeRecipe(idRecipe);
+
+        return new ModelAndView("redirect:/app/recipes");
     }
 }

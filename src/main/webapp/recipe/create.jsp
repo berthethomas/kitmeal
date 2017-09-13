@@ -8,7 +8,7 @@
 <%@taglib prefix="s" uri="http://www.springframework.org/tags/form"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="fr.imie.kitmeal.beans.RecipeIngredientBean"%>
+<%@page import="fr.imie.kitmeal.beans.RecipeBean"%>
 <!DOCTYPE html>
 <html>
 
@@ -234,22 +234,15 @@
                                                 <div class="col-lg-8">
                                                     <div class="form-group">
                                                         <label>Nom *</label>
-                                                        <s:input name="recipe.nom" id="recipe.nom" path="recipe.nom" type="text" value='${bean.recipe.nom}' class="form-control required" />
+                                                        <s:input name="nom" id="nom" path="nom" type="text" value='${bean.nom}' class="form-control required" />
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Description *</label>
-                                                        <s:textarea name="recipe.description" id="recipe.description" path="recipe.description" type="text" value='${bean.recipe.description}' class="form-control required" />
+                                                        <s:textarea name="description" id="description" path="description" type="text" value='${bean.description}' class="form-control required" />
                                                     </div>
                                                 </div>
                                             </div>
 
-                                        </fieldset>
-                                        <h1>Ingrédients</h1>
-                                        <fieldset>
-                                            <h2>Ingrédients de la recette</h2>
-                                            <c:forEach items="${ingredients}" var="ingredient">
-                                                <s:checkbox  name="ingredient.idIngredient" id="ingredient.idIngredient${ingredient.idIngredient}" path="ingredient.idIngredient" label="${ingredient.nom}" value='${ingredient.idIngredient}' class="form-control required" />
-                                            </c:forEach>
                                         </fieldset>
                                     </s:form>
                                 </div>

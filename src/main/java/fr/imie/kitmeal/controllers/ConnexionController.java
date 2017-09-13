@@ -33,21 +33,22 @@ public class ConnexionController {
 
     @Autowired
     IUserService userService;
-    
+
 // verificaton si connexion
     @RequestMapping(value = "/log", method = RequestMethod.GET)
     public ModelAndView ifConnect(HttpSession session) {
-        if(session.getAttribute("user") != null){
-              return new ModelAndView("/home/home.jsp");
-        }else {
-         return new ModelAndView("/home/login.jsp");
-        } 
+        if (session.getAttribute("user") != null) {
+            return new ModelAndView("/home/home.jsp");
+        } else {
+            UserBean bean = new UserBean();
+            return new ModelAndView("/home/login.jsp", "bean", bean);
+        }
     }
-    
+
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public ModelAndView logout(HttpSession session) {
-          session.removeAttribute("user");
-              return new ModelAndView("redirect:/app/log");
+        session.removeAttribute("user");
+        return new ModelAndView("redirect:/app/log");
     }
 
     // connexion
@@ -55,16 +56,16 @@ public class ConnexionController {
     public ModelAndView log(HttpSession session, UserBean bean,
             HttpServletRequest request) {
         UserBean user = userService.connect(bean);
-        
-        if(user != null){
+
+        if (user != null) {
             session.setAttribute("user", user);
-        }else{
+        } else {
             return new ModelAndView("redirect:/app/log");
         }
 
         return new ModelAndView("redirect:/app/home");
     }
-    
+
     // deconnexion
     /*@RequestMapping(value = "/logout", method = RequestMethod.POST)
     public ResponseEntity<EventBean> createEvent(HttpSession session, @RequestBody EventBean bean,
@@ -73,15 +74,12 @@ public class ConnexionController {
 
         return new ResponseEntity<EventBean>(bean, HttpStatus.OK);
     }*/
-    
     //home
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public ModelAndView showHome(HttpSession session, @RequestBody EventBean bean,
             HttpServletRequest request) {
-        
 
         return new ModelAndView("/contacts/contacts.jsp");
     }
 
-    
 }
