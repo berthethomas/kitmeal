@@ -1,5 +1,5 @@
 web/META-INF
 *.DS_Store
 src/main/resources/application.config.properties
-target/
 *.war
+target/*
