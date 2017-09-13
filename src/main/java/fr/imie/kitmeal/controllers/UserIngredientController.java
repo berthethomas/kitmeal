@@ -33,11 +33,11 @@ public class UserIngredientController {
     IUserIngredientService userIngredientService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public ResponseEntity<List<UserIngredientBean>> findAllUserIngredients(HttpSession session,
+    public ModelAndView findAllUserIngredients(HttpSession session,
             HttpServletRequest request) {
         List<UserIngredientBean> beans = userIngredientService.findAllUserIngredients();
 
-        return new ResponseEntity<List<UserIngredientBean>>(beans, HttpStatus.OK);
+        return new ModelAndView("/frigo/showAll.jsp", "bean", beans);
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)

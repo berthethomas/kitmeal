@@ -123,4 +123,14 @@ public class UserService implements IUserService {
         userDao.delete(userDao.find(idUser));
     }
 
+    @Override
+    public UserBean connect(UserBean bean) {
+        
+        User user = userDao.findUser(bean.getUsername(), bean.getPassword());
+     
+        return bean;
+    }
+    
+   
+    
 }

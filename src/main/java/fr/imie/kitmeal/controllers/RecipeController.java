@@ -33,11 +33,11 @@ public class RecipeController {
     IRecipeService recipeService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public ResponseEntity<List<RecipeBean>> findAllRecipes(HttpSession session,
+    public ModelAndView findAllRecipes(HttpSession session,
             HttpServletRequest request) {
         List<RecipeBean> beans = recipeService.findAllRecipes();
 
-        return new ResponseEntity<List<RecipeBean>>(beans, HttpStatus.OK);
+        return new ModelAndView("/recipe/showAll.jsp", "bean", beans);
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
@@ -73,11 +73,11 @@ public class RecipeController {
     }
 
     @RequestMapping(value = "/find/{idRecipe}", method = RequestMethod.GET)
-    public ResponseEntity<RecipeBean> findRecipe(HttpSession session, @PathVariable Integer idRecipe,
+    public ModelAndView findRecipe(HttpSession session, @PathVariable Integer idRecipe,
             HttpServletRequest request) {
         RecipeBean bean = recipeService.findRecipe(idRecipe);
 
-        return new ResponseEntity<RecipeBean>(bean, HttpStatus.OK);
+        return new ModelAndView("/recipe/show.jsp", "bean", bean);
     }
 
     @RequestMapping(value = "/remove/{idRecipe}", method = RequestMethod.DELETE)

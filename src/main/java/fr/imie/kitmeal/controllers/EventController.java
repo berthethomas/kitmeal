@@ -33,11 +33,11 @@ public class EventController {
     IEventService eventService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public ResponseEntity<List<EventBean>> findAllEvents(HttpSession session,
+    public ModelAndView findAllEvents(HttpSession session,
             HttpServletRequest request) {
         List<EventBean> beans = eventService.findAllEvents();
 
-        return new ResponseEntity<List<EventBean>>(beans, HttpStatus.OK);
+        return new ModelAndView("/event/calendar.jsp", "bean", beans);
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
@@ -53,7 +53,7 @@ public class EventController {
             HttpServletRequest request) {
         EventBean bean = new EventBean();
 
-        return new ModelAndView("/", "bean", bean);
+        return new ModelAndView("/event/addEvent.jsp", "bean", bean);
     }
 
     @RequestMapping(value = "/update/{idEvent}", method = RequestMethod.POST)

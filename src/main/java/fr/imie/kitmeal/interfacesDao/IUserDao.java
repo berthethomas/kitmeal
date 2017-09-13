@@ -13,5 +13,7 @@ import java.io.Serializable;
  * @author Laura
  */
 public interface IUserDao extends IGenericDao<Serializable, User> {
+    
+    public User findUser(String username, String password);
 
 }

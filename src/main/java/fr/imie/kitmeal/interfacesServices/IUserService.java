@@ -6,6 +6,7 @@
 package fr.imie.kitmeal.interfacesServices;
 
 import fr.imie.kitmeal.beans.UserBean;
+import fr.imie.kitmeal.entities.User;
 import java.util.List;
 
 /**
@@ -13,6 +14,8 @@ import java.util.List;
  * @author Laura
  */
 public interface IUserService {
+    
+    public UserBean connect(UserBean bean);
     
     public List<UserBean> findAllUsers();
 

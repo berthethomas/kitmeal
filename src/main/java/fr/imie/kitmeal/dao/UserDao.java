@@ -28,5 +28,19 @@ public class UserDao extends AbstractGenericDaoKitmeal<User> implements IUserDao
 
         return users;
     }
+    
+    @Override
+    public User findUser(String username, String password) {
+        String hql = "from User u "
+                + "where u.username = :username "
+                + "and u.password = :password ";
+               
+        Query query = getSession().createQuery(hql);
+        query.setParameter("username", username);
+        query.setParameter("password", password);
+        query.setMaxResults(1);
+        User results = (User) query.uniqueResult();
+        return results;
+    }
 
 }
