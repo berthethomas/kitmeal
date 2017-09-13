@@ -37,23 +37,31 @@ public class ConnexionController {
 // verificaton si connexion
     @RequestMapping(value = "/log", method = RequestMethod.GET)
     public ModelAndView ifConnect(HttpSession session) {
-        if(session.getAttribute("user") != null){
+        //if(session.getAttribute("user") != null){
               //log.setTrigramme((String) session.getAttribute("user"));
-              return new ModelAndView("/home/home.jsp");
-          }else {
+              //return new ModelAndView("/home/home.jsp");
+          //}else {
               return new ModelAndView("/home/login.jsp");
-          }
+         // }
 
         
     }
 
     // connexion
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ModelAndView log(HttpSession session, @RequestBody UserBean bean,
+    @RequestMapping(value = "/login/{bean}", method = RequestMethod.POST)
+    public ModelAndView log(HttpSession session, UserBean bean,
             HttpServletRequest request) {
-        userService.connect(bean);
+        System.err.println("cest iciiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
+        UserBean user = userService.connect(bean);
+        System.err.println(user);
+        if(user != null){
+            session.setAttribute("user", user);
+            
+        }else{
+            return new ModelAndView("/home/login.jsp");
+        }
 
-        return new ModelAndView("/home/login.jsp", "bean", bean);
+        return new ModelAndView("redirect:/app/home");
     }
     
     // deconnexion
@@ -63,16 +71,16 @@ public class ConnexionController {
         eventService.createEvent(bean);
 
         return new ResponseEntity<EventBean>(bean, HttpStatus.OK);
-    }
+    }*/
     
     //home
     @RequestMapping(value = "/home", method = RequestMethod.POST)
-    public ResponseEntity<EventBean> createEvent(HttpSession session, @RequestBody EventBean bean,
+    public ModelAndView showHome(HttpSession session, @RequestBody EventBean bean,
             HttpServletRequest request) {
-        eventService.createEvent(bean);
+        
 
-        return new ResponseEntity<EventBean>(bean, HttpStatus.OK);
-    }*/
+        return new ModelAndView("/contacts/contacts.jsp");
+    }
 
     
 }

@@ -4,8 +4,11 @@
     Author     : Laura
 --%>
 
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="s" uri="http://www.springframework.org/tags/form"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@page import="fr.imie.kitmeal.beans.UserBean"%><!DOCTYPE html>
 <html>
 
 <head>
@@ -34,16 +37,18 @@
             </div>
             
             <p>Connexion</p>
-            <form class="m-t" role="form" action="index.html">
+            <s:form modelAttribute="bean" id="form" action="${pageContext.servletContext.contextPath}/app/login/${bean}" method="POST" class="wizard-big">
+
+            
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Identifiant" required="">
+                    <input type="text" class="form-control" placeholder="Identifiant" value='${bean.username}' required="">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Mot de passe" required="">
+                    <input type="password" class="form-control" placeholder="Mot de passe" value='${bean.password}' required="">
                 </div>
                 <button type="submit" class="btn btn-primary block full-width m-b">Connexion</button>
 
-            </form>
+            </s:form>
             
         </div>
     </div>

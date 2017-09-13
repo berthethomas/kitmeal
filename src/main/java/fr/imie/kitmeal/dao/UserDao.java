@@ -31,6 +31,9 @@ public class UserDao extends AbstractGenericDaoKitmeal<User> implements IUserDao
     
     @Override
     public User findUser(String username, String password) {
+        System.err.println("loooooog");
+        System.err.println(username);
+        System.err.println(password);
         String hql = "from User u "
                 + "where u.username = :username "
                 + "and u.password = :password ";

@@ -30,7 +30,7 @@ public class Ingredient {
     private String nom;
 
     @ManyToOne(targetEntity = Category.class)
-    @JoinColumn(name = "category")
+    @JoinColumn(name = "categorie")
     private Category category;
 
     @ManyToOne(targetEntity = Unite.class)

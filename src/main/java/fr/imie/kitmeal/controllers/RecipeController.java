@@ -5,7 +5,11 @@
  */
 package fr.imie.kitmeal.controllers;
 
+import fr.imie.kitmeal.beans.IngredientBean;
 import fr.imie.kitmeal.beans.RecipeBean;
+import fr.imie.kitmeal.beans.RecipeIngredientBean;
+import fr.imie.kitmeal.interfacesServices.IIngredientService;
+import fr.imie.kitmeal.interfacesServices.IRecipeIngredientService;
 import fr.imie.kitmeal.interfacesServices.IRecipeService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -32,6 +36,12 @@ public class RecipeController {
     @Autowired
     IRecipeService recipeService;
 
+    @Autowired
+    IRecipeIngredientService recipeIngredientService;
+
+    @Autowired
+    IIngredientService ingredientService;
+
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelAndView findAllRecipes(HttpSession session,
             HttpServletRequest request) {
@@ -40,20 +50,28 @@ public class RecipeController {
         return new ModelAndView("/recipe/showAll.jsp", "bean", beans);
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public ResponseEntity<RecipeBean> createRecipe(HttpSession session, @RequestBody RecipeBean bean,
+    @RequestMapping(value = "/create/{bean}", method = RequestMethod.POST)
+    public ModelAndView createRecipe(HttpSession session, RecipeIngredientBean bean,
             HttpServletRequest request) {
-        recipeService.createRecipe(bean);
+         System.err.println("TOTOTOTOTOTOTOTOOTOTOTOTOTOTOTOTOTOOTOTOTOTOTOTO");
+        System.err.println(request.getAttribute("ingredient.idIngredient"));
+        recipeIngredientService.createRecipeIngredient(bean);
 
-        return new ResponseEntity<RecipeBean>(bean, HttpStatus.OK);
+        return new ModelAndView("redirect:/app/recipes");
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView showCreateRecipe(HttpSession session,
             HttpServletRequest request) {
-        RecipeBean bean = new RecipeBean();
+        RecipeIngredientBean bean = new RecipeIngredientBean();
 
-        return new ModelAndView("/", "bean", bean);
+        List<IngredientBean> ingredients = ingredientService.findAllIngredients();
+
+        ModelAndView mav = new ModelAndView("/recipe/create.jsp");
+        mav.addObject("bean", bean);
+        mav.addObject("ingredients", ingredients);
+
+        return mav;
     }
 
     @RequestMapping(value = "/update/{idRecipe}", method = RequestMethod.POST)
