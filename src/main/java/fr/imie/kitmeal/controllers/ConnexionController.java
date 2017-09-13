@@ -37,15 +37,17 @@ public class ConnexionController {
 // verificaton si connexion
     @RequestMapping(value = "/log", method = RequestMethod.GET)
     public ModelAndView ifConnect(HttpSession session) {
-        //if(session.getAttribute("user") != null){
-              //log.setTrigramme((String) session.getAttribute("user"));
-              //return new ModelAndView("/home/home.jsp");
-          //}else {
-          UserBean bean = new UserBean();
-              return new ModelAndView("/home/login.jsp", "bean", bean);
-         // }
-
-        
+        if(session.getAttribute("user") != null){
+              return new ModelAndView("/home/home.jsp");
+        }else {
+         return new ModelAndView("/home/login.jsp");
+        } 
+    }
+    
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public ModelAndView logout(HttpSession session) {
+          session.removeAttribute("user");
+              return new ModelAndView("redirect:/app/log");
     }
 
     // connexion

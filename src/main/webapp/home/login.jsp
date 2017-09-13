@@ -18,11 +18,11 @@
 
     <title>INSPINIA | Login</title>
 
-    <link href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${pageContext.servletContext.contextPath}/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="${pageContext.servletContext.contextPath}/asset/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.servletContext.contextPath}/asset//font-awesome/css/font-awesome.css" rel="stylesheet">
 
-    <link href="${pageContext.servletContext.contextPath}/css/animate.css" rel="stylesheet">
-    <link href="${pageContext.servletContext.contextPath}/css/style.css" rel="stylesheet">
+    <link href="${pageContext.servletContext.contextPath}/asset/css/animate.css" rel="stylesheet">
+    <link href="${pageContext.servletContext.contextPath}/asset/css/style.css" rel="stylesheet">
 
 </head>
 
@@ -54,8 +54,8 @@
     </div>
 
     <!-- Mainly scripts -->
-    <script src="${pageContext.servletContext.contextPath}/js/jquery-2.1.1.js"></script>
-    <script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
+    <script src="${pageContext.servletContext.contextPath}/asset/js/jquery-2.1.1.js"></script>
+    <script src="${pageContext.servletContext.contextPath}/asset/js/bootstrap.min.js"></script>
 
 </body>
 

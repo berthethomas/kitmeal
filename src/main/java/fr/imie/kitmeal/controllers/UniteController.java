@@ -36,15 +36,19 @@ public class UniteController {
     public ModelAndView findAllUnites(HttpSession session,
             HttpServletRequest request) {
         List<UniteBean> beans = uniteService.findAllUnites();
-
-        return new ModelAndView("/admin/unite/unite.jsp", "bean", beans);
+        if(session.getAttribute("user") != null){
+            return new ModelAndView("/admin/unite/unite.jsp", "bean", beans);
+        }else{
+            return new ModelAndView("redirect:/app/log");
+        }
+        
     }
 
     @RequestMapping(value = "/create/{bean}", method = RequestMethod.POST)
     public ModelAndView createUnite(HttpSession session, UniteBean bean,
             HttpServletRequest request) {
         uniteService.createUnite(bean);
-
+        
         return new ModelAndView("redirect:/app/unites");
     }
 
@@ -52,8 +56,12 @@ public class UniteController {
     public ModelAndView showCreateUnite(HttpSession session,
             HttpServletRequest request) {
         UniteBean bean = new UniteBean();
-
-        return new ModelAndView("/admin/unite/create.jsp", "bean", bean);
+        if(session.getAttribute("user") != null){
+            return new ModelAndView("/admin/unite/create.jsp", "bean", bean);
+        }else{
+            return new ModelAndView("redirect:/app/log");
+        }
+        
     }
 
     @RequestMapping(value = "/update/{idUnite}/{bean}", method = RequestMethod.POST)
@@ -68,8 +76,13 @@ public class UniteController {
     public ModelAndView showUpdateUnite(HttpSession session,
             @PathVariable Integer idUnite, HttpServletRequest request) {
         UniteBean bean = uniteService.findUnite(idUnite);
-
-        return new ModelAndView("/admin/unite/update.jsp", "bean", bean);
+        if(session.getAttribute("user") != null){
+            return new ModelAndView("/admin/unite/update.jsp", "bean", bean);
+            
+        }else{
+            return new ModelAndView("redirect:/app/log");
+        }
+        
     }
 
     @RequestMapping(value = "/find/{idUnite}", method = RequestMethod.GET)

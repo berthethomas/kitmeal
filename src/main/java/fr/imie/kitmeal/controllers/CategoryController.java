@@ -36,8 +36,11 @@ public class CategoryController {
     public ModelAndView findAllCategories(HttpSession session,
             HttpServletRequest request) {
         List<CategoryBean> beans = categoryService.findAllCategories();
-
-        return new ModelAndView("/admin/category/category.jsp", "bean", beans);
+        if(session.getAttribute("user") != null){
+            return new ModelAndView("/admin/category/category.jsp", "bean", beans);
+        }else{
+            return new ModelAndView("redirect:/app/log");
+        }
     }
 
     @RequestMapping(value = "/create/{bean}", method = RequestMethod.POST)
@@ -52,8 +55,11 @@ public class CategoryController {
     public ModelAndView showCreateCategory(HttpSession session,
             HttpServletRequest request) {
         CategoryBean bean = new CategoryBean();
-
-        return new ModelAndView("/admin/category/create.jsp", "bean", bean);
+        if(session.getAttribute("user") != null){
+            return new ModelAndView("/admin/category/create.jsp", "bean", bean);
+        }else{
+            return new ModelAndView("redirect:/app/log");
+        }
     }
 
     @RequestMapping(value = "/update/{idCategory}/{bean}", method = RequestMethod.POST)
@@ -68,8 +74,11 @@ public class CategoryController {
     public ModelAndView showUpdateCategory(HttpSession session,
             @PathVariable Integer idCategory, HttpServletRequest request) {
         CategoryBean bean = categoryService.findCategory(idCategory);
-
-        return new ModelAndView("/admin/category/update.jsp", "bean", bean);
+        if(session.getAttribute("user") != null){
+            return new ModelAndView("/admin/category/update.jsp", "bean", bean);
+        }else{
+            return new ModelAndView("redirect:/app/log");
+        }
     }
 
     @RequestMapping(value = "/find/{idCategory}", method = RequestMethod.GET)

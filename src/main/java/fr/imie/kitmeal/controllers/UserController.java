@@ -41,8 +41,11 @@ public class UserController {
     public ModelAndView findAllUsers(HttpSession session,
             HttpServletRequest request) {
         List<UserBean> beans = userService.findAllUsers();
-
-        return new ModelAndView("/contacts/contacts.jsp", "bean", beans);
+        if(session.getAttribute("user") != null){
+            return new ModelAndView("/contacts/contacts.jsp", "bean", beans);
+        }else{
+            return new ModelAndView("redirect:/app/log");
+        }
     }
 
     @RequestMapping(value = "/create/{bean}", method = RequestMethod.POST)
@@ -58,8 +61,16 @@ public class UserController {
     public ModelAndView showCreateUser(HttpSession session,
             HttpServletRequest request) {
         UserBean bean = new UserBean();
-
-        return new ModelAndView("/contacts/form.jsp", "bean", bean);
+        UserBean user = (UserBean)session.getAttribute("user");
+        if(session.getAttribute("user") != null){
+            if((user.getRole() == "admin")){
+            return new ModelAndView("/contacts/form.jsp", "bean", bean);
+            }else{
+              return new ModelAndView("redirect:/app/users");  
+            }
+        }else{
+            return new ModelAndView("redirect:/app/log");
+        }
     }
 
     @RequestMapping(value = "/update/{idUser}/{bean}", method = RequestMethod.POST)
@@ -76,8 +87,16 @@ public class UserController {
     public ModelAndView showUpdateUser(HttpSession session,
             @PathVariable Integer idUser, HttpServletRequest request) {
         UserBean bean = userService.findUser(idUser);
-
-        return new ModelAndView("/contacts/update.jsp", "bean", bean);
+        UserBean user = (UserBean)session.getAttribute("user");
+        if(session.getAttribute("user") != null){
+            if((user.getRole() == "admin")){
+                return new ModelAndView("/contacts/update.jsp", "bean", bean);
+            }else{
+                return new ModelAndView("redirect:/app/users");  
+            }
+        }else{
+            return new ModelAndView("redirect:/app/log");
+        }
     }
 
     @RequestMapping(value = "/find/{idUser}", method = RequestMethod.GET)

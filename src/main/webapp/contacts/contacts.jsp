@@ -194,7 +194,7 @@
                                 <strong>Famille</strong>
                             </li>
                         </ol>
-                        <a href="${pageContext.servletContext.contextPath}/app/users/create" type="button" class="btn btn-w-m btn-primary pull-right"><i class="fa fa-plus-circle"></i> Ajouter un membre</a>
+                        <a id="createUser" href="${pageContext.servletContext.contextPath}/app/users/create" type="button" class="btn btn-w-m btn-primary pull-right"><i class="fa fa-plus-circle"></i> Ajouter un membre</a>
                     </div>
                 </div>
                 <div class="wrapper wrapper-content animated fadeInRight">
@@ -251,6 +251,18 @@
         <!-- Custom and plugin javascript -->
         <script src="${pageContext.servletContext.contextPath}/assets/js/inspinia.js"></script>
         <script src="${pageContext.servletContext.contextPath}/assets/js/plugins/pace/pace.min.js"></script>
+        
+        <script>
+            
+            console.log(${sessionScope});
+            if(${sessionScope.role} == "admin"){
+                $('#createUser').show()
+            }else{
+                $('#createUser').hide()
+            }
+            
+            
+        </script>
     </body>
 
 </html>
