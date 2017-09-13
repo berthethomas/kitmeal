@@ -1,12 +1,12 @@
 <%-- 
     Document   : contacts
     Created on : 11 sept. 2017, 16:55:16
-    Author     : Laura
+    Author     : thomasberthe
 --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="fr.imie.kitmeal.beans.UserBean"%>
+<%@page import="fr.imie.kitmeal.beans.UniteBean"%>
 <!DOCTYPE html>
 <html>
 
@@ -15,7 +15,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>Kitmeal | Famille</title>
+        <title>Kitmeal | Admin | Unités</title>
 
         <link href="${pageContext.servletContext.contextPath}/assets/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.servletContext.contextPath}/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -65,8 +65,16 @@
                             <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Infos personnels</span></a>
                         </li>
                         <li class="active">
-                            <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Gestion admin</span> <span class="fa arrow"></span></a>
-                        </li>                
+                            <a href="#"><i class="fa fa-sitemap"></i> <span class="nav-label">Gestion admin </span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li>
+                                    <a href="${pageContext.servletContext.contextPath}/app/categories">Catégories</a>
+                                </li>
+                                <li>
+                                    <a href="${pageContext.servletContext.contextPath}/app/unites">Unités</a>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -185,46 +193,47 @@
                 </div>
                 <div class="row wrapper border-bottom white-bg page-heading">
                     <div class="col-lg-12">
-                        <h2>Contacts</h2>
+                        <h2>Unités</h2>
                         <ol class="breadcrumb">
                             <li>
                                 <a href="${pageContext.servletContext.contextPath}/home">Accueil</a>
                             </li>
                             <li class="active">
-                                <strong>Famille</strong>
+                                <strong>Unités</strong>
                             </li>
                         </ol>
-                        <a href="${pageContext.servletContext.contextPath}/app/users/create" type="button" class="btn btn-w-m btn-primary pull-right"><i class="fa fa-plus-circle"></i> Ajouter un membre</a>
+                        <a href="${pageContext.servletContext.contextPath}/app/unites/create" type="button" class="btn btn-w-m btn-primary pull-right"><i class="fa fa-plus-circle"></i> Ajouter une unité</a>
                     </div>
                 </div>
-                <div class="wrapper wrapper-content animated fadeInRight">
-                    <div class="contact-row">
-                        <c:forEach items="${bean}" var="item">
-                            <div class="col-lg-4">
-                                <div class="contact-box">
-                                    <div class="pull-right">
-                                        <a href="${pageContext.servletContext.contextPath}/app/users/update/${item.idUser}"><i class="fa fa-wrench"></i></a>
-                                        <a href="${pageContext.servletContext.contextPath}/app/users/remove/${item.idUser}"><i class="fa fa-times"></i></a>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="text-center">
-                                            <img alt="image" class="img-circle m-t-xs img-responsive" src="${pageContext.servletContext.contextPath}/assets/img/a2.jpg">
-                                            <div class="m-t-xs font-bold"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <h3><strong>${item.nom}</strong></h3>
-                                        <p><i class="fa fa-map-marker"></i> ${item.address.numero}, ${item.address.rue}</p>
-                                        <address>
-                                            <strong>${item.address.codePostal} ${item.address.ville}</strong>
-                                            <br>
-                                            ${item.address.pays}
-                                        </address>
-                                    </div>
-                                    <div class="clearfix"></div>
+                <div class="wrapper wrapper-content">
+                    <div class="row animated fadeInDown">
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-10">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-content">
+
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">Nom</th>
+                                                <th class="text-center">Options</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach items="${bean}" var="item">
+                                                <tr>
+                                                    <td class="text-center">${item.nom}</td>
+                                                    <td class="text-center">
+                                                        <a href="${pageContext.servletContext.contextPath}/app/unites/update/${item.idUnite}"><i class="fa fa-wrench"></i></a>
+                                                        <a href="${pageContext.servletContext.contextPath}/app/unites/remove/${item.idUnite}"><i class="fa fa-times"></i></a>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach> 
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-                        </c:forEach>
+                        </div>
                     </div>
                 </div>
                 <div class="footer">

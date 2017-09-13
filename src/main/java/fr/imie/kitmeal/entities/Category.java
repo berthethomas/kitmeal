@@ -30,10 +30,6 @@ public class Category {
     @Column(name = "nom")
     private String nom;
 
-    @OneToMany(targetEntity = Ingredient.class)
-    @JoinColumn(name = "ingredients")
-    private Set<Ingredient> ingredients;
-
     public Integer getIdCategory() {
         return idCategory;
     }
@@ -50,15 +46,4 @@ public class Category {
         this.nom = nom;
     }
 
-    public Set<Ingredient> getIngredients() {
-        return ingredients;
-    }
-
-    public void addIngredient(Ingredient ingredient) {
-        this.ingredients.add(ingredient);
-    }
-
-    public void removeIngredient(Ingredient ingredient) {
-        this.ingredients.remove(ingredient);
-    }
 }

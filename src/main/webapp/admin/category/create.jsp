@@ -1,12 +1,14 @@
 <%-- 
-    Document   : contacts
-    Created on : 11 sept. 2017, 16:55:16
-    Author     : Laura
+    Document   : form
+    Created on : 12 sept. 2017, 14:06:07
+    Author     : thomasberthe
 --%>
+
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="s" uri="http://www.springframework.org/tags/form"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="fr.imie.kitmeal.beans.UserBean"%>
+<%@page import="fr.imie.kitmeal.beans.CategoryBean"%>
 <!DOCTYPE html>
 <html>
 
@@ -15,13 +17,21 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>Kitmeal | Famille</title>
+        <title>Kitmeal | Admin | Catégories</title>
 
         <link href="${pageContext.servletContext.contextPath}/assets/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.servletContext.contextPath}/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
-
+        <link href="${pageContext.servletContext.contextPath}/assets/css/plugins/iCheck/custom.css" rel="stylesheet">
+        <link href="${pageContext.servletContext.contextPath}/assets/css/plugins/steps/jquery.steps.css" rel="stylesheet">
         <link href="${pageContext.servletContext.contextPath}/assets/css/animate.css" rel="stylesheet">
         <link href="${pageContext.servletContext.contextPath}/assets/css/style.css" rel="stylesheet">
+
+
+        <style>
+
+            .wizard > .content > .body  {position: relative; }
+
+        </style>
     </head>
 
     <body>
@@ -185,48 +195,57 @@
                 </div>
                 <div class="row wrapper border-bottom white-bg page-heading">
                     <div class="col-lg-12">
-                        <h2>Contacts</h2>
+                        <h2>Gestion des utilsateurs</h2>
                         <ol class="breadcrumb">
                             <li>
-                                <a href="${pageContext.servletContext.contextPath}/home">Accueil</a>
+                                <a href="${pageContext.servletContext.contextPath}/home">Home</a>
+                            </li>
+                            <li>
+                                <a href="${pageContext.servletContext.contextPath}/app/categories">Catégories</a>
                             </li>
                             <li class="active">
-                                <strong>Famille</strong>
+                                <strong>Gestions</strong>
                             </li>
                         </ol>
-                        <a href="${pageContext.servletContext.contextPath}/app/users/create" type="button" class="btn btn-w-m btn-primary pull-right"><i class="fa fa-plus-circle"></i> Ajouter un membre</a>
                     </div>
                 </div>
                 <div class="wrapper wrapper-content animated fadeInRight">
-                    <div class="contact-row">
-                        <c:forEach items="${bean}" var="item">
-                            <div class="col-lg-4">
-                                <div class="contact-box">
-                                    <div class="pull-right">
-                                        <a href="${pageContext.servletContext.contextPath}/app/users/update/${item.idUser}"><i class="fa fa-wrench"></i></a>
-                                        <a href="${pageContext.servletContext.contextPath}/app/users/remove/${item.idUser}"><i class="fa fa-times"></i></a>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="ibox">
+                                <div class="ibox-title">
+                                    <h5>Ajouter une catégorie</h5>
+                                    <div class="ibox-tools">
+                                        <a class="collapse-link">
+                                            <i class="fa fa-chevron-up"></i>
+                                        </a>
+                                        <a class="close-link">
+                                            <i class="fa fa-times"></i>
+                                        </a>
                                     </div>
-                                    <div class="col-sm-4">
-                                        <div class="text-center">
-                                            <img alt="image" class="img-circle m-t-xs img-responsive" src="${pageContext.servletContext.contextPath}/assets/img/a2.jpg">
-                                            <div class="m-t-xs font-bold"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <h3><strong>${item.nom}</strong></h3>
-                                        <p><i class="fa fa-map-marker"></i> ${item.address.numero}, ${item.address.rue}</p>
-                                        <address>
-                                            <strong>${item.address.codePostal} ${item.address.ville}</strong>
-                                            <br>
-                                            ${item.address.pays}
-                                        </address>
-                                    </div>
-                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="ibox-content">
+
+                                    <s:form modelAttribute="bean" id="form" action="${pageContext.servletContext.contextPath}/app/categories/create/${bean}" method="POST" class="wizard-big">
+                                        <h1>Catégorie</h1>
+                                        <fieldset>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="form-group">
+                                                        <label>Nom *</label>
+                                                        <s:input name="nom" id="nom" path="nom" type="text" value='${bean.nom}' class="form-control required" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </s:form>
                                 </div>
                             </div>
-                        </c:forEach>
+                        </div>
+
                     </div>
                 </div>
+
                 <div class="footer">
                     <div class="pull-right">
                         Créé et développé par <strong>Laura Souchu</strong> & <strong>Thomas Berthé</strong>
@@ -247,11 +266,96 @@
         <script src="${pageContext.servletContext.contextPath}/assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
         <script src="${pageContext.servletContext.contextPath}/assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-
         <!-- Custom and plugin javascript -->
         <script src="${pageContext.servletContext.contextPath}/assets/js/inspinia.js"></script>
         <script src="${pageContext.servletContext.contextPath}/assets/js/plugins/pace/pace.min.js"></script>
+
+        <!-- Steps -->
+        <script src="${pageContext.servletContext.contextPath}/assets/js/plugins/staps/jquery.steps.min.js"></script>
+
+        <!-- Jquery Validate -->
+        <script src="${pageContext.servletContext.contextPath}/assets/js/plugins/validate/jquery.validate.min.js"></script>
     </body>
 
+    <script>
+        $(document).ready(function () {
+            $("#wizard").steps();
+            $("#form").steps({
+                bodyTag: "fieldset",
+                onStepChanging: function (event, currentIndex, newIndex)
+                {
+                    // Always allow going backward even if the current step contains invalid fields!
+                    if (currentIndex > newIndex)
+                    {
+                        return true;
+                    }
+
+                    // Forbid suppressing "Warning" step if the user is to young
+                    if (newIndex === 3 && Number($("#age").val()) < 18)
+                    {
+                        return false;
+                    }
+
+                    var form = $(this);
+
+                    // Clean up if user went backward before
+                    if (currentIndex < newIndex)
+                    {
+                        // To remove error styles
+                        $(".body:eq(" + newIndex + ") label.error", form).remove();
+                        $(".body:eq(" + newIndex + ") .error", form).removeClass("error");
+                    }
+
+                    // Disable validation on fields that are disabled or hidden.
+                    form.validate().settings.ignore = ":disabled,:hidden";
+
+                    // Start validation; Prevent going forward if false
+                    return form.valid();
+                },
+                onStepChanged: function (event, currentIndex, priorIndex)
+                {
+                    // Suppress (skip) "Warning" step if the user is old enough.
+                    if (currentIndex === 2 && Number($("#age").val()) >= 18)
+                    {
+                        $(this).steps("next");
+                    }
+
+                    // Suppress (skip) "Warning" step if the user is old enough and wants to the previous step.
+                    if (currentIndex === 2 && priorIndex === 3)
+                    {
+                        $(this).steps("previous");
+                    }
+                },
+                onFinishing: function (event, currentIndex)
+                {
+                    var form = $(this);
+
+                    // Disable validation on fields that are disabled.
+                    // At this point it's recommended to do an overall check (mean ignoring only disabled fields)
+                    form.validate().settings.ignore = ":disabled";
+
+                    // Start validation; Prevent form submission if false
+                    return form.valid();
+                },
+                onFinished: function (event, currentIndex)
+                {
+                    var form = $(this);
+
+                    // Submit form input
+                    form.submit();
+                }
+            }).validate({
+                errorPlacement: function (error, element)
+                {
+                    element.before(error);
+                },
+                rules: {
+                    confirm: {
+                        equalTo: "#password"
+                    }
+                }
+            });
+        });
+    </script>
 </html>
 

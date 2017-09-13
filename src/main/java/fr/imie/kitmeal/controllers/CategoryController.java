@@ -33,19 +33,19 @@ public class CategoryController {
     ICategoryService categoryService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public ResponseEntity<List<CategoryBean>> findAllCategories(HttpSession session,
+    public ModelAndView findAllCategories(HttpSession session,
             HttpServletRequest request) {
         List<CategoryBean> beans = categoryService.findAllCategories();
 
-        return new ResponseEntity<List<CategoryBean>>(beans, HttpStatus.OK);
+        return new ModelAndView("/admin/category/category.jsp", "bean", beans);
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public ResponseEntity<CategoryBean> createCategory(HttpSession session, @RequestBody CategoryBean bean,
+    @RequestMapping(value = "/create/{bean}", method = RequestMethod.POST)
+    public ModelAndView createCategory(HttpSession session, CategoryBean bean,
             HttpServletRequest request) {
         categoryService.createCategory(bean);
 
-        return new ResponseEntity<CategoryBean>(bean, HttpStatus.OK);
+        return new ModelAndView("redirect:/app/categories");
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -53,15 +53,15 @@ public class CategoryController {
             HttpServletRequest request) {
         CategoryBean bean = new CategoryBean();
 
-        return new ModelAndView("/", "bean", bean);
+        return new ModelAndView("/admin/category/create.jsp", "bean", bean);
     }
 
-    @RequestMapping(value = "/update/{idCategory}", method = RequestMethod.POST)
-    public ResponseEntity<CategoryBean> updateCategory(HttpSession session, @RequestBody CategoryBean bean,
+    @RequestMapping(value = "/update/{idCategory}/{bean}", method = RequestMethod.POST)
+    public ModelAndView updateCategory(HttpSession session, CategoryBean bean,
             @PathVariable Integer idCategory, HttpServletRequest request) {
         categoryService.updateCategory(idCategory, bean);
 
-        return new ResponseEntity<CategoryBean>(bean, HttpStatus.OK);
+        return new ModelAndView("redirect:/app/categories");
     }
 
     @RequestMapping(value = "/update/{idCategory}", method = RequestMethod.GET)
@@ -69,7 +69,7 @@ public class CategoryController {
             @PathVariable Integer idCategory, HttpServletRequest request) {
         CategoryBean bean = categoryService.findCategory(idCategory);
 
-        return new ModelAndView("/", "bean", bean);
+        return new ModelAndView("/admin/category/update.jsp", "bean", bean);
     }
 
     @RequestMapping(value = "/find/{idCategory}", method = RequestMethod.GET)
@@ -80,11 +80,12 @@ public class CategoryController {
         return new ResponseEntity<CategoryBean>(bean, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/remove/{idCategory}", method = RequestMethod.DELETE)
-    @ResponseStatus(value = HttpStatus.OK)
-    public void removeCategory(HttpSession session, @PathVariable Integer idCategory,
+    @RequestMapping(value = "/remove/{idCategory}", method = RequestMethod.GET)
+    public ModelAndView removeCategory(HttpSession session, @PathVariable Integer idCategory,
             HttpServletRequest request) {
         categoryService.removeCategory(idCategory);
+
+        return new ModelAndView("redirect:/app/categories");
     }
 
 }
