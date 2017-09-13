@@ -62,11 +62,14 @@ public class UserController {
         return new ModelAndView("/contacts/form.jsp", "bean", bean);
     }
 
-    @RequestMapping(value = "/update/{idUser}", method = RequestMethod.POST)
-    public ResponseEntity<UserBean> updateUser(HttpSession session, @RequestBody UserBean bean,
+    @RequestMapping(value = "/update/{idUser}/{bean}", method = RequestMethod.POST)
+    public ModelAndView updateUser(HttpSession session, UserBean bean,
             @PathVariable Integer idUser, HttpServletRequest request) {
+
+        addressService.updateAddress(bean.getAddress().getIdAddress(), bean.getAddress());
         userService.updateUser(idUser, bean);
-        return new ResponseEntity<UserBean>(bean, HttpStatus.OK);
+
+        return new ModelAndView("redirect:/app/users");
     }
 
     @RequestMapping(value = "/update/{idUser}", method = RequestMethod.GET)
@@ -74,7 +77,7 @@ public class UserController {
             @PathVariable Integer idUser, HttpServletRequest request) {
         UserBean bean = userService.findUser(idUser);
 
-        return new ModelAndView("/contacts/form.jsp", "bean", bean);
+        return new ModelAndView("/contacts/update.jsp", "bean", bean);
     }
 
     @RequestMapping(value = "/find/{idUser}", method = RequestMethod.GET)
@@ -85,11 +88,12 @@ public class UserController {
         return new ResponseEntity<UserBean>(bean, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/remove/{idUser}", method = RequestMethod.DELETE)
-    @ResponseStatus(value = HttpStatus.OK)
-    public void removeUser(HttpSession session, @PathVariable Integer idUser,
+    @RequestMapping(value = "/remove/{idUser}", method = RequestMethod.GET)
+    public ModelAndView removeUser(HttpSession session, @PathVariable Integer idUser,
             HttpServletRequest request) {
         userService.removeUser(idUser);
+
+        return new ModelAndView("redirect:/app/users");
     }
 
 }

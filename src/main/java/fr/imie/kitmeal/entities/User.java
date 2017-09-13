@@ -6,6 +6,7 @@
 package fr.imie.kitmeal.entities;
 
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -59,11 +60,6 @@ public class User {
     @ManyToOne(targetEntity = Address.class)
     @JoinColumn(name = "adresse")
     private Address adresse;
-
-    @OneToMany(targetEntity = Recipe.class)
-    @JoinColumn(name = "recipe")
-    @ElementCollection
-    private Set<Recipe> recipes;
 
     public Integer getIdUser() {
         return idUser;
@@ -151,18 +147,6 @@ public class User {
 
     public void setAdresse(Address adresse) {
         this.adresse = adresse;
-    }
-
-    public Set<Recipe> getRecipes() {
-        return recipes;
-    }
-
-    public void addRecipe(Recipe recipe) {
-        this.recipes.add(recipe);
-    }
-
-    public void removeRecipe(Recipe recipe) {
-        this.recipes.remove(recipe);
     }
 
 }

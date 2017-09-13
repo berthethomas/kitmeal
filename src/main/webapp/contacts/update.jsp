@@ -226,7 +226,7 @@
                                 </div>
                                 <div class="ibox-content">
 
-                                    <s:form modelAttribute="bean" id="form" action="${pageContext.servletContext.contextPath}/app/users/create/${bean}" method="POST" class="wizard-big">
+                                    <s:form modelAttribute="bean" id="form" action="${pageContext.servletContext.contextPath}/app/users/update/${bean.idUser}/${bean}" method="POST" class="wizard-big">
                                         <h1>Compte</h1>
                                         <fieldset>
                                             <h2>Informations sur le compte</h2>
@@ -287,6 +287,7 @@
                                             <h2>Adresse</h2>
                                             <div class="row">
                                                 <div class="col-lg-6">
+                                                    <s:input name="address.idAddress" id="address.idAddress" path="address.idAddress" type="hidden" value='${bean.address.idAddress}'/>
                                                     <div class="form-group">
                                                         <label>Batiment</label>
                                                         <s:input id="address.numero" path="address.batiment" type="number" value='${bean.address.batiment}' class="form-control" />

@@ -188,7 +188,7 @@
                         <h2>Contacts</h2>
                         <ol class="breadcrumb">
                             <li>
-                                <a href="dashboard_2.html">Accueil</a>
+                                <a href="${pageContext.servletContext.contextPath}/home">Accueil</a>
                             </li>
                             <li class="active">
                                 <strong>Famille</strong>
@@ -202,24 +202,26 @@
                         <c:forEach items="${bean}" var="item">
                             <div class="col-lg-4">
                                 <div class="contact-box">
-                                    <a href="#">
-                                        <div class="col-sm-4">
-                                            <div class="text-center">
-                                                <img alt="image" class="img-circle m-t-xs img-responsive" src="${pageContext.servletContext.contextPath}/assets/img/a2.jpg">
-                                                <div class="m-t-xs font-bold"></div>
-                                            </div>
+                                    <div class="pull-right">
+                                        <a href="${pageContext.servletContext.contextPath}/app/users/update/${item.idUser}"><i class="fa fa-wrench"></i></a>
+                                        <a href="${pageContext.servletContext.contextPath}/app/users/remove/${item.idUser}"><i class="fa fa-times"></i></a>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="text-center">
+                                            <img alt="image" class="img-circle m-t-xs img-responsive" src="${pageContext.servletContext.contextPath}/assets/img/a2.jpg">
+                                            <div class="m-t-xs font-bold"></div>
                                         </div>
-                                        <div class="col-sm-8">
-                                            <h3><strong>${item.nom}</strong></h3>
-                                            <p><i class="fa fa-map-marker"></i> ${item.address.numero}, ${item.address.rue}</p>
-                                            <address>
-                                                <strong>${item.address.codePostal} ${item.address.ville}</strong>
-                                                <br>
-                                                ${item.address.pays}
-                                            </address>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </a>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <h3><strong>${item.nom}</strong></h3>
+                                        <p><i class="fa fa-map-marker"></i> ${item.address.numero}, ${item.address.rue}</p>
+                                        <address>
+                                            <strong>${item.address.codePostal} ${item.address.ville}</strong>
+                                            <br>
+                                            ${item.address.pays}
+                                        </address>
+                                    </div>
+                                    <div class="clearfix"></div>
                                 </div>
                             </div>
                         </c:forEach>

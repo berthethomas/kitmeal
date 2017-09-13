@@ -82,7 +82,6 @@ public class UserService implements IUserService {
     public UserBean updateUser(Integer idUser, UserBean bean) {
         User user = userDao.find(idUser);
 
-        user.setIdUser(bean.getIdUser());
         user.setPrenom(bean.getPrenom());
         user.setNom(bean.getNom());
         user.setMail(bean.getMail());
@@ -91,9 +90,10 @@ public class UserService implements IUserService {
         user.setUsername(bean.getUsername());
         user.setPassword(bean.getPassword());
         user.setPhoto(bean.getPhoto());
-        user.setAdresse(addressDao.find(bean.getAddress().getIdAddress()));
 
         userDao.update(user);
+        
+        bean.setIdUser(user.getIdUser());
 
         return bean;
     }
