@@ -33,19 +33,19 @@ public class UniteController {
     IUniteService uniteService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public ResponseEntity<List<UniteBean>> findAllUnites(HttpSession session,
+    public ModelAndView findAllUnites(HttpSession session,
             HttpServletRequest request) {
         List<UniteBean> beans = uniteService.findAllUnites();
 
-        return new ResponseEntity<List<UniteBean>>(beans, HttpStatus.OK);
+        return new ModelAndView("/admin/unite/unite.jsp", "bean", beans);
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public ResponseEntity<UniteBean> createUnite(HttpSession session, @RequestBody UniteBean bean,
+    @RequestMapping(value = "/create/{bean}", method = RequestMethod.POST)
+    public ModelAndView createUnite(HttpSession session, UniteBean bean,
             HttpServletRequest request) {
         uniteService.createUnite(bean);
 
-        return new ResponseEntity<UniteBean>(bean, HttpStatus.OK);
+        return new ModelAndView("redirect:/app/unites");
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -53,15 +53,15 @@ public class UniteController {
             HttpServletRequest request) {
         UniteBean bean = new UniteBean();
 
-        return new ModelAndView("/", "bean", bean);
+        return new ModelAndView("/admin/unite/create.jsp", "bean", bean);
     }
 
-    @RequestMapping(value = "/update/{idUnite}", method = RequestMethod.POST)
-    public ResponseEntity<UniteBean> updateUnite(HttpSession session, @RequestBody UniteBean bean,
+    @RequestMapping(value = "/update/{idUnite}/{bean}", method = RequestMethod.POST)
+    public ModelAndView updateUnite(HttpSession session, UniteBean bean,
             @PathVariable Integer idUnite, HttpServletRequest request) {
         uniteService.updateUnite(idUnite, bean);
 
-        return new ResponseEntity<UniteBean>(bean, HttpStatus.OK);
+        return new ModelAndView("redirect:/app/unites");
     }
 
     @RequestMapping(value = "/update/{idUnite}", method = RequestMethod.GET)
@@ -69,7 +69,7 @@ public class UniteController {
             @PathVariable Integer idUnite, HttpServletRequest request) {
         UniteBean bean = uniteService.findUnite(idUnite);
 
-        return new ModelAndView("/", "bean", bean);
+        return new ModelAndView("/admin/unite/update.jsp", "bean", bean);
     }
 
     @RequestMapping(value = "/find/{idUnite}", method = RequestMethod.GET)
@@ -80,10 +80,11 @@ public class UniteController {
         return new ResponseEntity<UniteBean>(bean, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/remove/{idUnite}", method = RequestMethod.DELETE)
-    @ResponseStatus(value = HttpStatus.OK)
-    public void removeUnite(HttpSession session, @PathVariable Integer idUnite,
+    @RequestMapping(value = "/remove/{idUnite}", method = RequestMethod.GET)
+    public ModelAndView removeUnite(HttpSession session, @PathVariable Integer idUnite,
             HttpServletRequest request) {
         uniteService.removeUnite(idUnite);
+
+        return new ModelAndView("redirect:/app/unites");
     }
 }
