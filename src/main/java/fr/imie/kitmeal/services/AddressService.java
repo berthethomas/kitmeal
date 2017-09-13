@@ -65,6 +65,8 @@ public class AddressService implements IAddressService {
 
         addressDao.create(address);
 
+        bean.setIdAddress(address.getIdAddress());
+        
         return bean;
     }
 

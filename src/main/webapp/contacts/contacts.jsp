@@ -17,11 +17,11 @@
 
         <title>Kitmeal | Famille</title>
 
-        <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
-        <link href="../assets/font-awesome/css/font-awesome.css" rel="stylesheet">
+        <link href="${pageContext.servletContext.contextPath}/assets/css/bootstrap.min.css" rel="stylesheet">
+        <link href="${pageContext.servletContext.contextPath}/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
 
-        <link href="../assets/css/animate.css" rel="stylesheet">
-        <link href="../assets/css/style.css" rel="stylesheet">
+        <link href="${pageContext.servletContext.contextPath}/assets/css/animate.css" rel="stylesheet">
+        <link href="${pageContext.servletContext.contextPath}/assets/css/style.css" rel="stylesheet">
     </head>
 
     <body>
@@ -32,7 +32,7 @@
                     <ul class="nav metismenu" id="side-menu">
                         <li class="nav-header">
                             <div class="dropdown profile-element"> <span>
-                                    <img alt="image" class="img-circle" src="../assets/img/profile_small.jpg" />
+                                    <img alt="image" class="img-circle" src="${pageContext.servletContext.contextPath}/assets/img/profile_small.jpg" />
                                 </span>
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                     <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">David Williams</strong>
@@ -59,7 +59,7 @@
                             <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Recettes</span></a>
                         </li>
                         <li class="active">
-                            <a href="contacts.html"><i class="fa fa-th-large"></i> <span class="nav-label">Familles</span></a>
+                            <a href="${pageContext.servletContext.contextPath}/app/users/create"><i class="fa fa-th-large"></i> <span class="nav-label">Familles</span></a>
                         </li>
                         <li class="active">
                             <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Infos personnels</span></a>
@@ -94,7 +94,7 @@
                                     <li>
                                         <div class="dropdown-messages-box">
                                             <a href="profile.html" class="pull-left">
-                                                <img alt="image" class="img-circle" src="../assets/img/a7.jpg">
+                                                <img alt="image" class="img-circle" src="${pageContext.servletContext.contextPath}/assets/img/a7.jpg">
                                             </a>
                                             <div class="media-body">
                                                 <small class="pull-right">Il y a 46h</small>
@@ -107,7 +107,7 @@
                                     <li>
                                         <div class="dropdown-messages-box">
                                             <a href="profile.html" class="pull-left">
-                                                <img alt="image" class="img-circle" src="../assets/img/a4.jpg">
+                                                <img alt="image" class="img-circle" src="${pageContext.servletContext.contextPath}/assets/img/a4.jpg">
                                             </a>
                                             <div class="media-body ">
                                                 <small class="pull-right text-navy">Il y a 5h</small>
@@ -120,7 +120,7 @@
                                     <li>
                                         <div class="dropdown-messages-box">
                                             <a href="profile.html" class="pull-left">
-                                                <img alt="image" class="img-circle" src="../assets/img/profile.jpg">
+                                                <img alt="image" class="img-circle" src="${pageContext.servletContext.contextPath}/assets/img/profile.jpg">
                                             </a>
                                             <div class="media-body ">
                                                 <small class="pull-right">Il y a 23h</small>
@@ -194,7 +194,7 @@
                                 <strong>Famille</strong>
                             </li>
                         </ol>
-                        <a href="form_wizard.html" type="button" class="btn btn-w-m btn-primary pull-right"><i class="fa fa-plus-circle"></i> Ajouter un membre</a>
+                        <a href="${pageContext.servletContext.contextPath}/app/users/create" type="button" class="btn btn-w-m btn-primary pull-right"><i class="fa fa-plus-circle"></i> Ajouter un membre</a>
                     </div>
                 </div>
                 <div class="wrapper wrapper-content animated fadeInRight">
@@ -205,7 +205,7 @@
                                     <a href="#">
                                         <div class="col-sm-4">
                                             <div class="text-center">
-                                                <img alt="image" class="img-circle m-t-xs img-responsive" src="../assets/img/a2.jpg">
+                                                <img alt="image" class="img-circle m-t-xs img-responsive" src="${pageContext.servletContext.contextPath}/assets/img/a2.jpg">
                                                 <div class="m-t-xs font-bold"></div>
                                             </div>
                                         </div>
@@ -240,15 +240,15 @@
 
 
         <!-- Mainly scripts -->
-        <script src="../assets/js/jquery-2.1.1.js"></script>
-        <script src="../assets/js/bootstrap.min.js"></script>
-        <script src="../assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-        <script src="../assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+        <script src="${pageContext.servletContext.contextPath}/assets/js/jquery-2.1.1.js"></script>
+        <script src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.min.js"></script>
+        <script src="${pageContext.servletContext.contextPath}/assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+        <script src="${pageContext.servletContext.contextPath}/assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
 
         <!-- Custom and plugin javascript -->
-        <script src="../assets/js/inspinia.js"></script>
-        <script src="../assets/js/plugins/pace/pace.min.js"></script>
+        <script src="${pageContext.servletContext.contextPath}/assets/js/inspinia.js"></script>
+        <script src="${pageContext.servletContext.contextPath}/assets/js/plugins/pace/pace.min.js"></script>
     </body>
 
 </html>

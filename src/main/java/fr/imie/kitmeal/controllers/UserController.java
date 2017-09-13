@@ -5,7 +5,9 @@
  */
 package fr.imie.kitmeal.controllers;
 
+import fr.imie.kitmeal.beans.AddressBean;
 import fr.imie.kitmeal.beans.UserBean;
+import fr.imie.kitmeal.interfacesServices.IAddressService;
 import fr.imie.kitmeal.interfacesServices.IUserService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -32,6 +34,9 @@ public class UserController {
     @Autowired
     IUserService userService;
 
+    @Autowired
+    IAddressService addressService;
+
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelAndView findAllUsers(HttpSession session,
             HttpServletRequest request) {
@@ -40,12 +45,13 @@ public class UserController {
         return new ModelAndView("/contacts/contacts.jsp", "bean", beans);
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public ResponseEntity<UserBean> createUser(HttpSession session, @RequestBody UserBean bean,
+    @RequestMapping(value = "/create/{bean}", method = RequestMethod.POST)
+    public ModelAndView createUser(HttpSession session, UserBean bean,
             HttpServletRequest request) {
+        AddressBean address = addressService.createAddress(bean.getAddress());
         userService.createUser(bean);
 
-        return new ResponseEntity<UserBean>(bean, HttpStatus.OK);
+        return new ModelAndView("redirect:/app/users");
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -53,14 +59,13 @@ public class UserController {
             HttpServletRequest request) {
         UserBean bean = new UserBean();
 
-        return new ModelAndView("/", "bean", bean);
+        return new ModelAndView("/contacts/form.jsp", "bean", bean);
     }
 
     @RequestMapping(value = "/update/{idUser}", method = RequestMethod.POST)
     public ResponseEntity<UserBean> updateUser(HttpSession session, @RequestBody UserBean bean,
             @PathVariable Integer idUser, HttpServletRequest request) {
         userService.updateUser(idUser, bean);
-
         return new ResponseEntity<UserBean>(bean, HttpStatus.OK);
     }
 
@@ -69,7 +74,7 @@ public class UserController {
             @PathVariable Integer idUser, HttpServletRequest request) {
         UserBean bean = userService.findUser(idUser);
 
-        return new ModelAndView("/", "bean", bean);
+        return new ModelAndView("/contacts/form.jsp", "bean", bean);
     }
 
     @RequestMapping(value = "/find/{idUser}", method = RequestMethod.GET)
