@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -74,7 +75,7 @@ public class RecipeController {
     public ModelAndView showCreateIngredientRecipe(HttpSession session,
             @PathVariable Integer idRecipe, HttpServletRequest request) {
         List<IngredientBean> bean = ingredientService.findAllIngredients();
-        
+
         ModelAndView mav = new ModelAndView("/recipe/createIngredient.jsp");
         mav.addObject("bean", bean);
         mav.addObject("idRecipe", idRecipe);
@@ -82,10 +83,21 @@ public class RecipeController {
         return mav;
     }
 
-    @RequestMapping(value = "/create/ingredients/{bean}", method = RequestMethod.POST)
-    public void createIngredientRecipe(HttpSession session,
+    @RequestMapping(value = "/create/ingredients/{idRecipe}", method = RequestMethod.POST)
+    public void createIngredientRecipe(HttpSession session, @PathVariable Integer idRecipe,
+            @RequestParam("idIngredient") Integer idIngredient, @RequestParam("quantite") Long quantite,
             HttpServletRequest request) {
+        System.err.println("ID RECIPE : " + idRecipe);
+        System.err.println("ID INGREDIENT : " + idIngredient);
+        System.err.println("QUANTITE : " + quantite);
+        
+        RecipeBean recipe = recipeService.findRecipe(idRecipe);
+        IngredientBean ingredient = ingredientService.findIngredient(idIngredient);
+        
         RecipeIngredientBean bean = new RecipeIngredientBean();
+        bean.setRecipe(recipe);
+        bean.setIngredient(ingredient);
+        bean.setQuantite(quantite);
         recipeIngredientService.createRecipeIngredient(bean);
 
     }
