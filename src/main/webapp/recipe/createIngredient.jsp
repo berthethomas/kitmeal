@@ -234,7 +234,7 @@
                                         <label for="q${ingredient.idIngredient}">Quantité (en ${ingredient.unite.nom})</label>
                                         <input type="number" class="form-control" id="q${ingredient.idIngredient}">
                                     </c:forEach>
-                                        <input type="button" class="btn btn-success" value="Valider"/>
+                                    <input id="validate" type="button" class="btn btn-success" value="Valider"/>
                                 </div>
                             </div>
                         </div>
@@ -275,6 +275,13 @@
 
     <script>
         $(document).ready(function () {
+            $("#validate").on('click', function () {
+                $('.ingredients').each(function() {
+                    if($(this).is(':checked')) {
+                        alert("hello");
+                    }
+                });
+            });
             $("#wizard").steps();
             $("#form").steps({
                 bodyTag: "fieldset",
