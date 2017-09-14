@@ -154,7 +154,7 @@ public class UserIngredientController {
     }
 
     @RequestMapping(value = "/update/{idIngredient}", method = RequestMethod.GET)
-    public ModelAndView showUpdateUser(HttpSession session,
+    public ModelAndView showUpdateIngredient(HttpSession session,
             @PathVariable Integer idIngredient, HttpServletRequest request) {
         IngredientBean bean = ingredientService.findIngredient(idIngredient);
         UserBean user = (UserBean)session.getAttribute("user");
@@ -162,16 +162,14 @@ public class UserIngredientController {
         List<UniteBean> beanUnity = uniteService.findAllUnites();
         
         if (session.getAttribute("user") != null) {
-            if (("admin".equals(user.getRole()))) {
+            
                 ModelAndView mav = new ModelAndView("/frigo/updateIngredient.jsp");
                 mav.addObject("bean", bean);
                 mav.addObject("unite", beanUnity);
                 mav.addObject("category", beanCategory);
 
                 return mav;
-            } else {
-                return new ModelAndView("redirect:/app/userIngredients");
-            }
+            
         } else {
             return new ModelAndView("redirect:/app/log");
         }
@@ -179,7 +177,7 @@ public class UserIngredientController {
     }
 
     @RequestMapping(value = "/update/{idIngredient}/{bean}", method = RequestMethod.POST)
-    public ModelAndView updateRecipe(HttpSession session, IngredientBean bean,
+    public ModelAndView updateIngredient(HttpSession session, IngredientBean bean,
             @PathVariable Integer idIngredient, HttpServletRequest request) {
         ingredientService.updateIngredient(idIngredient, bean);
 

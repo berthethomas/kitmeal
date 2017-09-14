@@ -33,6 +33,11 @@ public class ConnexionController {
 
     @Autowired
     IUserService userService;
+    
+    @Autowired
+    IEventService eventService;
+    
+    
 
 // verificaton si connexion
     @RequestMapping(value = "/log", method = RequestMethod.GET)
@@ -78,12 +83,23 @@ public class ConnexionController {
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public ModelAndView showHome(HttpSession session,
             HttpServletRequest request) {
-
+        
+        UserBean bean = (UserBean)session.getAttribute("user");
+        List<EventBean> beanEvent = eventService.findAllEvents();
+        
         if (session.getAttribute("user") != null) {
-            return new ModelAndView("/home/home.jsp");
+            
+                ModelAndView mav = new ModelAndView("/home/home.jsp");
+                mav.addObject("bean", bean);
+                mav.addObject("event", beanEvent);
+
+                return mav;
+            
         } else {
             return new ModelAndView("redirect:/app/log");
         }
+        
+
     }
 
 }
