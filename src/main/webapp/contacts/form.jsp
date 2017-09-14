@@ -195,7 +195,7 @@
                 </div>
                 <div class="row wrapper border-bottom white-bg page-heading">
                     <div class="col-lg-12">
-                        <h2>Gestion des utilsateurs</h2>
+                        <h2>Gestion des utilisateurs</h2>
                         <ol class="breadcrumb">
                             <li>
                                 <a href="${pageContext.servletContext.contextPath}/home">Home</a>
