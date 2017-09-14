@@ -113,6 +113,7 @@ public class UserService implements IUserService {
         bean.setUsername(user.getUsername());
         bean.setPassword(user.getPassword());
         bean.setPhoto(user.getPhoto());
+        bean.setRole(user.getRole());
         bean.setAddress(addressService.findAddress(user.getAdresse().getIdAddress()));
 
         return bean;

@@ -6,6 +6,7 @@
 package fr.imie.kitmeal.controllers;
 
 import fr.imie.kitmeal.beans.UniteBean;
+import fr.imie.kitmeal.beans.UserBean;
 import fr.imie.kitmeal.interfacesServices.IUniteService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -35,54 +36,92 @@ public class UniteController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelAndView findAllUnites(HttpSession session,
             HttpServletRequest request) {
-        List<UniteBean> beans = uniteService.findAllUnites();
-        if(session.getAttribute("user") != null){
-            return new ModelAndView("/admin/unite/unite.jsp", "bean", beans);
-        }else{
+
+        if (session.getAttribute("user") != null) {
+            UserBean user = (UserBean) session.getAttribute("user");
+            if (("admin".equals(user.getRole()))) {
+                List<UniteBean> beans = uniteService.findAllUnites();
+
+                return new ModelAndView("/admin/unite/unite.jsp", "bean", beans);
+            } else {
+                return new ModelAndView("redirect:/app/home");
+            }
+        } else {
             return new ModelAndView("redirect:/app/log");
         }
-        
+
     }
 
     @RequestMapping(value = "/create/{bean}", method = RequestMethod.POST)
     public ModelAndView createUnite(HttpSession session, UniteBean bean,
             HttpServletRequest request) {
-        uniteService.createUnite(bean);
-        
-        return new ModelAndView("redirect:/app/unites");
+        if (session.getAttribute("user") != null) {
+            UserBean user = (UserBean) session.getAttribute("user");
+            if (("admin".equals(user.getRole()))) {
+                uniteService.createUnite(bean);
+
+                return new ModelAndView("redirect:/app/unites");
+            } else {
+                return new ModelAndView("redirect:/app/home");
+            }
+        } else {
+            return new ModelAndView("redirect:/app/log");
+        }
+
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView showCreateUnite(HttpSession session,
             HttpServletRequest request) {
-        UniteBean bean = new UniteBean();
-        if(session.getAttribute("user") != null){
-            return new ModelAndView("/admin/unite/create.jsp", "bean", bean);
-        }else{
+
+        if (session.getAttribute("user") != null) {
+            UserBean user = (UserBean) session.getAttribute("user");
+            if (("admin".equals(user.getRole()))) {
+                UniteBean bean = new UniteBean();
+
+                return new ModelAndView("/admin/unite/create.jsp", "bean", bean);
+            } else {
+                return new ModelAndView("redirect:/app/home");
+            }
+        } else {
             return new ModelAndView("redirect:/app/log");
         }
-        
     }
 
     @RequestMapping(value = "/update/{idUnite}/{bean}", method = RequestMethod.POST)
     public ModelAndView updateUnite(HttpSession session, UniteBean bean,
             @PathVariable Integer idUnite, HttpServletRequest request) {
-        uniteService.updateUnite(idUnite, bean);
+        if (session.getAttribute("user") != null) {
+            UserBean user = (UserBean) session.getAttribute("user");
+            if (("admin".equals(user.getRole()))) {
+                uniteService.updateUnite(idUnite, bean);
 
-        return new ModelAndView("redirect:/app/unites");
+                return new ModelAndView("redirect:/app/unites");
+            } else {
+                return new ModelAndView("redirect:/app/home");
+            }
+        } else {
+            return new ModelAndView("redirect:/app/log");
+        }
+
     }
 
     @RequestMapping(value = "/update/{idUnite}", method = RequestMethod.GET)
     public ModelAndView showUpdateUnite(HttpSession session,
             @PathVariable Integer idUnite, HttpServletRequest request) {
-        UniteBean bean = uniteService.findUnite(idUnite);
-        if(session.getAttribute("user") != null){
-            return new ModelAndView("/admin/unite/update.jsp", "bean", bean);
-            
-        }else{
+        if (session.getAttribute("user") != null) {
+            UserBean user = (UserBean) session.getAttribute("user");
+            if (("admin".equals(user.getRole()))) {
+                UniteBean bean = uniteService.findUnite(idUnite);
+
+                return new ModelAndView("/admin/unite/update.jsp", "bean", bean);
+            } else {
+                return new ModelAndView("redirect:/app/home");
+            }
+        } else {
             return new ModelAndView("redirect:/app/log");
         }
-        
+
     }
 
     @RequestMapping(value = "/find/{idUnite}", method = RequestMethod.GET)
@@ -96,8 +135,18 @@ public class UniteController {
     @RequestMapping(value = "/remove/{idUnite}", method = RequestMethod.GET)
     public ModelAndView removeUnite(HttpSession session, @PathVariable Integer idUnite,
             HttpServletRequest request) {
-        uniteService.removeUnite(idUnite);
+        if (session.getAttribute("user") != null) {
+            UserBean user = (UserBean) session.getAttribute("user");
+            if (("admin".equals(user.getRole()))) {
+                uniteService.removeUnite(idUnite);
 
-        return new ModelAndView("redirect:/app/unites");
+                return new ModelAndView("redirect:/app/unites");
+            } else {
+                return new ModelAndView("redirect:/app/home");
+            }
+        } else {
+            return new ModelAndView("redirect:/app/log");
+        }
+
     }
 }

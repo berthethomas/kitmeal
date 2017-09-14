@@ -38,7 +38,7 @@ public class ConnexionController {
     @RequestMapping(value = "/log", method = RequestMethod.GET)
     public ModelAndView ifConnect(HttpSession session) {
         if (session.getAttribute("user") != null) {
-            return new ModelAndView("/home/home.jsp");
+            return new ModelAndView("redirect:/app/home");
         } else {
             UserBean bean = new UserBean();
             return new ModelAndView("/home/login.jsp", "bean", bean);
@@ -76,10 +76,14 @@ public class ConnexionController {
     }*/
     //home
     @RequestMapping(value = "/home", method = RequestMethod.GET)
-    public ModelAndView showHome(HttpSession session, @RequestBody EventBean bean,
+    public ModelAndView showHome(HttpSession session,
             HttpServletRequest request) {
 
-        return new ModelAndView("/contacts/contacts.jsp");
+        if (session.getAttribute("user") != null) {
+            return new ModelAndView("/home/home.jsp");
+        } else {
+            return new ModelAndView("redirect:/app/log");
+        }
     }
 
 }

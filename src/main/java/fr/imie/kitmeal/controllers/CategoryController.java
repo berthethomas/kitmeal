@@ -6,6 +6,7 @@
 package fr.imie.kitmeal.controllers;
 
 import fr.imie.kitmeal.beans.CategoryBean;
+import fr.imie.kitmeal.beans.UserBean;
 import fr.imie.kitmeal.interfacesServices.ICategoryService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -36,9 +37,14 @@ public class CategoryController {
     public ModelAndView findAllCategories(HttpSession session,
             HttpServletRequest request) {
         List<CategoryBean> beans = categoryService.findAllCategories();
-        if(session.getAttribute("user") != null){
-            return new ModelAndView("/admin/category/category.jsp", "bean", beans);
-        }else{
+        if (session.getAttribute("user") != null) {
+            UserBean user = (UserBean) session.getAttribute("user");
+            if (("admin".equals(user.getRole()))) {
+                return new ModelAndView("/admin/category/category.jsp", "bean", beans);
+            } else {
+                return new ModelAndView("redirect:/app/home");
+            }
+        } else {
             return new ModelAndView("redirect:/app/log");
         }
     }
@@ -46,18 +52,34 @@ public class CategoryController {
     @RequestMapping(value = "/create/{bean}", method = RequestMethod.POST)
     public ModelAndView createCategory(HttpSession session, CategoryBean bean,
             HttpServletRequest request) {
-        categoryService.createCategory(bean);
+        if (session.getAttribute("user") != null) {
+            UserBean user = (UserBean) session.getAttribute("user");
+            if (("admin".equals(user.getRole()))) {
+                categoryService.createCategory(bean);
 
-        return new ModelAndView("redirect:/app/categories");
+                return new ModelAndView("redirect:/app/categories");
+            } else {
+                return new ModelAndView("redirect:/app/home");
+            }
+        } else {
+            return new ModelAndView("redirect:/app/log");
+        }
+
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView showCreateCategory(HttpSession session,
             HttpServletRequest request) {
-        CategoryBean bean = new CategoryBean();
-        if(session.getAttribute("user") != null){
-            return new ModelAndView("/admin/category/create.jsp", "bean", bean);
-        }else{
+        if (session.getAttribute("user") != null) {
+            UserBean user = (UserBean) session.getAttribute("user");
+            if (("admin".equals(user.getRole()))) {
+                CategoryBean bean = new CategoryBean();
+
+                return new ModelAndView("/admin/category/create.jsp", "bean", bean);
+            } else {
+                return new ModelAndView("redirect:/app/home");
+            }
+        } else {
             return new ModelAndView("redirect:/app/log");
         }
     }
@@ -65,18 +87,34 @@ public class CategoryController {
     @RequestMapping(value = "/update/{idCategory}/{bean}", method = RequestMethod.POST)
     public ModelAndView updateCategory(HttpSession session, CategoryBean bean,
             @PathVariable Integer idCategory, HttpServletRequest request) {
-        categoryService.updateCategory(idCategory, bean);
+        if (session.getAttribute("user") != null) {
+            UserBean user = (UserBean) session.getAttribute("user");
+            if (("admin".equals(user.getRole()))) {
+                categoryService.updateCategory(idCategory, bean);
 
-        return new ModelAndView("redirect:/app/categories");
+                return new ModelAndView("redirect:/app/categories");
+            } else {
+                return new ModelAndView("redirect:/app/home");
+            }
+        } else {
+            return new ModelAndView("redirect:/app/log");
+        }
     }
 
     @RequestMapping(value = "/update/{idCategory}", method = RequestMethod.GET)
     public ModelAndView showUpdateCategory(HttpSession session,
             @PathVariable Integer idCategory, HttpServletRequest request) {
-        CategoryBean bean = categoryService.findCategory(idCategory);
-        if(session.getAttribute("user") != null){
-            return new ModelAndView("/admin/category/update.jsp", "bean", bean);
-        }else{
+
+        if (session.getAttribute("user") != null) {
+            UserBean user = (UserBean) session.getAttribute("user");
+            if (("admin".equals(user.getRole()))) {
+                CategoryBean bean = categoryService.findCategory(idCategory);
+
+                return new ModelAndView("/admin/category/update.jsp", "bean", bean);
+            } else {
+                return new ModelAndView("redirect:/app/home");
+            }
+        } else {
             return new ModelAndView("redirect:/app/log");
         }
     }
@@ -92,9 +130,19 @@ public class CategoryController {
     @RequestMapping(value = "/remove/{idCategory}", method = RequestMethod.GET)
     public ModelAndView removeCategory(HttpSession session, @PathVariable Integer idCategory,
             HttpServletRequest request) {
-        categoryService.removeCategory(idCategory);
+        if (session.getAttribute("user") != null) {
+            UserBean user = (UserBean) session.getAttribute("user");
+            if (("admin".equals(user.getRole()))) {
+                categoryService.removeCategory(idCategory);
 
-        return new ModelAndView("redirect:/app/categories");
+                return new ModelAndView("redirect:/app/categories");
+            } else {
+                return new ModelAndView("redirect:/app/home");
+            }
+        } else {
+            return new ModelAndView("redirect:/app/log");
+        }
+
     }
 
 }
