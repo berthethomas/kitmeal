@@ -32,43 +32,50 @@
             <nav class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
                     <ul class="nav metismenu" id="side-menu">
+
                         <li class="nav-header">
                             <div class="dropdown profile-element"> <span>
                                     <img alt="image" class="img-circle" src="${pageContext.servletContext.contextPath}/assets/img/profile_small.jpg" />
                                 </span>
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                    <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">David Williams</strong>
+                                    <span class="clear"> <span class="block m-t-xs">
                                         </span> <span class="text-muted text-xs block">Options <b class="caret"></b></span> </span> </a>
                                 <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                     <li><a href="profile.html">Profil</a></li>
                                     <li><a href="contacts.html">Contacts</a></li>
                                     <li><a href="mailbox.html">Mailbox</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="login.html">Déconnexion</a></li>
+                                    <li><a href="${pageContext.servletContext.contextPath}/app/logout">Déconnexion</a></li>
                                 </ul>
                             </div>
                             <div class="logo-element">
                                 Logo Kitmeal
                             </div>
                         </li>
-                        <li class="active">
-                            <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Evènements</span></a>
+                        <li class='active'>
+                            <a href="${pageContext.servletContext.contextPath}/app/events"><i class="fa fa-th-large"></i> <span class="nav-label">Evènements</span></a>
                         </li>
-                        <li class="active">
-                            <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Frigo</span></a>
+                        <li class='active'>
+                            <a href="${pageContext.servletContext.contextPath}/app/userIngredients"><i class="fa fa-th-large"></i> <span class="nav-label">Réfrigérateur</span></a>
                         </li>
-                        <li class="active">
-                            <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Recettes</span></a>
+                        <li class='active'>
+                            <a href="${pageContext.servletContext.contextPath}/app/recipes"><i class="fa fa-th-large"></i> <span class="nav-label">Recettes</span></a>
                         </li>
-                        <li class="active">
-                            <a href="contacts.html"><i class="fa fa-th-large"></i> <span class="nav-label">Familles</span></a>
+                        <li class='active'>
+                            <a href="${pageContext.servletContext.contextPath}/app/users"><i class="fa fa-th-large"></i> <span class="nav-label">Familles</span></a>
                         </li>
-                        <li class="active">
-                            <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Infos personnels</span></a>
-                        </li>
-                        <li class="active">
-                            <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Gestion admin</span> <span class="fa arrow"></span></a>
-                        </li>                
+
+                        <li class='active'>
+                            <a href="#"><i class="fa fa-sitemap"></i> <span class="nav-label">Gestion admin </span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li>
+                                    <a href="${pageContext.servletContext.contextPath}/app/categories">Catégories</a>
+                                </li>
+                                <li>
+                                    <a href="${pageContext.servletContext.contextPath}/app/unites">Unités</a>
+                                </li>
+                            </ul>
+                        </li>               
                     </ul>
                 </div>
             </nav>
@@ -96,12 +103,12 @@
                                     <li>
                                         <div class="dropdown-messages-box">
                                             <a href="profile.html" class="pull-left">
-                                                <img alt="image" class="img-circle" src="../assets/img/a7.jpg">
+                                                <img alt="image" class="img-circle" src="${pageContext.servletContext.contextPath}/assets/img/a7.jpg">
                                             </a>
                                             <div class="media-body">
-                                                <small class="pull-right">46h ago</small>
-                                                <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
-                                                <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+                                                <small class="pull-right">Il y a 46h</small>
+                                                <strong>Papy</strong> Vous à envoyé un message. <br>
+                                                <small class="text-muted">Il y a 3 jours à 17:58 - 10.06.2014</small>
                                             </div>
                                         </div>
                                     </li>
@@ -109,12 +116,12 @@
                                     <li>
                                         <div class="dropdown-messages-box">
                                             <a href="profile.html" class="pull-left">
-                                                <img alt="image" class="img-circle" src="../assets/img/a4.jpg">
+                                                <img alt="image" class="img-circle" src="${pageContext.servletContext.contextPath}/assets/img/a4.jpg">
                                             </a>
                                             <div class="media-body ">
-                                                <small class="pull-right text-navy">5h ago</small>
-                                                <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>
-                                                <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
+                                                <small class="pull-right text-navy">Il y a 5h</small>
+                                                <strong>Chris Johnatan Overtunk</strong> Vous à envoyé un message. <br>
+                                                <small class="text-muted">Hier à 1:21 - 11.06.2014</small>
                                             </div>
                                         </div>
                                     </li>
@@ -122,12 +129,12 @@
                                     <li>
                                         <div class="dropdown-messages-box">
                                             <a href="profile.html" class="pull-left">
-                                                <img alt="image" class="img-circle" src="../assets/img/profile.jpg">
+                                                <img alt="image" class="img-circle" src="${pageContext.servletContext.contextPath}/assets/img/profile.jpg">
                                             </a>
                                             <div class="media-body ">
-                                                <small class="pull-right">23h ago</small>
-                                                <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>
-                                                <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
+                                                <small class="pull-right">Il y a 23h</small>
+                                                <strong>Monica Smith</strong> Vous à envoyé un message. <br>
+                                                <small class="text-muted">Il y a 2 ago à 14:30 - 11.06.2014</small>
                                             </div>
                                         </div>
                                     </li>
@@ -135,7 +142,7 @@
                                     <li>
                                         <div class="text-center link-block">
                                             <a href="mailbox.html">
-                                                <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
+                                                <i class="fa fa-envelope"></i> <strong>Voir tous les messages</strong>
                                             </a>
                                         </div>
                                     </li>
@@ -149,8 +156,8 @@
                                     <li>
                                         <a href="mailbox.html">
                                             <div>
-                                                <i class="fa fa-envelope fa-fw"></i> You have 16 messages
-                                                <span class="pull-right text-muted small">4 minutes ago</span>
+                                                <i class="fa fa-envelope fa-fw"></i> Vous avez 16 messages
+                                                <span class="pull-right text-muted small">Il y a 4 minutes</span>
                                             </div>
                                         </a>
                                     </li>
@@ -158,17 +165,8 @@
                                     <li>
                                         <a href="profile.html">
                                             <div>
-                                                <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                                <span class="pull-right text-muted small">12 minutes ago</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li>
-                                        <a href="grid_options.html">
-                                            <div>
-                                                <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                                <span class="pull-right text-muted small">4 minutes ago</span>
+                                                <i class="fa fa-inbox fa-fw"></i> 3 Nouveaux évênements
+                                                <span class="pull-right text-muted small">Il y a 12 minutes</span>
                                             </div>
                                         </a>
                                     </li>
@@ -176,7 +174,7 @@
                                     <li>
                                         <div class="text-center link-block">
                                             <a href="notifications.html">
-                                                <strong>See All Alerts</strong>
+                                                <strong>Voir toutes les alertes</strong>
                                                 <i class="fa fa-angle-right"></i>
                                             </a>
                                         </div>
@@ -186,32 +184,30 @@
 
 
                             <li>
-                                <a href="login.html">
-                                    <i class="fa fa-sign-out"></i> Log out
+                                <a href="${pageContext.servletContext.contextPath}/app/logout">
+                                    <i class="fa fa-sign-out"></i> Déconnexion
                                 </a>
                             </li>
                         </ul>
 
                     </nav>
+                    <div class="wrapper wrapper-content">
+                        <div class="row wrapper border-bottom white-bg page-heading">
+                            <div class="col-lg-12">
+                                <h2>Evènements</h2>
+                                <ol class="breadcrumb">
+                                    <li>
+                                        <a href="${pageContext.servletContext.contextPath}/app/home">Home</a>
+                                    </li>
+                                    <li>
+                                        Evènements
+                                    </li>
+                                </ol>
+                                <a href="${pageContext.servletContext.contextPath}/app/events/create" type="button" class="btn btn-w-m btn-primary pull-right"><i class="fa fa-plus-circle"></i> Créer un évènement</a>
 
-                    <div class="row wrapper border-bottom white-bg page-heading">
-                        <div class="col-lg-12">
-                            <h2>Evènements</h2>
-                            <ol class="breadcrumb">
-                                <li>
-                                    <a href="${pageContext.servletContext.contextPath}/app/home">Home</a>
-                                </li>
-                                <li>
-                                    Evènements
-                                </li>
-                            </ol>
-                            <a href="${pageContext.servletContext.contextPath}/app/events/create" type="button" class="btn btn-w-m btn-primary pull-right"><i class="fa fa-plus-circle"></i> Créer un évènement</a>
+                            </div>
 
                         </div>
-
-                    </div>
-
-                    <div class="wrapper wrapper-content">
                         <div class="row animated fadeInDown">
                             <div class="col-lg-1"></div>
                             <div class="col-lg-10">
@@ -255,19 +251,18 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="footer">
-                        <div class="pull-right">
-                            10GB of <strong>250GB</strong> Free.
+                        <div class="footer">
+                            <div class="pull-right">
+                                Créé et développé par <strong>Laura Souchu</strong> & <strong>Thomas Berthé</strong>
+                            </div>
+                            <div>
+                                <strong>Copyright</strong> KITmeal &copy; 2017
+                            </div>
                         </div>
-                        <div>
-                            <strong>Copyright</strong> Example Company &copy; 2014-2017
-                        </div>
-                    </div>
 
+                    </div>
                 </div>
             </div>
-
             <!-- Mainly scripts -->
             <script src="${pageContext.servletContext.contextPath}/assets/js/plugins/fullcalendar/moment.min.js"></script>
             <script src="${pageContext.servletContext.contextPath}/assets/js/jquery-2.1.1.js"></script>

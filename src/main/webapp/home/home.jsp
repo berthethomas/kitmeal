@@ -49,20 +49,20 @@
                                 Logo Kitmeal
                             </div>
                         </li>
-                        <li>
+                        <li class='active'>
                             <a href="${pageContext.servletContext.contextPath}/app/events"><i class="fa fa-th-large"></i> <span class="nav-label">Evènements</span></a>
                         </li>
-                        <li>
-                            <a href="${pageContext.servletContext.contextPath}/app/userIngredients"><i class="fa fa-th-large"></i> <span class="nav-label">Frigo</span></a>
+                        <li class='active'>
+                            <a href="${pageContext.servletContext.contextPath}/app/userIngredients"><i class="fa fa-th-large"></i> <span class="nav-label">Réfrigérateur</span></a>
                         </li>
-                        <li>
+                        <li class='active'>
                             <a href="${pageContext.servletContext.contextPath}/app/recipes"><i class="fa fa-th-large"></i> <span class="nav-label">Recettes</span></a>
                         </li>
-                        <li>
+                        <li class='active'>
                             <a href="${pageContext.servletContext.contextPath}/app/users"><i class="fa fa-th-large"></i> <span class="nav-label">Familles</span></a>
                         </li>
 
-                        <li>
+                        <li class='active'>
                             <a href="#"><i class="fa fa-sitemap"></i> <span class="nav-label">Gestion admin </span><span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level collapse">
                                 <li>

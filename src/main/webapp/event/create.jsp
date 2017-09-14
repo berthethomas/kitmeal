@@ -42,43 +42,50 @@
             <nav class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
                     <ul class="nav metismenu" id="side-menu">
+
                         <li class="nav-header">
                             <div class="dropdown profile-element"> <span>
                                     <img alt="image" class="img-circle" src="${pageContext.servletContext.contextPath}/assets/img/profile_small.jpg" />
                                 </span>
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                    <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">David Williams</strong>
+                                    <span class="clear"> <span class="block m-t-xs">
                                         </span> <span class="text-muted text-xs block">Options <b class="caret"></b></span> </span> </a>
                                 <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                     <li><a href="profile.html">Profil</a></li>
                                     <li><a href="contacts.html">Contacts</a></li>
                                     <li><a href="mailbox.html">Mailbox</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="login.html">Déconnexion</a></li>
+                                    <li><a href="${pageContext.servletContext.contextPath}/app/logout">Déconnexion</a></li>
                                 </ul>
                             </div>
                             <div class="logo-element">
                                 Logo Kitmeal
                             </div>
                         </li>
-                        <li class="active">
-                            <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Evènements</span></a>
+                        <li class='active'>
+                            <a href="${pageContext.servletContext.contextPath}/app/events"><i class="fa fa-th-large"></i> <span class="nav-label">Evènements</span></a>
                         </li>
-                        <li class="active">
-                            <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Frigo</span></a>
+                        <li class='active'>
+                            <a href="${pageContext.servletContext.contextPath}/app/userIngredients"><i class="fa fa-th-large"></i> <span class="nav-label">Réfrigérateur</span></a>
                         </li>
-                        <li class="active">
-                            <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Recettes</span></a>
+                        <li class='active'>
+                            <a href="${pageContext.servletContext.contextPath}/app/recipes"><i class="fa fa-th-large"></i> <span class="nav-label">Recettes</span></a>
                         </li>
-                        <li class="active">
+                        <li class='active'>
                             <a href="${pageContext.servletContext.contextPath}/app/users"><i class="fa fa-th-large"></i> <span class="nav-label">Familles</span></a>
                         </li>
-                        <li class="active">
-                            <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Infos personnels</span></a>
-                        </li>
-                        <li class="active">
-                            <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Gestion admin</span> <span class="fa arrow"></span></a>
-                        </li>                
+
+                        <li class='active'>
+                            <a href="#"><i class="fa fa-sitemap"></i> <span class="nav-label">Gestion admin </span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li>
+                                    <a href="${pageContext.servletContext.contextPath}/app/categories">Catégories</a>
+                                </li>
+                                <li>
+                                    <a href="${pageContext.servletContext.contextPath}/app/unites">Unités</a>
+                                </li>
+                            </ul>
+                        </li>               
                     </ul>
                 </div>
             </nav>
@@ -187,7 +194,7 @@
 
 
                             <li>
-                                <a href="login.html">
+                                <a href="${pageContext.servletContext.contextPath}/app/logout">
                                     <i class="fa fa-sign-out"></i> Déconnexion
                                 </a>
                             </li>

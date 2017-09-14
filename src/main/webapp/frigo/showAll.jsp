@@ -30,43 +30,50 @@
             <nav class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
                     <ul class="nav metismenu" id="side-menu">
+
                         <li class="nav-header">
                             <div class="dropdown profile-element"> <span>
                                     <img alt="image" class="img-circle" src="${pageContext.servletContext.contextPath}/assets/img/profile_small.jpg" />
                                 </span>
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                    <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">David Williams</strong>
+                                    <span class="clear"> <span class="block m-t-xs">
                                         </span> <span class="text-muted text-xs block">Options <b class="caret"></b></span> </span> </a>
                                 <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                     <li><a href="profile.html">Profil</a></li>
                                     <li><a href="contacts.html">Contacts</a></li>
                                     <li><a href="mailbox.html">Mailbox</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="login.html">Déconnexion</a></li>
+                                    <li><a href="${pageContext.servletContext.contextPath}/app/logout">Déconnexion</a></li>
                                 </ul>
                             </div>
                             <div class="logo-element">
                                 Logo Kitmeal
                             </div>
                         </li>
-                        <li class="active">
-                            <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Evènements</span></a>
+                        <li class='active'>
+                            <a href="${pageContext.servletContext.contextPath}/app/events"><i class="fa fa-th-large"></i> <span class="nav-label">Evènements</span></a>
                         </li>
-                        <li class="active">
-                            <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Frigo</span></a>
+                        <li class='active'>
+                            <a href="${pageContext.servletContext.contextPath}/app/userIngredients"><i class="fa fa-th-large"></i> <span class="nav-label">Réfrigérateur</span></a>
                         </li>
-                        <li class="active">
-                            <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Recettes</span></a>
+                        <li class='active'>
+                            <a href="${pageContext.servletContext.contextPath}/app/recipes"><i class="fa fa-th-large"></i> <span class="nav-label">Recettes</span></a>
                         </li>
-                        <li class="active">
+                        <li class='active'>
                             <a href="${pageContext.servletContext.contextPath}/app/users"><i class="fa fa-th-large"></i> <span class="nav-label">Familles</span></a>
                         </li>
-                        <li class="active">
-                            <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Infos personnels</span></a>
-                        </li>
-                        <li class="active">
-                            <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Gestion admin</span> <span class="fa arrow"></span></a>
-                        </li>                
+
+                        <li class='active'>
+                            <a href="#"><i class="fa fa-sitemap"></i> <span class="nav-label">Gestion admin </span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li>
+                                    <a href="${pageContext.servletContext.contextPath}/app/categories">Catégories</a>
+                                </li>
+                                <li>
+                                    <a href="${pageContext.servletContext.contextPath}/app/unites">Unités</a>
+                                </li>
+                            </ul>
+                        </li>               
                     </ul>
                 </div>
             </nav>
@@ -175,7 +182,7 @@
 
 
                             <li>
-                                <a href="login.html">
+                                <a href="${pageContext.servletContext.contextPath}/app/logout">
                                     <i class="fa fa-sign-out"></i> Déconnexion
                                 </a>
                             </li>
@@ -188,49 +195,49 @@
                         <h2>Gestion des ingrédients</h2>
                         <ol class="breadcrumb">
                             <li>
-                                <a href="${pageContext.servletContext.contextPath}/home">Home</a>
+                                <a href="${pageContext.servletContext.contextPath}/app/home">Home</a>
                             </li>
-                            
+
                             <li class="active">
                                 <strong>Réfrigérateur</strong>
                             </li>
                         </ol>
-                        
-                        <a href="${pageContext.servletContext.contextPath}/app/userIngredients/ingredients" type="button" class="btn btn-w-m btn-primary pull-right"><i class="fa fa-plus-circle"></i> Afficher tout les ingrédients</a>
+
+                        <a href="${pageContext.servletContext.contextPath}/app/userIngredients/ingredients" type="button" class="btn btn-w-m btn-primary pull-right" style='margin-left:2px;'><i class="fa fa-plus-circle"></i> Afficher tout les ingrédients</a>
                         <a href="${pageContext.servletContext.contextPath}/app/userIngredients/create/ingredients" type="button" class="btn btn-w-m btn-primary pull-right"><i class="fa fa-plus-circle"></i> Ajouter un ingrédient</a>
 
                     </div>
                 </div>
-                
+
                 <div class="wrapper wrapper-content animated fadeInRight">
                     <div class="contact-row">
-                        
-                            <c:forEach items="${bean}" var="item">
-                                <div class="col-lg-4">
+
+                        <c:forEach items="${bean}" var="item">
+                            <div class="col-lg-4">
                                 <div class="contact-box">
                                     <div class="pull-right">
                                         <a href="${pageContext.servletContext.contextPath}/app/userIngredients/remove/${item.idUserIngredient}"><i class="fa fa-times"></i></a>
                                     </div>
-                                        <div class="col-sm-4">
-                                            <div class="text-center">
-                                                <img alt="image" class="img-circle m-t-xs img-responsive" src="${pageContext.servletContext.contextPath}/assets/img/repas.jpg">
-                                                <div class="m-t-xs font-bold"></div>
-                                            </div>
+                                    <div class="col-sm-4">
+                                        <div class="text-center">
+                                            <img alt="image" class="img-circle m-t-xs img-responsive" src="${pageContext.servletContext.contextPath}/assets/img/repas.jpg">
+                                            <div class="m-t-xs font-bold"></div>
                                         </div>
-                                        <div class="col-sm-8">
-                                            <h3><strong>${item.quantite} ${item.ingredient.nom}</strong></h3>
-                                            
-                                            <address>
-                                                <strong><i class="fa fa-user"></i> ${item.user.nom} </strong>
-                                                
-                                            </address>
-                                        </div>
-                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <h3><strong>${item.quantite} ${item.ingredient.nom}</strong></h3>
+
+                                        <address>
+                                            <strong><i class="fa fa-user"></i> ${item.user.nom} </strong>
+
+                                        </address>
+                                    </div>
+                                    <div class="clearfix"></div>
                                     </a>
                                 </div>
-                                </div>
-                            </c:forEach>
-                        
+                            </div>
+                        </c:forEach>
+
 
                     </div>
                 </div>
