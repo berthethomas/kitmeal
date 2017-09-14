@@ -29,4 +29,16 @@ public class UserEventDao extends AbstractGenericDaoKitmeal<UserEvent> implement
         return userEvents;
     }
 
+    @Override
+    public List<UserEvent> findByEvent(Integer idEvent) {
+        String hql = "from UserEvent u "
+                + "where u.event = :idEvent ";
+
+        Query query = getSession().createQuery(hql);
+        query.setInteger("idEvent", idEvent);
+        List<UserEvent> results = (List<UserEvent>) query.list();
+
+        return results;
+    }
+
 }

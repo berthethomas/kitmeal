@@ -5,36 +5,36 @@
 <!DOCTYPE html>
 <html>
 
-<head>
+    <head>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>INSPINIA | Calendar</title>
+        <title>Kitmeal | Evènements</title>
 
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../assets/font-awesome/css/font-awesome.css" rel="stylesheet">
+        <link href="${pageContext.servletContext.contextPath}/assets/css/bootstrap.min.css" rel="stylesheet">
+        <link href="${pageContext.servletContext.contextPath}/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
 
-    <link href="../assets/css/plugins/iCheck/custom.css" rel="stylesheet">
+        <link href="${pageContext.servletContext.contextPath}/assets/css/plugins/iCheck/custom.css" rel="stylesheet">
 
-    <link href="../assets/css/plugins/fullcalendar/fullcalendar.css" rel="stylesheet">
-    <link href="../assets/css/plugins/fullcalendar/fullcalendar.print.css" rel='stylesheet' media='print'>
+        <link href="${pageContext.servletContext.contextPath}/assets/css/plugins/fullcalendar/fullcalendar.css" rel="stylesheet">
+        <link href="${pageContext.servletContext.contextPath}/assets/css/plugins/fullcalendar/fullcalendar.print.css" rel='stylesheet' media='print'>
 
-    <link href="../assets/css/animate.css" rel="stylesheet">
-    <link href="../assets/css/style.css" rel="stylesheet">
+        <link href="${pageContext.servletContext.contextPath}/assets/css/animate.css" rel="stylesheet">
+        <link href="${pageContext.servletContext.contextPath}/assets/css/style.css" rel="stylesheet">
 
-</head>
+    </head>
 
-<body>
+    <body>
 
-<div id="wrapper">
+        <div id="wrapper">
 
-<nav class="navbar-default navbar-static-side" role="navigation">
+            <nav class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
                     <ul class="nav metismenu" id="side-menu">
                         <li class="nav-header">
                             <div class="dropdown profile-element"> <span>
-                                    <img alt="image" class="img-circle" src="../assets/img/profile_small.jpg" />
+                                    <img alt="image" class="img-circle" src="${pageContext.servletContext.contextPath}/assets/img/profile_small.jpg" />
                                 </span>
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                     <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">David Williams</strong>
@@ -194,175 +194,174 @@
 
                     </nav>
 
-<div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-12">
-        <h2>Evènements</h2>
-        <ol class="breadcrumb">
-            <li>
-                <a href="#">Home</a>
-            </li>
-            <li>
-                Evènements
-            </li>
-        </ol>
-        <a href="${pageContext.servletContext.contextPath}/app/events/create" type="button" class="btn btn-w-m btn-primary pull-right"><i class="fa fa-plus-circle"></i> Créer un évènement</a>
-
-    </div>
-    
-</div>
-
-<div class="wrapper wrapper-content">
-    <div class="row animated fadeInDown">
-        <div class="col-lg-1"></div>
-        <div class="col-lg-10">
-            <div class="ibox float-e-margins">
-                <div class="ibox-content">
-
-                    <table class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th>Titre de l'évènement</th>
-                            <th>Organisateur</th>
-                            <th>Description</th>
-                            <th>Date de début</th>
-                            <th>Date de fin</th>
-                            <th>Recette</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach items="${bean}" var="item">
-                        <tr>
-                            <td>${item.nom}</td>
-                            <td>${item.organisateur.nom}</td>
-                            <td>${item.description}</td>
-                            <td>${item.dateDebut}</td>
-                            <td>${item.dateFin}</td>
-                            <td><a href="${pageContext.servletContext.contextPath}/app/recipes/find/${item.recipe.idRecipe}">${item.recipe.nom}</a></td>
-                        </tr>
-                        </c:forEach> 
-                        </tbody>
-                    </table>
+                    <div class="row wrapper border-bottom white-bg page-heading">
+                        <div class="col-lg-12">
+                            <h2>Evènements</h2>
+                            <ol class="breadcrumb">
+                                <li>
+                                    <a href="${pageContext.servletContext.contextPath}/app/home">Home</a>
+                                </li>
+                                <li>
+                                    Evènements
+                                </li>
+                            </ol>
+                            <a href="${pageContext.servletContext.contextPath}/app/events/create" type="button" class="btn btn-w-m btn-primary pull-right"><i class="fa fa-plus-circle"></i> Créer un évènement</a>
 
                         </div>
 
-              
-                
-                <!--<div class="ibox-content">
-                    <div id="calendar"></div>
-                </div>-->
-                
-               
+                    </div>
+
+                    <div class="wrapper wrapper-content">
+                        <div class="row animated fadeInDown">
+                            <div class="col-lg-1"></div>
+                            <div class="col-lg-10">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-content">
+
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Titre de l'évènement</th>
+                                                    <th>Organisateur</th>
+                                                    <th>Description</th>
+                                                    <th>Date de début</th>
+                                                    <th>Date de fin</th>
+                                                    <th>Recette</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach items="${bean}" var="item">
+                                                    <tr>
+                                                        <td><a href="${pageContext.servletContext.contextPath}/app/events/find/${item.idEvent}">${item.nom}</a></td>
+                                                        <td>${item.organisateur.nom}</td>
+                                                        <td>${item.description}</td>
+                                                        <td>${item.dateDebut}</td>
+                                                        <td>${item.dateFin}</td>
+                                                        <td><a href="${pageContext.servletContext.contextPath}/app/recipes/find/${item.recipe.idRecipe}">${item.recipe.nom}</a></td>
+                                                    </tr>
+                                                </c:forEach> 
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+
+
+
+                                    <!--<div class="ibox-content">
+                                        <div id="calendar"></div>
+                                    </div>-->
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <div class="pull-right">
+                            10GB of <strong>250GB</strong> Free.
+                        </div>
+                        <div>
+                            <strong>Copyright</strong> Example Company &copy; 2014-2017
+                        </div>
+                    </div>
+
+                </div>
             </div>
-        </div>
-    </div>
-</div>
-<div class="footer">
-    <div class="pull-right">
-        10GB of <strong>250GB</strong> Free.
-    </div>
-    <div>
-        <strong>Copyright</strong> Example Company &copy; 2014-2017
-    </div>
-</div>
 
-</div>
-</div>
+            <!-- Mainly scripts -->
+            <script src="${pageContext.servletContext.contextPath}/assets/js/plugins/fullcalendar/moment.min.js"></script>
+            <script src="${pageContext.servletContext.contextPath}/assets/js/jquery-2.1.1.js"></script>
+            <script src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.min.js"></script>
+            <script src="${pageContext.servletContext.contextPath}/assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+            <script src="${pageContext.servletContext.contextPath}/assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-<!-- Mainly scripts -->
-<script src="../assets/js/plugins/fullcalendar/moment.min.js"></script>
-<script src="../assets/js/jquery-2.1.1.js"></script>
-<script src="../assets/js/bootstrap.min.js"></script>
-<script src="../assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="../assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+            <!-- Custom and plugin javascript -->
+            <script src="${pageContext.servletContext.contextPath}/assets/js/inspinia.js"></script>
+            <script src="${pageContext.servletContext.contextPath}/assets/js/plugins/pace/pace.min.js"></script>
 
-<!-- Custom and plugin javascript -->
-<script src="../assets/js/inspinia.js"></script>
-<script src="../assets/js/plugins/pace/pace.min.js"></script>
+            <!-- jQuery UI custom -->
+            <script src="${pageContext.servletContext.contextPath}/assets/js/jquery-ui.custom.min.js"></script>
 
-<!-- jQuery UI custom -->
-<script src="../assets/js/jquery-ui.custom.min.js"></script>
+            <!-- iCheck -->
+            <script src="${pageContext.servletContext.contextPath}/assets/js/plugins/iCheck/icheck.min.js"></script>
 
-<!-- iCheck -->
-<script src="../assets/js/plugins/iCheck/icheck.min.js"></script>
+            <!-- Full Calendar -->
+            <script src="${pageContext.servletContext.contextPath}/assets/js/plugins/fullcalendar/fullcalendar.min.js"></script>
 
-<!-- Full Calendar -->
-<script src="../assets/js/plugins/fullcalendar/fullcalendar.min.js"></script>
+            <script>
 
-<script>
+                $(document).ready(function () {
 
-    $(document).ready(function() {
+                    $('.i-checks').iCheck({
+                        checkboxClass: 'icheckbox_square-green',
+                        radioClass: 'iradio_square-green'
+                    });
 
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green'
-            });
-
-        /* initialize the external events
-         -----------------------------------------------------------------*/
+                    /* initialize the external events
+                     -----------------------------------------------------------------*/
 
 
-        $('#external-events div.external-event').each(function() {
+                    $('#external-events div.external-event').each(function () {
 
-            // store data so the calendar knows to render an event upon drop
-            $(this).data('event', {
-                title: $.trim($(this).text()), // use the element's text as the event title
-                stick: true // maintain when user navigates (see docs on the renderEvent method)
-            });
+                        // store data so the calendar knows to render an event upon drop
+                        $(this).data('event', {
+                            title: $.trim($(this).text()), // use the element's text as the event title
+                            stick: true // maintain when user navigates (see docs on the renderEvent method)
+                        });
 
-            // make the event draggable using jQuery UI
-            $(this).draggable({
-                zIndex: 1111999,
-                revert: true,      // will cause the event to go back to its
-                revertDuration: 0  //  original position after the drag
-            });
+                        // make the event draggable using jQuery UI
+                        $(this).draggable({
+                            zIndex: 1111999,
+                            revert: true, // will cause the event to go back to its
+                            revertDuration: 0  //  original position after the drag
+                        });
 
-        });
-
-
-        /* initialize the calendar
-         -----------------------------------------------------------------*/
-        var date = new Date();
-        var d = date.getDate();
-        var m = date.getMonth();
-        var y = date.getFullYear();
-
-        $('#calendar').fullCalendar({
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'month,agendaWeek,agendaDay'
-            },
-            editable: true,
-            droppable: true, // this allows things to be dropped onto the calendar
-            drop: function() {
-                // is the "remove after drop" checkbox checked?
-                if ($('#drop-remove').is(':checked')) {
-                    // if so, remove the element from the "Draggable Events" list
-                    $(this).remove();
-                }
-            },
-            
-        
-         /* data = 
-       
-            {
-                title: "${item.nom}",
-                start: "${item.dateDebut}",
-                end: "${item.dateFin}"
-            },
-    
-            events.push(data); */
-    
-            
-            
-            
-        });
+                    });
 
 
-    });
+                    /* initialize the calendar
+                     -----------------------------------------------------------------*/
+                    var date = new Date();
+                    var d = date.getDate();
+                    var m = date.getMonth();
+                    var y = date.getFullYear();
 
-</script>
-</body>
+                    $('#calendar').fullCalendar({
+                        header: {
+                            left: 'prev,next today',
+                            center: 'title',
+                            right: 'month,agendaWeek,agendaDay'
+                        },
+                        editable: true,
+                        droppable: true, // this allows things to be dropped onto the calendar
+                        drop: function () {
+                            // is the "remove after drop" checkbox checked?
+                            if ($('#drop-remove').is(':checked')) {
+                                // if so, remove the element from the "Draggable Events" list
+                                $(this).remove();
+                            }
+                        },
+
+                        /* data = 
+                         
+                         {
+                         title: "${item.nom}",
+                         start: "${item.dateDebut}",
+                         end: "${item.dateFin}"
+                         },
+                         
+                         events.push(data); */
+
+
+
+
+                    });
+
+
+                });
+
+            </script>
+    </body>
 
 </html>
 

@@ -22,6 +22,8 @@ public interface IUserEventService {
 
     public UserEventBean findUserEvent(Integer idUserEvent);
 
+    public List<UserEventBean> findByEvent(Integer idEvent);
+
     public void removeUserEvent(Integer idUserEvent);
 
 }

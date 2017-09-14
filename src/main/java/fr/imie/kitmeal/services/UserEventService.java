@@ -104,4 +104,27 @@ public class UserEventService implements IUserEventService {
         userEventDao.delete(userEventDao.find(idUserEvent));
     }
 
+    @Override
+    public List<UserEventBean> findByEvent(Integer idEvent) {
+
+        List<UserEvent> data = userEventDao.findByEvent(idEvent);
+
+        List<UserEventBean> beans = new ArrayList<>();
+
+        if (data != null) {
+            for (UserEvent val : data) {
+                UserEventBean bean = new UserEventBean();
+                bean.setIdUserEvent(val.getIdUserEvent());
+                bean.setEvent(eventService.findEvent(val.getEvent().getIdEvent()));
+                bean.setUser(userService.findUser(val.getUser().getIdUser()));
+                bean.setResponse(val.isResponse());
+
+                beans.add(bean);
+            }
+            return beans;
+        } else {
+            return null;
+        }
+
+    }
 }

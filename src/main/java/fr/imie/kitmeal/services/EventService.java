@@ -48,6 +48,7 @@ public class EventService implements IEventService {
         for (Event event : events) {
             EventBean bean = new EventBean();
 
+            bean.setIdEvent(event.getIdEvent());
             bean.setNom(event.getNom());
             bean.setDescription(event.getDescription());
             bean.setDateDebut(event.getDateDebut());
@@ -73,13 +74,14 @@ public class EventService implements IEventService {
 
         eventDao.create(event);
 
+        bean.setIdEvent(event.getIdEvent());
+
         return bean;
     }
 
     @Override
     public EventBean updateEvent(Integer idEvent, EventBean bean) {
         Event event = eventDao.find(idEvent);
-
         event.setNom(bean.getNom());
         event.setDescription(bean.getDescription());
         event.setDateDebut(bean.getDateDebut());
@@ -88,6 +90,8 @@ public class EventService implements IEventService {
         event.setOrganisateur(userDao.find(bean.getOrganisateur().getIdUser()));
 
         eventDao.update(event);
+        
+        bean.setIdEvent(event.getIdEvent());
 
         return bean;
     }
@@ -97,6 +101,7 @@ public class EventService implements IEventService {
         Event event = eventDao.find(idEvent);
 
         EventBean bean = new EventBean();
+        bean.setIdEvent(event.getIdEvent());
         bean.setNom(event.getNom());
         bean.setDescription(event.getDescription());
         bean.setDateDebut(event.getDateDebut());
