@@ -190,6 +190,8 @@
                     </nav>
                 </div>
                 <div class="wrapper wrapper-content">
+                    <h1 class='text-center'>KITMEAL</h1>
+                    <h4 class='text-center'>Keep In Touch with Meal</h4>
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="ibox float-e-margins">
