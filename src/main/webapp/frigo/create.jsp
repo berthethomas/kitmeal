@@ -195,7 +195,7 @@
                 </div>
                 <div class="row wrapper border-bottom white-bg page-heading">
                     <div class="col-lg-12">
-                        <h2>Gestion des recettes</h2>
+                        <h2>Gestion des ingrédients</h2>
                         <ol class="breadcrumb">
                             <li>
                                 <a href="${pageContext.servletContext.contextPath}/home">Home</a>
@@ -214,7 +214,7 @@
                         <div class="col-lg-12">
                             <div class="ibox">
                                 <div class="ibox-title">
-                                    <h5>Ajouter une recette</h5>
+                                    <h5>Ajouter un ingrédient</h5>
                                     <div class="ibox-tools">
                                         <a class="collapse-link">
                                             <i class="fa fa-chevron-up"></i>
@@ -237,18 +237,18 @@
                                                         <s:input name="nom" id="nom" path="nom" type="text" value='${bean.nom}' class="form-control required" />
                                                     </div>
                                                     <div class="form-group">
-                                                        <select name="unite">
-                                                            <c:forEach items="${unite}" var="productSubCategoryList">
-                                                                <option value="${unite.idUnite}">${unite.nom}</option>
+                                                        <s:select name="unite.idUnite" path="unite.idUnite">
+                                                            <c:forEach items="${unite}" var="bean">
+                                                                <s:option value="${bean.idUnite}">${bean.nom}</s:option>
                                                             </c:forEach>
-                                                        </select>
+                                                        </s:select>
                                                     </div>
                                                     <div class="form-group">
-                                                        <select name="unite">
-                                                            <c:forEach items="${category}" var="productSubCategoryList">
-                                                                <option value="${category.idCategory}">${category.nom}</option>
+                                                        <s:select name="category.idCategory" path="category.idCategory">
+                                                            <c:forEach items="${category}" var="bean">
+                                                                <s:option name="categorie" value="${bean.idCategory}">${bean.nom}</s:option>
                                                             </c:forEach>
-                                                        </select>
+                                                        </s:select>
                                                     </div>
                                                 </div>
                                             </div>

@@ -8,6 +8,7 @@ package fr.imie.kitmeal.controllers;
 import fr.imie.kitmeal.beans.CategoryBean;
 import fr.imie.kitmeal.beans.IngredientBean;
 import fr.imie.kitmeal.beans.UniteBean;
+import fr.imie.kitmeal.beans.UserBean;
 import fr.imie.kitmeal.beans.UserIngredientBean;
 import fr.imie.kitmeal.interfacesServices.ICategoryService;
 import fr.imie.kitmeal.interfacesServices.IIngredientService;
@@ -58,6 +59,14 @@ public class UserIngredientController {
         return new ModelAndView("/frigo/showAll.jsp", "bean", beans);
     }
     
+    @RequestMapping(value = "/ingredients", method = RequestMethod.GET)
+    public ModelAndView findAllIngredients(HttpSession session,
+            HttpServletRequest request) {
+        List<IngredientBean> beans = ingredientService.findAllIngredients();
+
+        return new ModelAndView("/frigo/showIngredients.jsp", "bean", beans);
+    }
+    
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView showCreateIngredient(HttpSession session,
             HttpServletRequest request) {
@@ -96,7 +105,7 @@ public class UserIngredientController {
         return mav;
     }
 
-    @RequestMapping(value = "/create/ingredient", method = RequestMethod.POST)
+    @RequestMapping(value = "/create/ingredients", method = RequestMethod.POST)
     public void createIngredientRecipe(HttpSession session,
             @RequestParam("idIngredient") Integer idIngredient, @RequestParam("quantite") Long quantite,
             HttpServletRequest request) {
@@ -104,32 +113,38 @@ public class UserIngredientController {
         System.err.println("ID INGREDIENT : " + idIngredient);
         System.err.println("QUANTITE : " + quantite);
         
-        /*RecipeBean recipe = recipeService.findRecipe(idRecipe);
+        //RecipeBean recipe = recipeService.findRecipe(idRecipe);
         IngredientBean ingredient = ingredientService.findIngredient(idIngredient);
-        
-        RecipeIngredientBean bean = new RecipeIngredientBean();
-        bean.setRecipe(recipe);
+        UserIngredientBean bean = new UserIngredientBean();
         bean.setIngredient(ingredient);
         bean.setQuantite(quantite);
-        recipeIngredientService.createRecipeIngredient(bean);*/
+        bean.setUser((UserBean)session.getAttribute("user"));
+        userIngredientService.createUserIngredient(bean);
 
     }
 
-
-    @RequestMapping(value = "/update/{idUserIngredient}", method = RequestMethod.POST)
-    public ResponseEntity<UserIngredientBean> updateUserEvent(HttpSession session, @RequestBody UserIngredientBean bean,
-            @PathVariable Integer idUserIngredient, HttpServletRequest request) {
-        userIngredientService.updateUserIngredient(idUserIngredient, bean);
-
-        return new ResponseEntity<UserIngredientBean>(bean, HttpStatus.OK);
+    @RequestMapping(value = "/update/{idIngredient}", method = RequestMethod.GET)
+    public ModelAndView showUpdateUser(HttpSession session,
+            @PathVariable Integer idIngredient, HttpServletRequest request) {
+        IngredientBean bean = ingredientService.findIngredient(idIngredient);
+        UserBean user = (UserBean)session.getAttribute("user");
+        if(session.getAttribute("user") != null){
+            if((user.getRole() == "admin")){
+                return new ModelAndView("/frigo/updateIngredient.jsp", "bean", bean);
+            }else{
+                return new ModelAndView("redirect:/app/users");  
+            }
+        }else{
+            return new ModelAndView("redirect:/app/log");
+        }
     }
 
-    @RequestMapping(value = "/update/{idUserIngredient}", method = RequestMethod.GET)
-    public ModelAndView showUpdateUserIngredient(HttpSession session,
-            @PathVariable Integer idUserIngredient, HttpServletRequest request) {
-        UserIngredientBean bean = userIngredientService.findUserIngredient(idUserIngredient);
+    @RequestMapping(value = "/update/{idIngredient}/{bean}", method = RequestMethod.POST)
+    public ModelAndView updateRecipe(HttpSession session, IngredientBean bean,
+            @PathVariable Integer idIngredient, HttpServletRequest request) {
+        ingredientService.updateIngredient(idIngredient, bean);
 
-        return new ModelAndView("/", "bean", bean);
+        return new ModelAndView("redirect:/app/userIngredients");
     }
 
     @RequestMapping(value = "/find/{idUserIngredient}", method = RequestMethod.GET)
@@ -140,12 +155,20 @@ public class UserIngredientController {
         return new ResponseEntity<UserIngredientBean>(bean, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/remove/{idUserIngredient}", method = RequestMethod.DELETE)
-    @ResponseStatus(value = HttpStatus.OK)
-    public  ModelAndView removeUserIngredient(HttpSession session, @PathVariable Integer idUserIngredient,
+    @RequestMapping(value = "/remove/{idUserIngredient}", method = RequestMethod.GET)
+    public ModelAndView removeUseringredient(HttpSession session, @PathVariable Integer idUserIngredient,
             HttpServletRequest request) {
         userIngredientService.removeUserIngredient(idUserIngredient);
-         return new ModelAndView("redirect:/app/userIngredients");
+
+        return new ModelAndView("redirect:/app/userIngredients");
+    }
+    
+    @RequestMapping(value = "/removeIngredient/{idIngredient}", method = RequestMethod.GET)
+    public ModelAndView removeIngredient(HttpSession session, @PathVariable Integer idIngredient,
+            HttpServletRequest request) {
+        ingredientService.removeIngredient(idIngredient);
+
+        return new ModelAndView("redirect:/app/userIngredients");
     }
 
 }

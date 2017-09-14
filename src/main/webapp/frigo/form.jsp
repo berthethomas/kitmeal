@@ -235,6 +235,7 @@
                                         <input type="number" class="form-control" id="q${ingredient.idIngredient}">
                                     </c:forEach>
                                     <input id="validate" type="button" class="btn btn-success" value="Valider"/>
+                                    <a href="${pageContext.servletContext.contextPath}/app/recipes/find/${idRecipe}" class="btn btn-default">Retour vers le réfrigérateur</a>
                                 </div>
                             </div>
                         </div>
@@ -281,7 +282,7 @@
                         var idIngredient = $(this).attr('id');
                         var quantite = $('#q' + idIngredient).val();
                         $.ajax({
-                            url: '${pageContext.servletContext.contextPath}/app/recipes/create/ingredients/${idRecipe}',
+                            url: '${pageContext.servletContext.contextPath}/app/userIngredients/create/ingredients',
                                                     type: 'POST',
                                                     dataType: 'html',
                                                     data: {
