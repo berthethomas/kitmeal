@@ -7,6 +7,7 @@ package fr.imie.kitmeal.interfacesDao;
 
 import fr.imie.kitmeal.entities.RecipeIngredient;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
@@ -14,4 +15,5 @@ import java.io.Serializable;
  */
 public interface IRecipeIngredientDao extends IGenericDao<Serializable, RecipeIngredient> {
 
+    public List<RecipeIngredient> findByRecipe(Integer idRecipe);
 }

@@ -6,6 +6,7 @@
 package fr.imie.kitmeal.services;
 
 import fr.imie.kitmeal.beans.RecipeIngredientBean;
+import fr.imie.kitmeal.entities.Recipe;
 import fr.imie.kitmeal.entities.RecipeIngredient;
 import fr.imie.kitmeal.interfacesDao.IIngredientDao;
 import fr.imie.kitmeal.interfacesDao.IRecipeDao;
@@ -104,6 +105,30 @@ public class RecipeIngredientService implements IRecipeIngredientService {
     @Override
     public void removeRecipeIngredient(Integer idRecipeIngredient) {
         recipeIngredientDao.delete(recipeIngredientDao.find(idRecipeIngredient));
+    }
+
+    @Override
+    public List<RecipeIngredientBean> findByRecipe(Integer idRecipe) {
+
+        List<RecipeIngredient> data = recipeIngredientDao.findByRecipe(idRecipe);
+
+        List<RecipeIngredientBean> beans = new ArrayList<>();
+
+        if (data != null) {
+            for (RecipeIngredient val : data) {
+                RecipeIngredientBean bean = new RecipeIngredientBean();
+                bean.setIdRecipeIngredient(val.getIdRecipeIngredient());
+                bean.setRecipe(recipeService.findRecipe(val.getRecipe().getIdRecipe()));
+                bean.setIngredient(ingredientService.findIngredient(val.getIngredient().getIdIngredient()));
+                bean.setQuantite(val.getQuantite());
+
+                beans.add(bean);
+            }
+            return beans;
+        } else {
+            return null;
+        }
+
     }
 
 }

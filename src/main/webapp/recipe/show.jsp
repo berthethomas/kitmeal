@@ -1,5 +1,6 @@
 
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
 <%@page import="fr.imie.kitmeal.beans.RecipeBean"%>
@@ -212,8 +213,22 @@
                             <div class="ibox">
                                 <div class="ibox-content">
                                     <div class="pull-right">
-                                        <a href="${pageContext.servletContext.contextPath}/app/recipes/update/${bean.idRecipe}"><i class="fa fa-wrench"></i></a>
-                                        <a href="${pageContext.servletContext.contextPath}/app/recipes/remove/${bean.idRecipe}"><i class="fa fa-times"></i></a>
+                                        <ul class="nav metismenu" id="side-menu">
+                                            <li>
+                                                <a href="${pageContext.servletContext.contextPath}/app/recipes/remove/${bean.idRecipe}"><i class="fa fa-times"></i></a>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                                    <span class="clear">  
+                                                        <span class="text-muted text-xs block"><i class="fa fa-wrench"></i> <b class="caret"></b></span> 
+                                                    </span> 
+                                                </a>
+                                                <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                                    <li><a href="${pageContext.servletContext.contextPath}/app/recipes/update/${bean.idRecipe}">Recette</a></li>
+                                                    <li><a href="${pageContext.servletContext.contextPath}/app/recipes/update/ingredient/${bean.idRecipe}">Ingrédients</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
                                     </div>
                                     <div class="text-center article-title">
                                         <span class="text-muted"><i class="fa fa-user"></i> Ajoutée par ${bean.user.nom}</span>
@@ -223,6 +238,12 @@
                                     </div>
                                     <p>${bean.description}</p>
                                     <hr>
+                                    <h5>Liste des ingrédients</h5>
+                                    <ul>
+                                        <c:forEach var="data" items="${listIngredients}">
+                                            <li>${data.quantite} ${data.ingredient.unite.nom} de ${data.ingredient.nom}</li>
+                                        </c:forEach>
+                                    </ul>
                                 </div>
                             </div>
                         </div>

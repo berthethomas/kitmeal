@@ -22,5 +22,7 @@ public interface IRecipeIngredientService {
 
     public RecipeIngredientBean findRecipeIngredient(Integer idRecipeIngredient);
 
+    public List<RecipeIngredientBean> findByRecipe(Integer idRecipe);
+
     public void removeRecipeIngredient(Integer idRecipeIngredient);
 }

@@ -217,7 +217,7 @@
                         <div class="col-lg-12">
                             <div class="ibox">
                                 <div class="ibox-title">
-                                    <h5>Ajouter des ingrédients</h5>
+                                    <h5>Gérer les ingrédients</h5>
                                     <div class="ibox-tools">
                                         <a class="collapse-link">
                                             <i class="fa fa-chevron-up"></i>
@@ -228,11 +228,12 @@
                                     </div>
                                 </div>
                                 <div class="ibox-content">
-                                    <c:forEach items="${bean}" var="ingredient">
-                                        <input type="checkbox" class="form-control ingredients" value="${ingredient.idIngredient}" id="${ingredient.idIngredient}">
-                                        <label for="ingredient${ingredient.idIngredient}">${ingredient.nom}</label>
-                                        <label for="q${ingredient.idIngredient}">Quantité (en ${ingredient.unite.nom})</label>
-                                        <input type="number" class="form-control" id="q${ingredient.idIngredient}">
+                                    <c:forEach items="${bean}" var="val">
+                                        <input type="checkbox" class="form-control ingredients" value="${val.ingredient.idIngredient}" id="${val.ingredient.idIngredient}">
+                                        <label for="ingredient${val.ingredient.idIngredient}">${val.ingredient.nom}</label>
+                                        <label for="q${val.ingredient.idIngredient}">Quantité (en ${val.ingredient.unite.nom})</label>
+                                        <input type="number" class="form-control" id="q${val.ingredient.idIngredient}" value="${val.quantite}">
+                                        <input type="hidden" id="id${val.ingredient.idIngredient}" value="${val.idRecipeIngredient}">
                                     </c:forEach>
                                     <input id="validate" type="button" class="btn btn-success" value="Valider"/>
                                     <a href="${pageContext.servletContext.contextPath}/app/recipes/find/${idRecipe}" class="btn btn-default">Retour à la fiche recette</a>

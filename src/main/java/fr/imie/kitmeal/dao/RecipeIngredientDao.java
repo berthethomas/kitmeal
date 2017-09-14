@@ -29,4 +29,16 @@ public class RecipeIngredientDao extends AbstractGenericDaoKitmeal<RecipeIngredi
         return recipeIngredients;
     }
 
+    @Override
+    public List<RecipeIngredient> findByRecipe(Integer idRecipe) {
+        String hql = "from RecipeIngredient r "
+                + "where r.recipe = :idRecipe ";
+
+        Query query = getSession().createQuery(hql);
+        query.setInteger("idRecipe", idRecipe);
+        List<RecipeIngredient> results = (List<RecipeIngredient>) query.list();
+        System.err.println(results);
+        return results;
+    }
+
 }

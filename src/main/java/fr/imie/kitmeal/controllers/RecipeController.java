@@ -90,10 +90,10 @@ public class RecipeController {
         System.err.println("ID RECIPE : " + idRecipe);
         System.err.println("ID INGREDIENT : " + idIngredient);
         System.err.println("QUANTITE : " + quantite);
-        
+
         RecipeBean recipe = recipeService.findRecipe(idRecipe);
         IngredientBean ingredient = ingredientService.findIngredient(idIngredient);
-        
+
         RecipeIngredientBean bean = new RecipeIngredientBean();
         bean.setRecipe(recipe);
         bean.setIngredient(ingredient);
@@ -118,12 +118,26 @@ public class RecipeController {
         return new ModelAndView("/recipe/update.jsp", "bean", bean);
     }
 
+    @RequestMapping(value = "/update/ingredient/{idRecipe}", method = RequestMethod.GET)
+    public ModelAndView showUpdateIngredientRecipe(HttpSession session,
+            @PathVariable Integer idRecipe, HttpServletRequest request) {
+        List<RecipeIngredientBean> beans = recipeIngredientService.findByRecipe(idRecipe);
+
+        return new ModelAndView("/recipe/updateIngredient.jsp", "bean", beans);
+    }
+
     @RequestMapping(value = "/find/{idRecipe}", method = RequestMethod.GET)
     public ModelAndView findRecipe(HttpSession session, @PathVariable Integer idRecipe,
             HttpServletRequest request) {
-        RecipeBean bean = recipeService.findRecipe(idRecipe);
+        RecipeBean recipe = recipeService.findRecipe(idRecipe);
+        List<RecipeIngredientBean> beans = recipeIngredientService.findByRecipe(idRecipe);
 
-        return new ModelAndView("/recipe/show.jsp", "bean", bean);
+        ModelAndView mav = new ModelAndView("/recipe/show.jsp");
+        mav.addObject("bean", recipe);
+        mav.addObject("listIngredients", beans);
+
+        return mav;
+
     }
 
     @RequestMapping(value = "/remove/{idRecipe}", method = RequestMethod.GET)
