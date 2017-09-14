@@ -17,7 +17,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>Kitmeal | Recette</title>
+        <title>Kitmeal | Réfrigérateur</title>
 
         <link href="${pageContext.servletContext.contextPath}/assets/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.servletContext.contextPath}/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -201,7 +201,7 @@
                                 <a href="${pageContext.servletContext.contextPath}/home">Home</a>
                             </li>
                             <li>
-                                <a href="${pageContext.servletContext.contextPath}/app/recipes">Frigo</a>
+                                <a href="${pageContext.servletContext.contextPath}/app/userIngredients">Réfrigérateur</a>
                             </li>
                             <li class="active">
                                 <strong>Gestions</strong>
@@ -237,6 +237,7 @@
                                                         <s:input name="nom" id="nom" path="nom" type="text" value='${bean.nom}' class="form-control required" />
                                                     </div>
                                                     <div class="form-group">
+                                                        <label>Unité</label>
                                                         <s:select name="unite.idUnite" path="unite.idUnite">
                                                             <c:forEach items="${unite}" var="bean">
                                                                 <s:option value="${bean.idUnite}">${bean.nom}</s:option>
@@ -244,6 +245,7 @@
                                                         </s:select>
                                                     </div>
                                                     <div class="form-group">
+                                                        <label>Catégorie</label>
                                                         <s:select name="category.idCategory" path="category.idCategory">
                                                             <c:forEach items="${category}" var="bean">
                                                                 <s:option name="categorie" value="${bean.idCategory}">${bean.nom}</s:option>

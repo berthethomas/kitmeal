@@ -15,7 +15,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>Kitmeal | Frigo</title>
+        <title>Kitmeal | Réfrigérateur</title>
 
         <link href="${pageContext.servletContext.contextPath}/assets/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.servletContext.contextPath}/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -185,20 +185,23 @@
                 </div>
                 <div class="row wrapper border-bottom white-bg page-heading">
                     <div class="col-lg-12">
-                        <h2>Frigo</h2>
+                        <h2>Gestion des ingrédients</h2>
                         <ol class="breadcrumb">
                             <li>
-                                <a href="${pageContext.servletContext.contextPath}/app/home">Accueil</a>
+                                <a href="${pageContext.servletContext.contextPath}/home">Home</a>
                             </li>
+                            
                             <li class="active">
-                                <strong>Frigo</strong>
+                                <strong>Réfrigérateur</strong>
                             </li>
                         </ol>
-                        <a href="${pageContext.servletContext.contextPath}/app/userIngredients/create" type="button" class="btn btn-w-m btn-primary pull-right"><i class="fa fa-plus-circle"></i> Créer un ingrédient</a>
+                        
                         <a href="${pageContext.servletContext.contextPath}/app/userIngredients/ingredients" type="button" class="btn btn-w-m btn-primary pull-right"><i class="fa fa-plus-circle"></i> Afficher tout les ingrédients</a>
+                        <a href="${pageContext.servletContext.contextPath}/app/userIngredients/create/ingredients" type="button" class="btn btn-w-m btn-primary pull-right"><i class="fa fa-plus-circle"></i> Ajouter un ingrédient</a>
 
                     </div>
                 </div>
+                
                 <div class="wrapper wrapper-content animated fadeInRight">
                     <div class="contact-row">
                         

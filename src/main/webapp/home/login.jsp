@@ -44,7 +44,7 @@
                             <s:input id="username" path="username" type="text" value='${bean.username}' class="form-control required" />
                         </div>
                         <div class="form-group">
-                            <s:input id="password" path="password" type="text" value='${bean.password}' class="form-control required" />
+                            <s:input id="password" path="password" type="password" value='${bean.password}' class="form-control required" />
                         </div>
                         <button type="submit" class="btn btn-primary block full-width m-b">Connexion</button>
 

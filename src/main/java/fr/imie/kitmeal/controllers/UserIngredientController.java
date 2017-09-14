@@ -14,6 +14,7 @@ import fr.imie.kitmeal.interfacesServices.ICategoryService;
 import fr.imie.kitmeal.interfacesServices.IIngredientService;
 import fr.imie.kitmeal.interfacesServices.IUniteService;
 import fr.imie.kitmeal.interfacesServices.IUserIngredientService;
+import fr.imie.kitmeal.interfacesServices.IUserService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -49,22 +50,34 @@ public class UserIngredientController {
     @Autowired
     IUniteService uniteService;
     
+    @Autowired
+    IUserService userService;
+    
     
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelAndView findAllUserIngredients(HttpSession session,
             HttpServletRequest request) {
         List<UserIngredientBean> beans = userIngredientService.findAllUserIngredients();
-
-        return new ModelAndView("/frigo/showAll.jsp", "bean", beans);
+        if (session.getAttribute("user") != null) {
+            return new ModelAndView("/frigo/showAll.jsp", "bean", beans);
+        } else {
+            return new ModelAndView("redirect:/app/log");
+        }
+        
     }
     
     @RequestMapping(value = "/ingredients", method = RequestMethod.GET)
     public ModelAndView findAllIngredients(HttpSession session,
             HttpServletRequest request) {
         List<IngredientBean> beans = ingredientService.findAllIngredients();
-
-        return new ModelAndView("/frigo/showIngredients.jsp", "bean", beans);
+        
+        if (session.getAttribute("user") != null) {
+            return new ModelAndView("/frigo/showIngredients.jsp", "bean", beans);
+        } else {
+            return new ModelAndView("redirect:/app/log");
+        }
+       
     }
     
     @RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -73,14 +86,23 @@ public class UserIngredientController {
         IngredientBean bean = new IngredientBean();
         List<CategoryBean> beanCategory = categoryService.findAllCategories();
         List<UniteBean> beanUnity = uniteService.findAllUnites();
+        UserBean user = (UserBean) session.getAttribute("user");
         
-        ModelAndView mav = new ModelAndView("/frigo/create.jsp");
-        mav.addObject("bean", bean);
-        mav.addObject("unite", beanUnity);
-        mav.addObject("category", beanCategory);
-
-        return mav;
-        //return new ModelAndView("/frigo/create.jsp", "bean", bean);
+        if (session.getAttribute("user") != null) {
+            if (("admin".equals(user.getRole()))) {
+                ModelAndView mav = new ModelAndView("/frigo/create.jsp");
+                mav.addObject("bean", bean);
+                mav.addObject("unite", beanUnity);
+                mav.addObject("category", beanCategory);
+                return mav;
+            } else {
+                return new ModelAndView("redirect:/app/userIngredients");
+            }
+        } else {
+            return new ModelAndView("redirect:/app/log");
+        }
+        
+      
     }
     
     @RequestMapping(value = "/create/{bean}", method = RequestMethod.POST)
@@ -95,18 +117,26 @@ public class UserIngredientController {
     public ModelAndView showaddIngredientFrigo(HttpSession session,
              HttpServletRequest request) {
         List<IngredientBean> bean = ingredientService.findAllIngredients();
-
-        ModelAndView mav = new ModelAndView("/frigo/form.jsp");
-        mav.addObject("bean", bean);
-        System.err.println("testttttt");
-        System.err.println(bean);
-        //mav.addObject("idRecipe", idRecipe);
-
-        return mav;
+        UserBean user = (UserBean) session.getAttribute("user");
+       
+                
+        if (session.getAttribute("user") != null) {
+            if (("admin".equals(user.getRole()))) {
+                ModelAndView mav = new ModelAndView("/frigo/form.jsp");
+                mav.addObject("bean", bean);
+                return mav;
+            } else {
+                return new ModelAndView("redirect:/app/userIngredients");
+            }
+        } else {
+            return new ModelAndView("redirect:/app/log");
+        }
+        
+        
     }
 
     @RequestMapping(value = "/create/ingredients", method = RequestMethod.POST)
-    public void createIngredientRecipe(HttpSession session,
+    public void createIngredient(HttpSession session,
             @RequestParam("idIngredient") Integer idIngredient, @RequestParam("quantite") Long quantite,
             HttpServletRequest request) {
         
@@ -128,15 +158,24 @@ public class UserIngredientController {
             @PathVariable Integer idIngredient, HttpServletRequest request) {
         IngredientBean bean = ingredientService.findIngredient(idIngredient);
         UserBean user = (UserBean)session.getAttribute("user");
-        if(session.getAttribute("user") != null){
-            if((user.getRole() == "admin")){
-                return new ModelAndView("/frigo/updateIngredient.jsp", "bean", bean);
-            }else{
-                return new ModelAndView("redirect:/app/users");  
+        List<CategoryBean> beanCategory = categoryService.findAllCategories();
+        List<UniteBean> beanUnity = uniteService.findAllUnites();
+        
+        if (session.getAttribute("user") != null) {
+            if (("admin".equals(user.getRole()))) {
+                ModelAndView mav = new ModelAndView("/frigo/updateIngredient.jsp");
+                mav.addObject("bean", bean);
+                mav.addObject("unite", beanUnity);
+                mav.addObject("category", beanCategory);
+
+                return mav;
+            } else {
+                return new ModelAndView("redirect:/app/userIngredients");
             }
-        }else{
+        } else {
             return new ModelAndView("redirect:/app/log");
         }
+        
     }
 
     @RequestMapping(value = "/update/{idIngredient}/{bean}", method = RequestMethod.POST)
@@ -144,7 +183,7 @@ public class UserIngredientController {
             @PathVariable Integer idIngredient, HttpServletRequest request) {
         ingredientService.updateIngredient(idIngredient, bean);
 
-        return new ModelAndView("redirect:/app/userIngredients");
+        return new ModelAndView("redirect:/app/userIngredients/ingredients");
     }
 
     @RequestMapping(value = "/find/{idUserIngredient}", method = RequestMethod.GET)
@@ -158,17 +197,38 @@ public class UserIngredientController {
     @RequestMapping(value = "/remove/{idUserIngredient}", method = RequestMethod.GET)
     public ModelAndView removeUseringredient(HttpSession session, @PathVariable Integer idUserIngredient,
             HttpServletRequest request) {
-        userIngredientService.removeUserIngredient(idUserIngredient);
+        UserBean user = (UserBean)session.getAttribute("user");
 
-        return new ModelAndView("redirect:/app/userIngredients");
+        if (session.getAttribute("user") != null) {
+            if (("admin".equals(user.getRole()))) {
+                userIngredientService.removeUserIngredient(idUserIngredient);
+                return new ModelAndView("redirect:/app/userIngredients");
+            } else {
+                return new ModelAndView("redirect:/app/userIngredients");
+            }
+        } else {
+            return new ModelAndView("redirect:/app/log");
+        }
+    
     }
     
     @RequestMapping(value = "/removeIngredient/{idIngredient}", method = RequestMethod.GET)
     public ModelAndView removeIngredient(HttpSession session, @PathVariable Integer idIngredient,
             HttpServletRequest request) {
-        ingredientService.removeIngredient(idIngredient);
+        UserBean user = (UserBean)session.getAttribute("user");
+        if (session.getAttribute("user") != null) {
+            if (("admin".equals(user.getRole()))) {
+                ingredientService.removeIngredient(idIngredient);
+                return new ModelAndView("redirect:/app/userIngredients/ingredients");
+            } else {
+                return new ModelAndView("redirect:/app/userIngredients/ingredients");
+            }
+        } else {
+            return new ModelAndView("redirect:/app/log");
+        }
+        
 
-        return new ModelAndView("redirect:/app/userIngredients");
+        
     }
 
 }

@@ -10,7 +10,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>INSPINIA | Calendar</title>
+    <title>Kitmeal | Réfrigérateur</title>
 
     <link href="${pageContext.servletContext.contextPath}/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="${pageContext.servletContext.contextPath}/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -194,71 +194,69 @@
 
                     </nav>
 
-<div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-12">
-        <h2>Evènements</h2>
-        <ol class="breadcrumb">
-            <li>
-                <a href="#">Home</a>
-            </li>
-            <li>
-                Evènements
-            </li>
-        </ol>
-        <a href="${pageContext.servletContext.contextPath}/app/userIngredients/create" type="button" class="btn btn-w-m btn-primary pull-right"><i class="fa fa-plus-circle"></i> Créer un ingrédient</a>
-
-    </div>
-    
-</div>
-
-<div class="wrapper wrapper-content">
-    <div class="row animated fadeInDown">
-        <div class="col-lg-1"></div>
-        <div class="col-lg-10">
-            <div class="ibox float-e-margins">
-                <div class="ibox-content">
-
-                    <table class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th>Nom des ingrédients</th>
-                            <th>Actions</th>
-                            
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach items="${bean}" var="item">
-                        <tr>
-                            <td>${item.nom}</td>
-                            <td><a href="${pageContext.servletContext.contextPath}/app/userIngredients/update/${item.idIngredient}"><i class="fa fa-wrench"></i></a></td>
-                            <td><a href="${pageContext.servletContext.contextPath}/app/userIngredients/removeIngredient/${item.idIngredient}"><i class="fa fa-trash"></i></a></td>
-
-                        </tr>
-                        </c:forEach> 
-                        </tbody>
-                    </table>
-
+                    <div class="row wrapper border-bottom white-bg page-heading">
+                        <div class="col-lg-12">
+                            <h2>Gestion des ingrédients</h2>
+                            <ol class="breadcrumb">
+                                <li>
+                                    <a href="${pageContext.servletContext.contextPath}/home">Home</a>
+                                </li>
+                                <li>
+                                    <a href="${pageContext.servletContext.contextPath}/app/userIngredients">Réfrigérateur</a>
+                                </li>
+                                <li class="active">
+                                    <strong>Ingrédients</strong>
+                                </li>
+                            </ol>
+                                <a href="${pageContext.servletContext.contextPath}/app/userIngredients/create" type="button" class="btn btn-w-m btn-primary pull-right"><i class="fa fa-plus-circle"></i> Créer un ingrédient</a>
                         </div>
+                    </div>
 
-              
-                
-                <!--<div class="ibox-content">
-                    <div id="calendar"></div>
-                </div>-->
-                
-               
-            </div>
-        </div>
-    </div>
-</div>
-<div class="footer">
-    <div class="pull-right">
-        10GB of <strong>250GB</strong> Free.
-    </div>
-    <div>
-        <strong>Copyright</strong> Example Company &copy; 2014-2017
-    </div>
-</div>
+                    <div class="wrapper wrapper-content">
+                        <div class="row animated fadeInDown">
+                            <div class="col-lg-1"></div>
+                            <div class="col-lg-10">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-content">
+
+                                        <table class="table table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th>Nom des ingrédients</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <c:forEach items="${bean}" var="item">
+                                            <tr>
+                                                <td>${item.nom}</td>
+                                                <td><a href="${pageContext.servletContext.contextPath}/app/userIngredients/update/${item.idIngredient}"><i class="fa fa-wrench"></i></a><a href="${pageContext.servletContext.contextPath}/app/userIngredients/removeIngredient/${item.idIngredient}"><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                            </c:forEach> 
+                                            </tbody>
+                                        </table>
+
+                                            </div>
+
+
+
+                                    <!--<div class="ibox-content">
+                                        <div id="calendar"></div>
+                                    </div>-->
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <div class="pull-right">
+                            10GB of <strong>250GB</strong> Free.
+                        </div>
+                        <div>
+                            <strong>Copyright</strong> Example Company &copy; 2014-2017
+                        </div>
+                    </div>
 
 </div>
 </div>

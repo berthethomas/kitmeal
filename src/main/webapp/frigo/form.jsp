@@ -17,7 +17,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>Kitmeal | Recette</title>
+        <title>Kitmeal | Réfrigérateur</title>
 
         <link href="${pageContext.servletContext.contextPath}/assets/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.servletContext.contextPath}/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -194,24 +194,21 @@
                     </nav>
                 </div>
                 <div class="row wrapper border-bottom white-bg page-heading">
-                    <div class="col-lg-12">
-                        <h2>Gestion des recettes</h2>
-                        <ol class="breadcrumb">
-                            <li>
-                                <a href="${pageContext.servletContext.contextPath}/home">Home</a>
-                            </li>
-                            <li>
-                                <a href="${pageContext.servletContext.contextPath}/app/userIngredients">Frigo</a>
-                            </li>
-                            <li>
-                                <a href="${pageContext.servletContext.contextPath}/app/recipes/find/${idRecipe}">Recette</a>
-                            </li>
-                            <li class="active">
-                                <strong>Gestions</strong>
-                            </li>
-                        </ol>
+                        <div class="col-lg-12">
+                            <h2>Gestion des ingrédients</h2>
+                            <ol class="breadcrumb">
+                                <li>
+                                    <a href="${pageContext.servletContext.contextPath}/home">Home</a>
+                                </li>
+                                <li>
+                                    <a href="${pageContext.servletContext.contextPath}/app/userIngredients">Réfrigérateur</a>
+                                </li>
+                                <li class="active">
+                                    <strong>Ingrédients</strong>
+                                </li>
+                            </ol>
+                        </div>
                     </div>
-                </div>
                 <div class="wrapper wrapper-content animated fadeInRight">
                     <div class="row">
                         <div class="col-lg-12">
@@ -235,7 +232,7 @@
                                         <input type="number" class="form-control" id="q${ingredient.idIngredient}">
                                     </c:forEach>
                                     <input id="validate" type="button" class="btn btn-success" value="Valider"/>
-                                    <a href="${pageContext.servletContext.contextPath}/app/recipes/find/${idRecipe}" class="btn btn-default">Retour vers le réfrigérateur</a>
+                                    <a href="${pageContext.servletContext.contextPath}/app/userIngredients" class="btn btn-default">Retour vers le réfrigérateur</a>
                                 </div>
                             </div>
                         </div>
